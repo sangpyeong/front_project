@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
   return (
-    <div>
-      <div>
+    <div class="flex-col w-12/12">
+      <div class="flex flex-row justify-around w-12/12">
         <NavLink
           to="/"
           style={{ textDecoration: "none" }}
@@ -31,17 +31,17 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
         >
           <div>파일 검색</div>
         </NavLink>
-
         <NavLink
-          to="/output"
+          to="/search"
           style={{ textDecoration: "none" }}
           onClick={() => {
             setPageIndex(3);
           }}
         >
-          <div>검색 결과</div>
+          <div>로그인</div>
         </NavLink>
       </div>
+      <div class="w-12/12 h-0 border-y-2 bg-gray-100"></div>
     </div>
   );
 }
