@@ -6,7 +6,6 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
       <div class="flex flex-row justify-around w-12/12">
         <NavLink
           to="/"
-          style={{ textDecoration: "none" }}
           onClick={() => {
             setPageIndex(0);
           }}
@@ -15,7 +14,6 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
         </NavLink>
         <NavLink
           to="/upload"
-          style={{ textDecoration: "none" }}
           onClick={() => {
             setPageIndex(1);
           }}
@@ -24,7 +22,6 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
         </NavLink>
         <NavLink
           to="/search"
-          style={{ textDecoration: "none" }}
           onClick={() => {
             setPageIndex(2);
           }}
@@ -32,13 +29,13 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
           <div>파일 검색</div>
         </NavLink>
         <NavLink
-          to="/search"
-          style={{ textDecoration: "none" }}
           onClick={() => {
-            setPageIndex(3);
+            setLogInModal(true);
           }}
         >
-          <div>로그인</div>
+          <div>
+            <div>로그인</div>
+          </div>
         </NavLink>
       </div>
       <div class="w-12/12 h-0 border-y-2 bg-gray-100"></div>

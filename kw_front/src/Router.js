@@ -4,18 +4,33 @@ import Navigation from "./common/Navigation";
 import OutputPage from "./pages/OutputPage/OutputPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
+import Modal from "./common/Modal";
 
 function Router() {
   const [pageIndex, setPageIndex] = useState(0);
   const [auth, setAuth] = useState(0);
   const [token, setToken] = useState("");
   const [logInModal, setLogInModal] = useState(false);
+  console.log(logInModal);
 
   return (
     <div>
       <BrowserRouter>
+        <Modal
+          token={token}
+          setToken={setToken}
+          setAuth={setAuth}
+          logInModal={logInModal}
+          setLogInModal={setLogInModal}
+        />
         <div>
-          <Navigation />
+          <Navigation
+            setLogInModal={setLogInModal}
+            auth={auth}
+            setAuth={setAuth}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+          />
         </div>
         <div>
           <Routes>
