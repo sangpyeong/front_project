@@ -1,14 +1,11 @@
 function Description() {
   return (
-    <div class="w-full h-60 flex-col justify-around">
+    <div class="w-full h-40 flex-col justify-center">
       <div class="h-1/2 flex justify-center">
-        <div class="text-center">DWG to TXT Converter</div>
+        <div class="flex items-center">파일 업로드</div>
       </div>
-      <div class="h-1/2flex justify-center">
-        <div class="text-center">
-          설명 Convert DWG to TXT online, from any device with a modern browser
-          like Chrome and Firefox. Powered by groupdocs.com and groupdocs.cloud.
-        </div>
+      <div class="h-1/2 flex justify-center">
+        <div class="flex items-center">저장할 dwg파일을 업로드하세요.</div>
       </div>
     </div>
   );
