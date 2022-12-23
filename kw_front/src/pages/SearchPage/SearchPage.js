@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Search from "./Search";
-import Description from "./Descroption";
+import Description from "./Description";
 import Output from "./Output";
 function SearchPage() {
   const [value, setValue] = useState("");
