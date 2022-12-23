@@ -14,7 +14,7 @@ function Router() {
   console.log(logInModal);
 
   return (
-    <div>
+    <div class="flex flex-col font-sans">
       <BrowserRouter>
         <Modal
           token={token}
@@ -23,7 +23,7 @@ function Router() {
           logInModal={logInModal}
           setLogInModal={setLogInModal}
         />
-        <div>
+        <div className="h-14 w-full fixed z-20">
           <Navigation
             setLogInModal={setLogInModal}
             auth={auth}
@@ -32,13 +32,15 @@ function Router() {
             setPageIndex={setPageIndex}
           />
         </div>
-        <div>
-          <Routes>
-            <Route exact path="/" element={<UploadPage />} />
-            <Route path="/upload" element={<UploadPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/output" element={<OutputPage />} />
-          </Routes>
+        <div className="py-14 h-full w-full flex justify-center overflow-y-auto">
+          <div className="h-full w-3/5 bg-white padd px-3.5">
+            <Routes>
+              <Route exact path="/" element={<UploadPage />} />
+              <Route path="/upload" element={<UploadPage />} />
+              <Route path="/search" element={<SearchPage />} />
+              <Route path="/output" element={<OutputPage />} />
+            </Routes>
+          </div>
         </div>
       </BrowserRouter>
     </div>

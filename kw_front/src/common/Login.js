@@ -2,7 +2,7 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
   return (
     <div>
       <div>
-        LOGO
+        산학회
         <div></div>
       </div>
       <div>

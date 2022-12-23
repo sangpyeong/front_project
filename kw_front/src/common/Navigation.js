@@ -2,39 +2,50 @@ import { NavLink } from "react-router-dom";
 
 function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
   return (
-    <div class="flex-col w-12/12">
-      <div class="flex flex-row justify-around w-12/12">
+    <div class="w-full flex justify-center bg-cyan-300">
+      <div class="flex flex-row justify-around w-11/12 h-14">
         <NavLink
           to="/"
           onClick={() => {
             setPageIndex(0);
           }}
+          className="w-1/4 flex justify-center flex-col"
         >
-          <div className="column">LOGO</div>
+          <div className="h-3/4 w-full text-4xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
+            산학회
+          </div>
         </NavLink>
+
         <NavLink
           to="/upload"
           onClick={() => {
             setPageIndex(1);
           }}
+          className="w-1/4 flex justify-center flex-col"
         >
-          <div className="column">파일 업로드</div>
+          <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
+            파일 업로드
+          </div>
         </NavLink>
         <NavLink
           to="/search"
           onClick={() => {
             setPageIndex(2);
           }}
+          className="w-1/4 flex justify-center flex-col"
         >
-          <div>파일 검색</div>
+          <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
+            파일 검색
+          </div>
         </NavLink>
         <NavLink
           onClick={() => {
             setLogInModal(true);
           }}
+          className="w-1/4 flex justify-center flex-col"
         >
-          <div>
-            <div>로그인</div>
+          <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
+            로그인
           </div>
         </NavLink>
       </div>

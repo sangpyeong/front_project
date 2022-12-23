@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Login from "./Login";
+import index from "../index.css";
 
 function Modal({ token, setToken, setAuth, logInModal, setLogInModal }) {
   const [modalContent, setModalContent] = useState(0);
@@ -8,7 +9,7 @@ function Modal({ token, setToken, setAuth, logInModal, setLogInModal }) {
     <div className="z-30 w-full fixed text-5xl ">
       {logInModal ? (
         <div
-          className="W-full h-screen bg-transparent"
+          class="background"
           ref={ModalBG}
           onClick={(e) => {
             if (ModalBG.current === e.target) {
@@ -16,7 +17,7 @@ function Modal({ token, setToken, setAuth, logInModal, setLogInModal }) {
             }
           }}
         >
-          <div className="z-25 w-3/12 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
+          <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
             <Login
               token={token}
               setToken={setToken}
