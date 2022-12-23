@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import Search from "./Search";
+import Description from "./Descroption";
+import Output from "./Output";
 function SearchPage() {
   const [value, setValue] = useState("");
   const handleSubmit = (e) => {
@@ -12,12 +14,15 @@ function SearchPage() {
   };
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen bg-blue-100">
-      <div className="w-full p-6 m-4 bg-white rounded shadow md:w-3/4 md:max-w-lg lg:w-3/4 lg:max-w-lg">
-        <div className="flex justify-between mb-3">
-          <h1>파일 검색</h1>
-        </div>
+    <div class="flex flex-col w-full space-y-4">
+      <div>
+        <Description />
+      </div>
+      <div>
         <Search handleSubmit={handleSubmit} value={value} setValue={setValue} />
+      </div>
+      <div>
+        <Output />
       </div>
     </div>
   );
