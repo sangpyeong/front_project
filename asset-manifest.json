@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.a18a8703.css",
-    "main.js": "/static/js/main.9397d62a.js",
-    "static/media/다운로드.png": "/static/media/다운로드.01eab9cf88d42caf036d.png",
-    "index.html": "/index.html",
-    "main.a18a8703.css.map": "/static/css/main.a18a8703.css.map",
-    "main.9397d62a.js.map": "/static/js/main.9397d62a.js.map"
+    "main.css": "/front_project/static/css/main.a18a8703.css",
+    "main.js": "/front_project/static/js/main.27e6407e.js",
+    "static/media/다운로드.png": "/front_project/static/media/다운로드.01eab9cf88d42caf036d.png",
+    "index.html": "/front_project/index.html",
+    "main.a18a8703.css.map": "/front_project/static/css/main.a18a8703.css.map",
+    "main.27e6407e.js.map": "/front_project/static/js/main.27e6407e.js.map"
   },
   "entrypoints": [
     "static/css/main.a18a8703.css",
-    "static/js/main.9397d62a.js"
+    "static/js/main.27e6407e.js"
   ]
 }
