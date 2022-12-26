@@ -1,4 +1,4 @@
-import image from "./default_img.png";
+import image from "./다운로드.png";
 
 function Upload() {
   return (
