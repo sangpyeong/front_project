@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./common/Navigation";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import UploadPage from "./pages/UploadPage/UploadPage";
+import DefaultPage from "./pages/Defualtpage/DefualtPage";
 import Modal from "./common/Modal";
 
 function Router() {
@@ -34,7 +35,7 @@ function Router() {
         <div className="py-14 h-full w-full flex justify-center overflow-y-auto">
           <div className="h-full w-3/5 bg-white padd px-3.5">
             <Routes>
-              <Route exact path="/" element={<UploadPage />} />
+              <Route exact path="/" element={<DefaultPage />} />
               <Route path="/upload" element={<UploadPage />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>
