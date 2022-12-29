@@ -7,6 +7,11 @@
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
 }
+.kwlogosize {
+  width: 300px;
+  height: 100px;
+  overflow: hidden;
+}
 
 body {
   margin: 0;
