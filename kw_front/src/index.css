@@ -21,3 +21,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.dropBox {
+  width: 500px;
+  height: 150px;
+
+  margin: 0.6rem;
+  overflow: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 4px dashed #ddd;
+  user-select: none;
+  transition: 0.4s;
+}
+
+/* 드롭 반응 */
+.dropBoxactive {
+  width: 500px;
+  height: 150px;
+
+  margin: 0.6rem;
+  overflow: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 4px dashed #ddd;
+  user-select: none;
+  transition: 0.4s;
+  background: #ddd;
+}
+
+.dropBox h1 {
+  font-size: 1.8rem;
+}
+
+/* ----------- */
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Pretendard, "Malgun Gothic", sans-serif;
+}
+
+.drop-zone {
+  width: 500px;
+  height: 200px;
+  background-color: azure;
+}
+
+.drop-zone-dragenter,
+.drop-zone-dragover {
+  border: 10px solid blue;
+}
