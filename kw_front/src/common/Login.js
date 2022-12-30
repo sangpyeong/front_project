@@ -1,6 +1,7 @@
 import axios from "axios"; //통신
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode"; //보안
+import { NavLink } from "react-router-dom";
 
 function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
   const [inputID, setInputID] = useState("");
@@ -11,6 +12,9 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
   };
   const onChangePW = (e) => {
     setInputPW(e.target.value);
+  };
+  const test = () => {
+    setAuth(2);
   };
   const login = () => {
     axios
@@ -97,6 +101,7 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
         <div class=" text-red-600 text-center text-[15px] mb-[10px]">
           {errorText}
         </div>
+
         <div
           class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
@@ -105,9 +110,44 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
         >
           LOG IN
         </div>
+        <NavLink
+          to="/upload"
+          onClick={() => {
+            setAuth(1);
+            //setPageIndex(1);
+            setLogInModal(false);
+          }}
+        >
+          test 회원
+        </NavLink>
+        <button
+          onClick={() => {
+            setAuth(2);
+          }}
+        >
+          test 관리자
+        </button>
+        <button
+          onClick={() => {
+            setAuth(0);
+          }}
+        >
+          test logout
+        </button>
       </div>
     </div>
   );
 }
-
 export default Login;
+
+/* <NavLink
+          to="/upload"
+          onClick={() => {
+            setPageIndex(1);
+          }}
+          className="w-1/4 flex justify-center flex-col"
+        >
+          <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
+            파일 업로드
+          </div>
+        </NavLink> */

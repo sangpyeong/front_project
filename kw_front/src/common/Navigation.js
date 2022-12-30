@@ -15,7 +15,6 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
             산학회
           </div>
         </NavLink>
-
         <NavLink
           to="/upload"
           onClick={() => {
@@ -45,7 +44,7 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
           className="w-1/4 flex justify-center flex-col"
         >
           <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
-            로그인
+            MY
           </div>
         </NavLink>
       </div>
