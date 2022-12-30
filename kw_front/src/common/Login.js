@@ -139,15 +139,3 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
   );
 }
 export default Login;
-
-/* <NavLink
-          to="/upload"
-          onClick={() => {
-            setPageIndex(1);
-          }}
-          className="w-1/4 flex justify-center flex-col"
-        >
-          <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
-            파일 업로드
-          </div>
-        </NavLink> */

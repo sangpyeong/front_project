@@ -1,5 +1,4 @@
 import index from "../../index.css";
-import DragAndDrop from "./DragAndDrop.js";
 import React, {
   useState,
   useCallback,
