@@ -1,5 +1,5 @@
-import image from "./다운로드.png";
 import index from "../../index.css";
+import DragAndDrop from "./DragAndDrop.js";
 import React, {
   useState,
   useCallback,
@@ -12,10 +12,7 @@ function Upload() {
   const [title, setTitle] = useState("이곳에 파일을 드롭해주세요.");
   const [dropclass, setDropclass] = useState("dropBox");
   const [file, setFile] = useState();
-  var $file = document.getElementById("directory_upload");
-  var selectFile = (files) => {
-    $file.files = files;
-  };
+
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="flex flex-row justify-center items-center w-full">
@@ -34,7 +31,6 @@ function Upload() {
               setTitle(files.map((v) => v.name).join("<br>"));
               setDropclass("dropBox");
               setFile(files);
-              selectFile(files);
             }}
             onDragOver={(e) => {
               e.preventDefault();
@@ -62,6 +58,7 @@ function Upload() {
               setTitle(e.target.files[0].name);
             }}
           />
+
           <div id="preview"></div>
           <input type="submit" />
         </form>
