@@ -4,17 +4,25 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
   return (
     <div class="w-full flex justify-center bg-cyan-300">
       <div class="flex flex-row justify-around w-11/12 h-14">
-        <NavLink
-          to="/"
-          onClick={() => {
-            setPageIndex(0);
-          }}
-          className="w-1/4 flex justify-center flex-col"
-        >
-          <div className="h-3/4 w-full text-4xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
-            산학회
-          </div>
-        </NavLink>
+        {auth ? (
+          <NavLink className="w-1/4 flex justify-center flex-col">
+            <div className="h-3/4 w-full text-4xl flex items-center font-bold justify-center rounded-lg">
+              산학회
+            </div>
+          </NavLink>
+        ) : (
+          <NavLink
+            to="/"
+            onClick={() => {
+              setPageIndex(0);
+            }}
+            className="w-1/4 flex justify-center flex-col"
+          >
+            <div className="h-3/4 w-full text-4xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
+              산학회
+            </div>
+          </NavLink>
+        )}
         <NavLink
           to="/upload"
           onClick={() => {
@@ -38,8 +46,9 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
           </div>
         </NavLink>
         <NavLink
+          to="/profile"
           onClick={() => {
-            setLogInModal(true);
+            setPageIndex(3);
           }}
           className="w-1/4 flex justify-center flex-col"
         >

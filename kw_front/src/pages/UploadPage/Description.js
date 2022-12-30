@@ -1,6 +1,6 @@
 function Description() {
   return (
-    <div class="w-full h-[90px] flex-col justify-center">
+    <div class="w-full h-[90px] flex-col justify-center mt-5">
       <div class="h-1/2 flex justify-center text-[40px]">
         <div class="flex items-center ">파일 업로드</div>
       </div>

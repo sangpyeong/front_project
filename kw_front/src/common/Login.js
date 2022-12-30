@@ -114,7 +114,6 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
           to="/upload"
           onClick={() => {
             setAuth(1);
-            //setPageIndex(1);
             setLogInModal(false);
           }}
         >
@@ -123,6 +122,7 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
         <button
           onClick={() => {
             setAuth(2);
+            setLogInModal(false);
           }}
         >
           test 관리자
@@ -130,6 +130,7 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
         <button
           onClick={() => {
             setAuth(0);
+            setLogInModal(false);
           }}
         >
           test logout
@@ -138,16 +139,5 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
     </div>
   );
 }
-export default Login;
 
-/* <NavLink
-          to="/upload"
-          onClick={() => {
-            setPageIndex(1);
-          }}
-          className="w-1/4 flex justify-center flex-col"
-        >
-          <div className="h-3/4 w-full text-2xl flex items-center font-bold hover:bg-cyan-500 justify-center rounded-lg">
-            파일 업로드
-          </div>
-        </NavLink> */
+export default Login;
