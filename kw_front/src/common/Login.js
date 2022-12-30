@@ -139,5 +139,4 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
     </div>
   );
 }
-
 export default Login;
