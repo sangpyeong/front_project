@@ -24,18 +24,24 @@ function Router() {
           setLogInModal={setLogInModal}
         />
         <div className="h-14 w-full fixed z-20">
-          <Navigation
-            setLogInModal={setLogInModal}
-            auth={auth}
-            setAuth={setAuth}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
-          />
+          {auth ? (
+            <Navigation
+              setLogInModal={setLogInModal}
+              auth={auth}
+              setAuth={setAuth}
+              pageIndex={pageIndex}
+              setPageIndex={setPageIndex}
+            />
+          ) : null}
         </div>
         <div className="py-14 h-full w-full flex justify-center overflow-y-auto">
           <div className="h-full w-3/5 bg-white padd px-3.5">
             <Routes>
-              <Route exact path="/" element={<DefaultPage />} />
+              <Route
+                exact
+                path="/"
+                element={<DefaultPage setLogInModal={setLogInModal} />}
+              />
               <Route path="/upload" element={<UploadPage />} />
               <Route path="/search" element={<SearchPage />} />
             </Routes>

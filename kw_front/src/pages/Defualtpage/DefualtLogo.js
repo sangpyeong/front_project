@@ -1,6 +1,6 @@
 import image from "./광운대로고.jpg";
 
-function Defualt() {
+function DefualtLogo() {
   return (
     <div>
       <div class="flex flex-row justify-center">
@@ -10,4 +10,4 @@ function Defualt() {
   );
 }
 
-export default Defualt;
+export default DefualtLogo;

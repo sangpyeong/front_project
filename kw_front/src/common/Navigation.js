@@ -15,7 +15,6 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
             산학회
           </div>
         </NavLink>
-
         <NavLink
           to="/upload"
           onClick={() => {
