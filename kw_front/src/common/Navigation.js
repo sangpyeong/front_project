@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
+function Navigation({
+  setLogInModal,
+  auth,
+  pageIndex,
+  setPageIndex,
+  setMyPassword,
+}) {
   return (
     <div>
       {auth ? (
@@ -48,9 +54,8 @@ function Navigation({ setLogInModal, auth, pageIndex, setPageIndex }) {
               </div>
             </NavLink>
             <NavLink
-              to="/profile"
               onClick={() => {
-                setPageIndex(3);
+                setMyPassword(true);
               }}
               className="w-1/4 flex justify-center flex-col"
             >

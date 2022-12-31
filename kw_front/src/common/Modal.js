@@ -1,8 +1,18 @@
 import { useRef, useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
+import MyPassword from "./MyPassword";
 
-function Modal({ token, setToken, setAuth, logInModal, setLogInModal }) {
+function Modal({
+  token,
+  setToken,
+  setAuth,
+  logInModal,
+  setLogInModal,
+  myPassword,
+  setMyPassword,
+  setPageIndex,
+}) {
   const [modalContent, setModalContent] = useState(0);
   const ModalBG = useRef();
   return (
@@ -33,6 +43,22 @@ function Modal({ token, setToken, setAuth, logInModal, setLogInModal }) {
                 setLogInModal={setLogInModal}
               />
             )}
+          </div>
+        </div>
+      ) : null}
+      {myPassword ? (
+        <div
+          class="background"
+          ref={ModalBG}
+          onClick={(e) => {
+            if (ModalBG.current === e.target) {
+              setMyPassword(false);
+              setPageIndex(3);
+            }
+          }}
+        >
+          <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
+            <MyPassword myPassword={myPassword} setMyPassword={setMyPassword} />
           </div>
         </div>
       ) : null}

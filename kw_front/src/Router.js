@@ -13,6 +13,7 @@ function Router() {
   const [auth, setAuth] = useState(0);
   const [token, setToken] = useState("");
   const [logInModal, setLogInModal] = useState(false);
+  const [myPassword, setMyPassword] = useState(false);
   console.log(auth);
 
   return (
@@ -24,6 +25,9 @@ function Router() {
           setAuth={setAuth}
           logInModal={logInModal}
           setLogInModal={setLogInModal}
+          myPassword={myPassword}
+          setMyPassword={setMyPassword}
+          setPageIndex={setPageIndex}
         />
         <div className="h-14 w-full fixed z-20">
           <Navigation
@@ -32,6 +36,7 @@ function Router() {
             setAuth={setAuth}
             pageIndex={pageIndex}
             setPageIndex={setPageIndex}
+            setMyPassword={setMyPassword}
           />
         </div>
         <div className="py-14 h-full w-full flex justify-center overflow-y-auto">
@@ -40,6 +45,11 @@ function Router() {
               <Route
                 exact
                 path="/"
+                element={<DefaultPage setLogInModal={setLogInModal} />}
+              />
+              <Route
+                exact
+                path="/front_project"
                 element={<DefaultPage setLogInModal={setLogInModal} />}
               />
               <Route
