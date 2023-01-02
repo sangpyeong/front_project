@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/front_project/static/css/main.a18a8703.css",
-    "main.js": "/front_project/static/js/main.a71d2308.js",
-    "static/media/다운로드.png": "/front_project/static/media/다운로드.01eab9cf88d42caf036d.png",
+    "main.css": "/front_project/static/css/main.4a449024.css",
+    "main.js": "/front_project/static/js/main.25212688.js",
+    "static/media/광운대로고.jpg": "/front_project/static/media/광운대로고.6d8b1720a6a73708f567.jpg",
     "index.html": "/front_project/index.html",
-    "main.a18a8703.css.map": "/front_project/static/css/main.a18a8703.css.map",
-    "main.a71d2308.js.map": "/front_project/static/js/main.a71d2308.js.map"
+    "main.4a449024.css.map": "/front_project/static/css/main.4a449024.css.map",
+    "main.25212688.js.map": "/front_project/static/js/main.25212688.js.map"
   },
   "entrypoints": [
-    "static/css/main.a18a8703.css",
-    "static/js/main.a71d2308.js"
+    "static/css/main.4a449024.css",
+    "static/js/main.25212688.js"
   ]
 }
