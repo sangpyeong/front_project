@@ -1,8 +1,17 @@
-function MyInform({ token }) {
+function Authority({ auth }) {
+  if (auth === 2) {
+    return <div>관리자</div>;
+  } else {
+    return <div>일반사원</div>;
+  }
+}
+
+function MyInform({ token, auth }) {
   const year = [2021];
   for (var i = 0; i < 100; i++) {
     year.push(year[i - 1] - i);
   }
+  console.log(auth);
 
   return (
     <div className="flex flex-col w-full border">
@@ -59,7 +68,7 @@ function MyInform({ token }) {
             권한
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            관리자
+            <Authority auth={auth} />
           </div>
         </div>
 

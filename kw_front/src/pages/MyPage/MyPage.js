@@ -18,7 +18,7 @@ function MyPage({ token, setToken, auth, setAuth }) {
         </NavLink>
       </div>
 
-      <MyInform token={token} />
+      <MyInform token={token} auth={auth} />
     </div>
   );
 }

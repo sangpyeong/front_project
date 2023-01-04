@@ -20,6 +20,7 @@ function Login({
   const onChangePW = (e) => {
     setInputPW(e.target.value);
   };
+
   const test_login = () => {
     setAuth(1);
     setLogInModal(false);
@@ -69,6 +70,7 @@ function Login({
         setErrorText("아이디와 비밀번호를 확인하세요.");
       });
   };
+  console.log(inputID);
 
   return (
     <div class="mx-[40px]">
@@ -129,7 +131,7 @@ function Login({
           }}
         >
           <div class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
-            TEST LOG IN
+            TEST LOG IN (일반사원)
           </div>
         </NavLink>
         <NavLink
@@ -139,7 +141,7 @@ function Login({
           }}
         >
           <div class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
-            TEST LOG IN (ADMIN)
+            TEST LOG IN (관리자)
           </div>
         </NavLink>
       </div>

@@ -37,9 +37,8 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
           username: inputID,
           user_idnumber: inputIDNumber,
           hased_pw: inputPW,
-          name: {
-            first: inputName,
-          },
+          name: inputName,
+
           email: inputEmail,
           birthday: inputBD,
         },

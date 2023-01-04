@@ -75,7 +75,10 @@ function Router() {
               <Route
                 path="/profile"
                 element={
-                  <PrivateRoute authenticated={auth} component={<MyPage />} />
+                  <PrivateRoute
+                    authenticated={auth}
+                    component={<MyPage auth={auth} />}
+                  />
                 }
               />
             </Routes>
