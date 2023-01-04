@@ -3,7 +3,14 @@ import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode"; //보안
 import { NavLink } from "react-router-dom";
 
-function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
+function Login({
+  token,
+  setToken,
+  setModalContent,
+  auth,
+  setAuth,
+  setLogInModal,
+}) {
   const [inputID, setInputID] = useState("");
   const [inputPW, setInputPW] = useState("");
   const [errorText, setErrorText] = useState("");
@@ -13,20 +20,25 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
   const onChangePW = (e) => {
     setInputPW(e.target.value);
   };
-  const test = () => {
+  const test_login = () => {
+    setAuth(1);
+    setLogInModal(false);
+  };
+  const admin_test_login = () => {
     setAuth(2);
+    setLogInModal(false);
   };
   const login = () => {
     axios
       .post(
-        "https://디비주소/auth/login/token", //DB 프로젝트에서 가져옴
+        "https://디비주소/auth/login/token",
         {
           username: inputID,
           password: inputPW,
         },
         {
           headers: {
-            "Content-type": "application/x-www-form-urlencoded", //DB 프로젝트에서 가져옴
+            "Content-type": "application/x-www-form-urlencoded",
             Accept: "application/json",
           },
         }
@@ -35,7 +47,7 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
         setToken(res.data.access_token);
         axios
           .post(
-            "https://디비주소/user/balance/makeAccount", //DB 프로젝트에서 가져옴
+            "https://디비주소/user/balance/makeAccount",
             {},
             {
               headers: {
@@ -111,30 +123,25 @@ function Login({ token, setToken, setModalContent, setAuth, setLogInModal }) {
           LOG IN
         </div>
         <NavLink
-          to="/upload"
+          to="/search"
           onClick={() => {
-            setAuth(1);
-            setLogInModal(false);
+            test_login();
           }}
         >
-          test 회원
+          <div class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
+            TEST LOG IN
+          </div>
         </NavLink>
-        <button
+        <NavLink
+          to="/search"
           onClick={() => {
-            setAuth(2);
-            setLogInModal(false);
+            admin_test_login();
           }}
         >
-          test 관리자
-        </button>
-        <button
-          onClick={() => {
-            setAuth(0);
-            setLogInModal(false);
-          }}
-        >
-          test logout
-        </button>
+          <div class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
+            TEST LOG IN (ADMIN)
+          </div>
+        </NavLink>
       </div>
     </div>
   );
