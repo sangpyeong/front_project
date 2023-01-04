@@ -51,6 +51,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
       )
       .then((res) => {
         console.log(res);
+
         setModalContent(0);
       })
       .catch((err) => {
