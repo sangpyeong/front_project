@@ -7,6 +7,7 @@ import DefaultPage from "./pages/Defualtpage/DefualtPage";
 import MyPage from "./pages/MyPage/MyPage";
 import Modal from "./common/Modal";
 import PrivateRoute from "./PrivateRoute";
+import AdminPrivateRoute from "./common/AdminPrivateRoute";
 
 function Router() {
   const [pageIndex, setPageIndex] = useState(0);
@@ -22,6 +23,7 @@ function Router() {
         <Modal
           token={token}
           setToken={setToken}
+          auth={auth}
           setAuth={setAuth}
           logInModal={logInModal}
           setLogInModal={setLogInModal}
@@ -55,7 +57,7 @@ function Router() {
               <Route
                 path="/upload"
                 element={
-                  <PrivateRoute
+                  <AdminPrivateRoute
                     authenticated={auth}
                     component={<UploadPage />}
                   />
@@ -73,7 +75,10 @@ function Router() {
               <Route
                 path="/profile"
                 element={
-                  <PrivateRoute authenticated={auth} component={<MyPage />} />
+                  <PrivateRoute
+                    authenticated={auth}
+                    component={<MyPage auth={auth} />}
+                  />
                 }
               />
             </Routes>

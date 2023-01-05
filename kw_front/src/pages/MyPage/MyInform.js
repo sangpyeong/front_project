@@ -1,8 +1,17 @@
-function MyInform({ token }) {
+function Authority({ auth }) {
+  if (auth === 2) {
+    return <div>관리자</div>;
+  } else {
+    return <div>일반사원</div>;
+  }
+}
+
+function MyInform({ token, auth }) {
   const year = [2021];
   for (var i = 0; i < 100; i++) {
     year.push(year[i - 1] - i);
   }
+  console.log(auth);
 
   return (
     <div className="flex flex-col w-full border">
@@ -29,14 +38,17 @@ function MyInform({ token }) {
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             생년월일
           </div>
-          <select className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            <option>선택해주세요</option>
-          </select>
+          <input
+            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2"
+            type="date"
+            placeholder="생년월일"
+          />
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             휴대폰
           </div>
           <input
             className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2"
+            type="tel"
             placeholder="예)010-1234-5678"
           />
         </div>
@@ -46,13 +58,17 @@ function MyInform({ token }) {
             e-mail
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
-            <input className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center" />
+            <input
+              className="flex items-center border w-5/6 h-11/12 border-slate-300 justify-center"
+              type="email"
+              placeholder="이메일"
+            />
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             권한
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            관리자
+            <Authority auth={auth} />
           </div>
         </div>
 
@@ -61,13 +77,21 @@ function MyInform({ token }) {
             신규 비밀번호
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
-            <input className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center" />
+            <input
+              className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center"
+              type="password"
+              placeholder="신규 비밀번호"
+            />
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             비밀번호 확인
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
-            <input className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center" />
+            <input
+              className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center"
+              type="password"
+              placeholder="비밀번호 확인"
+            />
           </div>
         </div>
         <div className="flex flex-row justify-end items-center h-[80px] pr-5">

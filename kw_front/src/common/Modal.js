@@ -6,6 +6,7 @@ import MyPassword from "./MyPassword";
 function Modal({
   token,
   setToken,
+  auth,
   setAuth,
   logInModal,
   setLogInModal,
@@ -13,6 +14,7 @@ function Modal({
   setMyPassword,
   setPageIndex,
 }) {
+  console.log(auth);
   const [modalContent, setModalContent] = useState(0);
   const ModalBG = useRef();
   return (
@@ -33,6 +35,7 @@ function Modal({
                 token={token}
                 setToken={setToken}
                 setModalContent={setModalContent}
+                auth={auth}
                 setAuth={setAuth}
                 setLogInModal={setLogInModal}
               />

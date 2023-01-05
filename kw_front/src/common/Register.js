@@ -4,9 +4,8 @@ import { useState } from "react";
 function Register({ setModalContent, setAuth, setLogInModal }) {
   const [inputID, setInputID] = useState("");
   const [inputPW, setInputPW] = useState("");
-  const [inputFName, setInputFName] = useState("");
-  const [inputLName, setInputLName] = useState("");
-  const [inputNickName, setInputNickName] = useState("");
+  const [inputName, setInputName] = useState("");
+  const [inputIDNumber, setInputIDNumber] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputBD, setInputBD] = useState("");
   const [errorText, setErrorText] = useState("");
@@ -17,14 +16,11 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   const onChangePW = (e) => {
     setInputPW(e.target.value);
   };
-  const onChangeFName = (e) => {
-    setInputFName(e.target.value);
+  const onChangeName = (e) => {
+    setInputName(e.target.value);
   };
-  const onChangeLName = (e) => {
-    setInputLName(e.target.value);
-  };
-  const onChangeNickName = (e) => {
-    setInputNickName(e.target.value);
+  const onChangeIDNumber = (e) => {
+    setInputIDNumber(e.target.value);
   };
   const onChangeEmail = (e) => {
     setInputEmail(e.target.value);
@@ -39,12 +35,10 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
         "https://디비주소/auth/register", //DB 프로젝트에서 가져옴
         {
           username: inputID,
-          user_nickname: inputNickName,
+          user_idnumber: inputIDNumber,
           hased_pw: inputPW,
-          name: {
-            first: inputFName,
-            last: inputLName,
-          },
+          name: inputName,
+
           email: inputEmail,
           birthday: inputBD,
         },
@@ -57,6 +51,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
       )
       .then((res) => {
         console.log(res);
+
         setModalContent(0);
       })
       .catch((err) => {
@@ -68,7 +63,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   return (
     <div class="mx-[40px]">
       <div class="h-[40px] text-center text-[55px] font-bold leading-[40px] m-[20px] mt-[40px] mb-[40px]">
-        LOGO
+        산학회
         <div></div>
       </div>
       <div class="flex flex-col">
@@ -91,34 +86,35 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
           />
         </div>
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">성</div>
+          <div class="w-1/4">한글이름</div>
           <input
-            onChange={onChangeLName}
+            onChange={onChangeName}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="text"
-            placeholder="성"
+            placeholder="한글이름"
           />
         </div>
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">이름</div>
+          <div class="w-1/4">사번</div>
           <input
-            onChange={onChangeFName}
+            onChange={onChangeIDNumber}
             class=" w-3/4 border-solid border-[1px] border-black "
-            type="text"
-            placeholder="이름"
+            type="number"
+            placeholder="사번"
           />
         </div>
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">별명</div>
+          <div class="w-1/4">휴대폰</div>
           <input
-            onChange={onChangeNickName}
+            onChange={onChangeEmail}
             class=" w-3/4 border-solid border-[1px] border-black "
-            type="text"
-            placeholder="별명"
+            type="tel"
+            placeholder="예)010-1234-5678"
+            required
           />
         </div>
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">이메일</div>
+          <div class="w-1/4">e-mail</div>
           <input
             onChange={onChangeEmail}
             class=" w-3/4 border-solid border-[1px] border-black "
@@ -128,12 +124,12 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
           />
         </div>
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">생일</div>
+          <div class="w-1/4">생년월일</div>
           <input
             onChange={onChangeBD}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="date"
-            placeholder="생일"
+            placeholder="생년월일"
           />
         </div>
       </div>
