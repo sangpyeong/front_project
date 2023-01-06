@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import index from "./Upload.css";
 
 function Upload() {
   const [fileList, setFileList] = useState([]);
   const [dropClass, setDropClass] = useState("dropBox");
   const [fileName, setFilename] = useState("이곳에 폴더를 드롭해주세요.");
+
   let tmpFile = [];
   const traverseFileTree = (item, path) => {
     path = path || "";
@@ -41,10 +42,10 @@ function Upload() {
     setFilename(file[0].webkitRelativePath.split("/")[0]);
   };
 
-  const listItems = (fileList) => {
+  const listItems = () => {
     let filelist = [...fileList];
-    console.log("filelist2", filelist);
-    return filelist.map((file) => <li>{file.name}</li>);
+    console.log("filelist2", fileList);
+    return fileList.map((file) => <li>{file.name}</li>);
   };
 
   console.log("fileLsit", fileList);
@@ -64,10 +65,11 @@ function Upload() {
                 traverseFileTree(item);
               }
             }
-            console.log("tmpfile2", tmpFile);
+            console.log("tmpfile", tmpFile);
             setFilename(e.dataTransfer.files[0].name);
             setDropClass("dropBox");
             setFileList(tmpFile);
+            console.log("ondrop", fileList);
           }}
           onDragOver={(e) => {
             e.preventDefault();
@@ -79,9 +81,6 @@ function Upload() {
           onDragLeave={(e) => {
             e.preventDefault();
             setDropClass("dropBox");
-          }}
-          onChange={(e) => {
-            e.preventDefault();
           }}
         >
           {fileName}
@@ -112,7 +111,7 @@ function Upload() {
         </label>
 
         <div>
-          <ul>{listItems(fileList)}</ul>
+          <ul>{listItems()}</ul>
         </div>
 
         <button
