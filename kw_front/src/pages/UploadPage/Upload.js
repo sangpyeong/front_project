@@ -1,6 +1,6 @@
 import { useState } from "react";
 import index from "./Upload.css";
-import FileList from "./FileList";
+
 function Upload() {
   const [fileList, setFileList] = useState([]);
   const [dropClass, setDropClass] = useState("dropBox");
@@ -40,11 +40,13 @@ function Upload() {
     setFileList((prev) => (prev = result));
     setFilename(file[0].webkitRelativePath.split("/")[0]);
   };
+
   const listItems = (fileList) => {
     let filelist = [...fileList];
-    console.log("filelist2", fileList);
+    console.log("filelist2", filelist);
     return filelist.map((file) => <li>{file.name}</li>);
   };
+
   console.log("fileLsit", fileList);
   //console.log("tmpfile1", tmpFile);
   return (
@@ -63,11 +65,9 @@ function Upload() {
               }
             }
             console.log("tmpfile2", tmpFile);
-            setFileList((prev) => {
-              prev = tmpFile;
-            });
             setFilename(e.dataTransfer.files[0].name);
             setDropClass("dropBox");
+            setFileList(tmpFile);
           }}
           onDragOver={(e) => {
             e.preventDefault();
@@ -110,9 +110,8 @@ function Upload() {
         >
           폴더 선택
         </label>
-
         <div>
-          <ul onChange={listItems}>{listItems(fileList)}</ul>
+          <ul>{listItems(fileList)}</ul>
         </div>
 
         <button
