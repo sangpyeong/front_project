@@ -14,7 +14,7 @@ function Navigation({
           <div class="flex flex-row justify-around w-11/12 h-14">
             {auth ? (
               <NavLink className="w-1/4 flex justify-center flex-col">
-                <div className="h-3/4 w-full text-4xl flex items-center font-bold justify-center rounded-lg">
+                <div className="h-3/4 w-full text-4xl flex items-center font-bold justify-center rounded-lg font-serif">
                   산학회
                 </div>
               </NavLink>

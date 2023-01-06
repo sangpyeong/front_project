@@ -1,0 +1,35 @@
+.dropBox {
+  width: 500px;
+  height: 150px;
+
+  margin: 0.6rem;
+  overflow: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 4px dashed #ddd;
+  user-select: none;
+  transition: 0.4s;
+}
+
+/* 드롭 반응 */
+.dropBoxactive {
+  width: 500px;
+  height: 150px;
+
+  margin: 0.6rem;
+  overflow: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 4px dashed #ddd;
+  user-select: none;
+  transition: 0.4s;
+  background: #ddd;
+}
