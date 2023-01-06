@@ -111,7 +111,9 @@ function Upload() {
           폴더 선택
         </label>
 
-        <FileList fileList={fileList} />
+        <div>
+          <ul onChange={listItems}>{listItems(fileList)}</ul>
+        </div>
 
         <button
           type="submit"
