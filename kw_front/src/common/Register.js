@@ -6,6 +6,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   const [inputPW, setInputPW] = useState("");
   const [inputName, setInputName] = useState("");
   const [inputIDNumber, setInputIDNumber] = useState("");
+  const [inputTellnumber, setInputTellnumber] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputBD, setInputBD] = useState("");
   const [errorText, setErrorText] = useState("");
@@ -22,6 +23,9 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   const onChangeIDNumber = (e) => {
     setInputIDNumber(e.target.value);
   };
+  const onChangeTellnumber = (e) => {
+    setInputTellnumber(e.target.value);
+  };
   const onChangeEmail = (e) => {
     setInputEmail(e.target.value);
   };
@@ -32,13 +36,13 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   const regist = () => {
     axios
       .post(
-        "https://디비주소/auth/register", //DB 프로젝트에서 가져옴
+        "http://localhost:8000/auth/register", //DB 프로젝트에서 가져옴
         {
           username: inputID,
           user_idnumber: inputIDNumber,
-          hased_pw: inputPW,
+          password: inputPW,
           name: inputName,
-
+          tell_number: inputTellnumber,
           email: inputEmail,
           birthday: inputBD,
         },
@@ -106,7 +110,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">휴대폰</div>
           <input
-            onChange={onChangeEmail}
+            onChange={onChangeTellnumber}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="tel"
             placeholder="예)010-1234-5678"

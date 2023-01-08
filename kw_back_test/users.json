@@ -1,0 +1,23 @@
+{
+  "users": [
+    { "id": 1, "username": "bruno", "password": "bruno" },
+    { "id": 2, "username": "techie", "password": "techie" },
+    { "id": 3, "username": "nilson", "password": "nilson" },
+    { "id": 4, "username": "nilson1", "password": "nilson" },
+    { "id": 5, "username": "nilson2", "password": "nilson" },
+    { "id": 6, "username": "nilson3", "password": "nilson" },
+    { "id": 7, "username": "nilson4", "password": "nilson" },
+    { "id": 8, "username": "nilson7", "password": "nilson" },
+    { "id": 9, "username": "nilson8", "password": "nilson" },
+    {
+      "id": 10,
+      "username": "test",
+      "password": "1234",
+      "user_idnumber": "12341234",
+      "name": "테스트",
+      "tell_number": "010-1234-1234",
+      "email": "test@test.com",
+      "birthday": "2023-01-01"
+    }
+  ]
+}
