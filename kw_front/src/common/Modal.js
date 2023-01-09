@@ -12,6 +12,8 @@ function Modal({
   setLogInModal,
   myPassword,
   setMyPassword,
+  myUsername,
+  setMyUsername,
   setPageIndex,
 }) {
   console.log(auth);
@@ -32,11 +34,10 @@ function Modal({
           <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
             {modalContent === 0 ? (
               <Login
-                token={token}
                 setToken={setToken}
                 setModalContent={setModalContent}
-                auth={auth}
                 setAuth={setAuth}
+                setMyUsername={setMyUsername}
                 setLogInModal={setLogInModal}
               />
             ) : (
@@ -61,7 +62,11 @@ function Modal({
           }}
         >
           <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
-            <MyPassword myPassword={myPassword} setMyPassword={setMyPassword} />
+            <MyPassword
+              myUsername={myUsername}
+              setMyPassword={setMyPassword}
+              token={token}
+            />
           </div>
         </div>
       ) : null}

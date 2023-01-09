@@ -4,11 +4,10 @@ import jwt_decode from "jwt-decode"; //보안
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Login({
-  token,
   setToken,
   setModalContent,
-  auth,
   setAuth,
+  setMyUsername,
   setLogInModal,
 }) {
   const navigate = useNavigate();
@@ -47,7 +46,9 @@ function Login({
       )
       .then((res) => {
         setToken(res.data.access_token);
+        console.log(res);
         navigate("/search");
+        setMyUsername(inputID);
         if (jwt_decode(res.data.access_token).adminkey) {
           setAuth(2);
         } else {
@@ -57,7 +58,7 @@ function Login({
       })
 
       .catch((err) => {
-        console.log(err.response.data.detail);
+        console.log(err.response.data);
         setErrorText("아이디와 비밀번호를 확인하세요.");
       });
 

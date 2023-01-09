@@ -1,3 +1,6 @@
+import axios from "axios";
+import { useState } from "react";
+
 function Authority({ auth }) {
   if (auth === 2) {
     return <div>관리자</div>;
@@ -6,12 +9,46 @@ function Authority({ auth }) {
   }
 }
 
-function MyInform({ token, auth }) {
+function MyInform({ token, auth, myUsername }) {
   const year = [2021];
   for (var i = 0; i < 100; i++) {
     year.push(year[i - 1] - i);
   }
-  console.log(auth);
+  console.log("token", token);
+  console.log("auth", auth);
+  console.log("myUsername", myUsername);
+  const [detailName, setDetailName] = useState("");
+  const [detailUser_idnumber, setDetailUser_idnumber] = useState("");
+  const [detailtell_numberr, setDetailtell_number] = useState("");
+  const [detailemail, setDetailemail] = useState("");
+  const [detailbirthday, setDetailbirthday] = useState("");
+
+  const ResponseDetail = () => {
+    axios
+      .post(
+        "http://localhost:8000/auth/detail",
+        {
+          username: myUsername,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setDetailName(res.data.name);
+        setDetailUser_idnumber(res.data.user_idnumber);
+        setDetailtell_number(res.data.tell_number);
+        setDetailemail(res.data.email);
+        setDetailbirthday(res.data.birthday);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  };
+  ResponseDetail();
 
   return (
     <div className="flex flex-col w-full border">
@@ -20,17 +57,15 @@ function MyInform({ token, auth }) {
           개인정보수정
         </div>
         <div className="flex flex-row justify-center h-[40px]">
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
-            한글이름
-          </div>
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200"></div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            홍길동
+            {detailName}
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             사번
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            20240000
+            {detailUser_idnumber}
           </div>
         </div>
 
@@ -39,17 +74,19 @@ function MyInform({ token, auth }) {
             생년월일
           </div>
           <input
-            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2"
+            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 "
             type="date"
-            placeholder="생년월일"
+            data-placeholder={detailbirthday}
+            required
+            aria-required="true"
           />
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             휴대폰
           </div>
           <input
-            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2"
+            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 placeholder:text-black"
             type="tel"
-            placeholder="예)010-1234-5678"
+            placeholder={detailtell_numberr}
           />
         </div>
 
@@ -59,9 +96,9 @@ function MyInform({ token, auth }) {
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
             <input
-              className="flex items-center border w-5/6 h-11/12 border-slate-300 justify-center"
+              className="flex items-center border w-5/6 h-11/12 border-slate-300 justify-center placeholder:text-black"
               type="email"
-              placeholder="이메일"
+              placeholder={detailemail}
             />
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
