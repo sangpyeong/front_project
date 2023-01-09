@@ -27,6 +27,14 @@ function verifyToken(token) {
   );
 }
 
+//로그인 함수에서 관리자 인증키를 변수에 인증키를 저장하기위한 함수
+function adminkeyinitinlogin({ username, password }) {
+  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  const finduser = userdb.users.find(
+    (user) => user.username === username && user.password === password
+  );
+  return finduser.adminkey;
+}
 // Check if the user exists in database
 function isAuthenticated({ username, password }) {
   userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
@@ -41,7 +49,7 @@ function isAuthenticated({ username, password }) {
 server.post("/auth/register", (req, res) => {
   console.log("register endpoint called; request body:");
   console.log(req.body);
-  const {
+  var {
     username,
     password,
     user_idnumber,
@@ -49,7 +57,15 @@ server.post("/auth/register", (req, res) => {
     tell_number,
     email,
     birthday,
+    adminkey,
   } = req.body;
+  console.log("ㅆㅃ", adminkey);
+
+  if (adminkey === "9999") {
+    adminkey = 1;
+  } else {
+    adminkey = 0;
+  }
 
   if (isAuthenticated({ username, password }) === true) {
     const status = 401;
@@ -82,7 +98,10 @@ server.post("/auth/register", (req, res) => {
       tell_number: tell_number,
       email: email,
       birthday: birthday,
-    }); //add some data
+      adminkey: adminkey,
+    });
+
+    //add some data
     var writeData = fs.writeFileSync(
       "./users.json",
       JSON.stringify(data),
@@ -100,7 +119,8 @@ server.post("/auth/register", (req, res) => {
   });
 
   // Create token for new user
-  const access_token = createToken({ username, password });
+  console.log(adminkey);
+  const access_token = createToken({ username, password, adminkey });
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });
@@ -110,13 +130,17 @@ server.post("/auth/login", (req, res) => {
   console.log("login endpoint called; request body:");
   console.log(req.body);
   const { username, password } = req.body;
+
   if (isAuthenticated({ username, password }) === false) {
     const status = 401;
     const message = "Incorrect username or password";
     res.status(status).json({ status, message });
     return;
   }
-  const access_token = createToken({ username, password });
+  const adminkey = adminkeyinitinlogin({ username, password });
+  console.log("adminkey", adminkey);
+
+  const access_token = createToken({ username, password, adminkey });
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });

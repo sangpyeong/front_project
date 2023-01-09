@@ -47,18 +47,13 @@ function Login({
       )
       .then((res) => {
         setToken(res.data.access_token);
-        console.log("이게 뭘까?", res.data.access_token);
-        setAuth(2);
-        setLogInModal(false);
         navigate("/search");
-        /***********************************************
-        if (jwt_decode(res.data.access_token).admin) {
+        if (jwt_decode(res.data.access_token).adminkey) {
           setAuth(2);
         } else {
           setAuth(1);
         }
         setLogInModal(false);
-        *************************************************/
       })
 
       .catch((err) => {
