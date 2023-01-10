@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import MyInform from "./MyInform";
 
-function MyPage({ token, setToken, auth, setAuth }) {
+function MyPage({ token, setToken, auth, setAuth, myUsername }) {
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-row w-full justify-end pr-5 pt-5 pb-5">
@@ -18,7 +17,7 @@ function MyPage({ token, setToken, auth, setAuth }) {
         </NavLink>
       </div>
 
-      <MyInform token={token} auth={auth} />
+      <MyInform token={token} auth={auth} myUsername={myUsername} />
     </div>
   );
 }

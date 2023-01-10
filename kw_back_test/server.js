@@ -35,8 +35,21 @@ function adminkeyinitinlogin({ username, password }) {
   );
   return finduser.adminkey;
 }
+
+function findhittingdata({ username }) {
+  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  const finduser = userdb.users.find((user) => user.username === username);
+  return finduser;
+}
+
 // Check if the user exists in database
-function isAuthenticated({ username, password }) {
+function isAuthenticatedforregister({ username }) {
+  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  return userdb.users.findIndex((user) => user.username === username) !== -1;
+}
+
+// Check if the user exists in database
+function isAuthenticatedforlogin({ username, password }) {
   userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
   return (
     userdb.users.findIndex(
@@ -59,7 +72,7 @@ server.post("/auth/register", (req, res) => {
     birthday,
     adminkey,
   } = req.body;
-  console.log("ㅆㅃ", adminkey);
+  console.log("modify adminkey", adminkey);
 
   if (adminkey === "9999") {
     adminkey = 1;
@@ -67,9 +80,9 @@ server.post("/auth/register", (req, res) => {
     adminkey = 0;
   }
 
-  if (isAuthenticated({ username, password }) === true) {
+  if (isAuthenticatedforregister({ username }) === true) {
     const status = 401;
-    const message = "username and Password already exist";
+    const message = "username already exist";
     res.status(status).json({ status, message });
     return;
   }
@@ -131,7 +144,7 @@ server.post("/auth/login", (req, res) => {
   console.log(req.body);
   const { username, password } = req.body;
 
-  if (isAuthenticated({ username, password }) === false) {
+  if (isAuthenticatedforlogin({ username, password }) === false) {
     const status = 401;
     const message = "Incorrect username or password";
     res.status(status).json({ status, message });
@@ -145,7 +158,17 @@ server.post("/auth/login", (req, res) => {
   res.status(200).json({ access_token });
 });
 
-server.use(/^(?!\/auth).*$/, (req, res, next) => {
+server.post("/auth/check", (req, res) => {
+  console.log("check endpoint called; request body:");
+  console.log(req.body);
+  const { username, password } = req.body;
+  if (isAuthenticatedforlogin({ username, password }) === false) {
+    const status = 401;
+    const message = "Incorrect username or password";
+    res.status(status).json({ status, message });
+    return;
+  }
+
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(" ")[0] !== "Bearer"
@@ -165,12 +188,56 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
       res.status(status).json({ status, message });
       return;
     }
-    next();
   } catch (err) {
     const status = 401;
     const message = "Error access_token is revoked";
     res.status(status).json({ status, message });
   }
+  const message = req.headers.authorization;
+  res.status(200).json({ message });
+  console.log("Bearer access_token:", req.headers.authorization);
+});
+
+server.post("/auth/detail", (req, res) => {
+  console.log("check endpoint called; request body:");
+  console.log(req.body);
+  const { username } = req.body;
+  if (isAuthenticatedforregister({ username }) === false) {
+    const status = 401;
+    const message = "No exist username";
+    res.status(status).json({ status, message });
+    return;
+  }
+
+  if (
+    req.headers.authorization === undefined ||
+    req.headers.authorization.split(" ")[0] !== "Bearer"
+  ) {
+    const status = 401;
+    const message = "Error in authorization format";
+    res.status(status).json({ status, message });
+    return;
+  }
+  try {
+    let verifyTokenResult;
+    verifyTokenResult = verifyToken(req.headers.authorization.split(" ")[1]);
+
+    if (verifyTokenResult instanceof Error) {
+      const status = 401;
+      const message = "Access token not provided";
+      res.status(status).json({ status, message });
+      return;
+    }
+  } catch (err) {
+    const status = 401;
+    const message = "Error access_token is revoked";
+    res.status(status).json({ status, message });
+  }
+  const hittingdata = findhittingdata({ username });
+  console.log(hittingdata);
+  const message = req.headers.authorization;
+  res.status(200).json(hittingdata);
+  console.log("Bearer access_token:", req.headers.authorization);
 });
 
 server.use(router);

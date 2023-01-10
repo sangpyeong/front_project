@@ -15,6 +15,7 @@ function Router() {
   const [token, setToken] = useState("");
   const [logInModal, setLogInModal] = useState(false);
   const [myPassword, setMyPassword] = useState(false);
+  const [myUsername, setMyUsername] = useState(false);
   console.log(auth);
 
   return (
@@ -29,6 +30,8 @@ function Router() {
           setLogInModal={setLogInModal}
           myPassword={myPassword}
           setMyPassword={setMyPassword}
+          myUsername={myUsername}
+          setMyUsername={setMyUsername}
           setPageIndex={setPageIndex}
         />
         <div className="h-14 w-full fixed z-20">
@@ -77,7 +80,15 @@ function Router() {
                 element={
                   <PrivateRoute
                     authenticated={auth}
-                    component={<MyPage auth={auth} />}
+                    component={
+                      <MyPage
+                        token={token}
+                        setToken={setToken}
+                        auth={auth}
+                        setAuth={setAuth}
+                        myUsername={myUsername}
+                      />
+                    }
                   />
                 }
               />
