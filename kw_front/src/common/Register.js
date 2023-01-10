@@ -6,8 +6,10 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   const [inputPW, setInputPW] = useState("");
   const [inputName, setInputName] = useState("");
   const [inputIDNumber, setInputIDNumber] = useState("");
+  const [inputTellnumber, setInputTellnumber] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputBD, setInputBD] = useState("");
+  const [inputAdminKey, setInputAdminKey] = useState("");
   const [errorText, setErrorText] = useState("");
 
   const onChangeID = (e) => {
@@ -22,25 +24,32 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
   const onChangeIDNumber = (e) => {
     setInputIDNumber(e.target.value);
   };
+  const onChangeTellnumber = (e) => {
+    setInputTellnumber(e.target.value);
+  };
   const onChangeEmail = (e) => {
     setInputEmail(e.target.value);
   };
   const onChangeBD = (e) => {
     setInputBD(e.target.value);
   };
+  const onChangeAdminKey = (e) => {
+    setInputAdminKey(e.target.value);
+  };
 
   const regist = () => {
     axios
       .post(
-        "https://디비주소/auth/register", //DB 프로젝트에서 가져옴
+        "http://localhost:8000/auth/register", //DB 프로젝트에서 가져옴
         {
           username: inputID,
           user_idnumber: inputIDNumber,
-          hased_pw: inputPW,
+          password: inputPW,
           name: inputName,
-
+          tell_number: inputTellnumber,
           email: inputEmail,
           birthday: inputBD,
+          adminkey: inputAdminKey,
         },
         {
           headers: {
@@ -106,7 +115,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">휴대폰</div>
           <input
-            onChange={onChangeEmail}
+            onChange={onChangeTellnumber}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="tel"
             placeholder="예)010-1234-5678"
@@ -130,6 +139,15 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
             class=" w-3/4 border-solid border-[1px] border-black "
             type="date"
             placeholder="생년월일"
+          />
+        </div>
+        <div class="flex justify-between mt-[20px]">
+          <div class="w-1/4">관리자권한</div>
+          <input
+            onChange={onChangeAdminKey}
+            class=" w-3/4 border-solid border-[1px] border-black "
+            type="number"
+            placeholder="관리자 권한을 원하시면 인증키를 입력하세오"
           />
         </div>
       </div>
