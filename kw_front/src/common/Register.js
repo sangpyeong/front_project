@@ -147,7 +147,7 @@ function Register({ setModalContent }) {
             onChange={onChangeAdminKey}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="number"
-            placeholder="관리자 권한을 원하시면 인증키를 입력하세오"
+            placeholder="관리자 권한을 원하시면 인증키를 입력하세요"
           />
         </div>
       </div>

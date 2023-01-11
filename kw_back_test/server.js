@@ -4,8 +4,8 @@ const jsonServer = require("json-server");
 const jwt = require("jsonwebtoken");
 
 const server = jsonServer.create();
-const router = jsonServer.router("./database.json");
-var userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+const router = jsonServer.router("./userDB.json");
+var userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -29,19 +29,21 @@ function verifyToken(token) {
 
 //로그인 함수에서 관리자 인증키를 변수에 인증키를 저장하기위한 함수
 function adminkeyinitinlogin({ userID, password }) {
-  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
   const finduser = userdb.users.find(
     (user) => user.userID === userID && user.password === password
   );
   return finduser.adminkey;
 }
 
+//원하는 사용자 정보 찾는 함수
 function findhittingdata({ userID }) {
-  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
   const finduser = userdb.users.find((user) => user.userID === userID);
   return finduser;
 }
 
+//수정 기능 API에서 원하는 사용자 정보 찾는 함수
 function findhittingdata_for_modify({
   userID,
   user_idnumber,
@@ -50,7 +52,7 @@ function findhittingdata_for_modify({
   email,
   birthday,
 }) {
-  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
   const finduser = userdb.users.find(
     (user) =>
       user.userID === userID &&
@@ -62,15 +64,36 @@ function findhittingdata_for_modify({
   );
   return finduser;
 }
+
+//DB 검색 API에서 원하는 사용자 정보 찾는 함수
+function findhittingdata_for_find({
+  user_idnumber,
+  name,
+  tell_number,
+  email,
+  birthday,
+}) {
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
+  const finduser = userdb.users.find(
+    (user) =>
+      user.user_idnumber === user_idnumber &&
+      user.name === name &&
+      user.tell_number === tell_number &&
+      user.email === email &&
+      user.birthday === birthday
+  );
+  return finduser;
+}
+
 // Check if the user exists in database
 function isAuthenticated_for_register_and_detail({ userID }) {
-  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
   return userdb.users.findIndex((user) => user.userID === userID) !== -1;
 }
 
 // Check if the user exists in database
 function isAuthenticated_for_login_modify({ userID, password }) {
-  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
   return (
     userdb.users.findIndex(
       (user) => user.userID === userID && user.password === password
@@ -92,9 +115,9 @@ server.post("/auth/register", (req, res) => {
     birthday,
     adminkey,
   } = req.body;
-  console.log("modify adminkey", adminkey);
 
   if (adminkey === "9999") {
+    //관리자권한 부여
     adminkey = 1;
   } else {
     adminkey = 0;
@@ -107,7 +130,7 @@ server.post("/auth/register", (req, res) => {
     return;
   }
 
-  fs.readFile("./users.json", (err, data) => {
+  fs.readFile("./userDB.json", (err, data) => {
     if (err) {
       const status = 401;
       const message = err;
@@ -119,7 +142,14 @@ server.post("/auth/register", (req, res) => {
     var data = JSON.parse(data.toString());
 
     // Get the id of last user
-    var last_item_id = data.users[data.users.length - 1].id;
+
+    if (data.users.length === 0 && data.users.constructor === Array) {
+      //user 배열에 객체가 할당되진 않은 경우
+
+      var last_item_id = 0;
+    } else {
+      var last_item_id = data.users[data.users.length - 1].id;
+    }
 
     //Add new user
     data.users.push({
@@ -136,7 +166,7 @@ server.post("/auth/register", (req, res) => {
 
     //add some data
     var writeData = fs.writeFileSync(
-      "./users.json",
+      "./userDB.json",
       JSON.stringify(data),
       (err, result) => {
         // WRITE
@@ -148,17 +178,16 @@ server.post("/auth/register", (req, res) => {
         }
       }
     );
-    userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8")); //동기화
+    userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8")); //동기화
   });
 
   // Create token for new user
-  console.log(adminkey);
   const access_token = createToken({ userID, password, adminkey });
-  console.log("Access Token:" + access_token);
+  //console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });
 
-// Login to one of the users from ./users.json
+// Login to one of the users from ./userDB.json
 server.post("/auth/login", (req, res) => {
   console.log("login endpoint called; request body:");
   console.log(req.body);
@@ -171,10 +200,9 @@ server.post("/auth/login", (req, res) => {
     return;
   }
   const adminkey = adminkeyinitinlogin({ userID, password });
-  console.log("adminkey", adminkey);
 
   const access_token = createToken({ userID, password, adminkey });
-  console.log("Access Token:" + access_token);
+  //console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });
 
@@ -216,10 +244,10 @@ server.post("/auth/check", (req, res) => {
   }
   const message = req.headers.authorization;
   res.status(200).json({ message });
-  console.log("Bearer access_token:", req.headers.authorization);
+  //console.log("Bearer access_token:", req.headers.authorization);
 });
 
-// DB정보를 가지고오는 기능
+// DB정보를 찾아서 가지고오는 기능
 server.post("/auth/detail", (req, res) => {
   console.log("check endpoint called; request body:");
   console.log(req.body);
@@ -264,10 +292,9 @@ server.post("/auth/detail", (req, res) => {
     return;
   }
 
-  console.log(hittingdata);
   const message = req.headers.authorization;
   res.status(200).json(hittingdata);
-  console.log("Bearer access_token:", req.headers.authorization);
+  //console.log("Bearer access_token:", req.headers.authorization);
 });
 
 // DB정보를 수정하는 기능
@@ -334,10 +361,8 @@ server.post("/auth/modify", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
-  console.log("hittingdata:", hittingdata);
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-  fs.readFile("./users.json", (err, data) => {
+  fs.readFile("./userDB.json", (err, data) => {
     if (err) {
       const status = 401;
       const message = err;
@@ -350,11 +375,6 @@ server.post("/auth/modify", (req, res) => {
     const find_user_index = data.users.findIndex(
       (data) => JSON.stringify(data) === JSON.stringify(hittingdata)
     );
-    console.log("data.users[9]: ", data.users[9]);
-    console.log("hittingdata: ", hittingdata);
-    console.log("find_user_index: ", find_user_index);
-    console.log("data.users[find_user_index]: ", data.users[find_user_index]);
-
     // 수정하고자 하는 유저 변경
     if (new_password !== "") {
       data.users[find_user_index].password = new_password;
@@ -368,11 +388,10 @@ server.post("/auth/modify", (req, res) => {
     if (new_birthday !== "") {
       data.users[find_user_index].birthday = new_birthday;
     }
-    console.log("변경후: ", data.users[10]);
 
     //add some data
     var writeData = fs.writeFileSync(
-      "./users.json",
+      "./userDB.json",
       JSON.stringify(data),
       (err, result) => {
         // WRITE
@@ -384,15 +403,40 @@ server.post("/auth/modify", (req, res) => {
         }
       }
     );
-    userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8")); //동기화
-    console.log(userdb.users[10]);
+    userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8")); //동기화
     res.status(200).json(userdb.users[10]);
-    console.log("Bearer access_token:", req.headers.authorization);
+    //console.log("Bearer access_token:", req.headers.authorization);
   });
+});
+
+//DB에서 원하는 ID,Password를 찾는 기능
+server.post("/auth/find", (req, res) => {
+  console.log("check endpoint called; request body:");
+  console.log(req.body);
+  const { user_idnumber, name, tell_number, email, birthday } = req.body;
+
+  const hittingdata = findhittingdata_for_find({
+    user_idnumber,
+    name,
+    tell_number,
+    email,
+    birthday,
+  });
+
+  if (hittingdata === undefined) {
+    const status = 401;
+    const message = "No exist imformation in DB";
+    res.status(status).json({ status, message });
+    return;
+  }
+
+  const message = req.headers.authorization;
+  res.status(200).json(hittingdata);
+  //console.log("Bearer access_token:", req.headers.authorization);
 });
 
 server.use(router);
 
 server.listen(8000, () => {
-  console.log("Run Auth API Server");
+  console.log("Run Simple Login API Server");
 });
