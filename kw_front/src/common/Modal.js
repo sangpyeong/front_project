@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import MyPassword from "./MyPassword";
+import FindIDPassword from "./FindIDPassword";
 
 function Modal({
   setTestMode,
@@ -41,8 +42,10 @@ function Modal({
                 setMyUserID={setMyUserID}
                 setLogInModal={setLogInModal}
               />
-            ) : (
+            ) : modalContent === 1 ? (
               <Register setModalContent={setModalContent} />
+            ) : (
+              <FindIDPassword setModalContent={setModalContent} />
             )}
           </div>
         </div>

@@ -100,7 +100,12 @@ function Login({
           >
             회원가입
           </div>
-          <div class="text-[13px] text-gray-400 cursor-pointer hover:text-black hover:translate-y-[12px] duration-75">
+          <div
+            class="text-[13px] text-gray-400 cursor-pointer hover:text-black hover:translate-y-[12px] duration-75"
+            onClick={() => {
+              setModalContent(2);
+            }}
+          >
             아이디/비밀번호 찾기
           </div>
         </div>
