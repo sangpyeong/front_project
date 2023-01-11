@@ -18,8 +18,6 @@ function Mymodify(
   setMyemail,
   setMybirthday,
   inputNewBD,
-  inputNewEmail,
-  inputNewPassword_First,
   inputNewPassword_Second,
   inputNewTell_Number,
   inputOldPassword,
@@ -30,13 +28,6 @@ function Mymodify(
     setToken("");
     setTestMode(false);
   } else {
-    console.log("testMode", testMode);
-    console.log("inputNewBD", inputNewBD);
-    console.log("inputNewEmail", inputNewEmail);
-    console.log("inputNewPassword_First", inputNewPassword_First);
-    console.log("inputNewPassword_Second", inputNewPassword_Second);
-    console.log("inputNewTell_Number", inputNewTell_Number);
-    console.log("inputOldPassword", inputOldPassword);
     axios
       .post(
         "http://localhost:8000/auth/modify",
@@ -50,7 +41,6 @@ function Mymodify(
           birthday: mybirthday,
           new_password: inputNewPassword_Second,
           new_tell_number: inputNewTell_Number,
-          new_email: inputNewEmail,
           new_birthday: inputNewBD,
         },
         {

@@ -32,7 +32,6 @@ function MyInform({
   const [inputNewPassword_Second, setInputNewPassword_Second] = useState("");
   const [inputNewTell_Number, setInputNewTell_Number] = useState("");
   const [inputNewEmail, setInputNewEmail] = useState("");
-  const [inputNewBD, setInputNewBD] = useState("");
   const [inputOldPassword, setInputOldPassword] = useState("");
 
   const [errorText, setErrorText] = useState("");
@@ -49,21 +48,13 @@ function MyInform({
   const onChangeNewEmail = (e) => {
     setInputNewEmail(e.target.value);
   };
-  const onChangeNewBD = (e) => {
-    setInputNewBD(e.target.value);
-  };
   const onChangeOldPassword = (e) => {
     setInputOldPassword(e.target.value);
   };
 
   const handleSubmit = (e) => {
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
-    console.log("inputNewBD", inputNewBD);
-    console.log("inputNewEmail", inputNewEmail);
-    console.log("inputNewPassword_First", inputNewPassword_First);
-    console.log("inputNewPassword_Second", inputNewPassword_Second);
-    console.log("inputNewTell_Number", inputNewTell_Number);
-    console.log("inputOldPassword", inputOldPassword);
+
     e.preventDefault();
 
     if (inputNewPassword_First !== inputNewPassword_Second) {
@@ -89,9 +80,6 @@ function MyInform({
         setMytell_number,
         setMyemail,
         setMybirthday,
-        inputNewBD,
-        inputNewEmail,
-        inputNewPassword_First,
         inputNewPassword_Second,
         inputNewTell_Number,
         inputOldPassword,
@@ -161,25 +149,16 @@ function MyInform({
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             생년월일
           </div>
-          <input
-            onChange={onChangeNewBD}
-            value={inputNewBD}
-            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 "
-            type="date"
-            data-placeholder={mybirthday}
-            required
-            aria-required="true"
-          />
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
-            휴대폰
+          <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 ">
+            {mybirthday}
           </div>
-          <input
-            onChange={onChangeNewTell_Number}
-            value={inputNewTell_Number}
-            className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 placeholder:text-black"
-            type="tel"
-            placeholder={mytell_number}
-          />
+
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+            권한
+          </div>
+          <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
+            <Authority auth={auth} />
+          </div>
         </div>
 
         <div className="flex flex-row justify-center h-[40px]">
@@ -196,10 +175,16 @@ function MyInform({
             />
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
-            권한
+            휴대폰
           </div>
-          <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            <Authority auth={auth} />
+          <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
+            <input
+              onChange={onChangeNewTell_Number}
+              value={inputNewTell_Number}
+              className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center placeholder:text-black"
+              type="tel"
+              placeholder={mytell_number}
+            />
           </div>
         </div>
         <div className="flex flex-row justify-center ">
