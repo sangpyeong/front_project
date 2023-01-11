@@ -3,24 +3,35 @@
     {
       "id": 1,
       "userID": "test",
-      "password": "1111",
-      "user_idnumber": "1111111111",
-      "name": "테스트",
-      "tell_number": "010-1111-1111",
-      "email": "test@test.com",
-      "birthday": "2023-01-01",
+      "password": "1234",
+      "user_idnumber": "2018202065",
+      "name": "홍길동",
+      "tell_number": "010-8652-1545",
+      "email": "gildong@kw.ac.kr",
+      "birthday": "1999-07-07",
       "adminkey": 1
     },
     {
       "id": 2,
-      "userID": "hong",
+      "userID": "test2",
       "password": "1234",
-      "user_idnumber": "1234123412",
-      "name": "홍길동",
+      "user_idnumber": "2018303065",
+      "name": "고길동",
       "tell_number": "010-1234-1234",
-      "email": "hong@test.com",
+      "email": "go@kw.ac.kr",
       "birthday": "1999-09-19",
       "adminkey": 0
+    },
+    {
+      "id": 3,
+      "userID": "cheoljun99",
+      "password": "1234",
+      "user_idnumber": "2018202065",
+      "name": "박철준",
+      "tell_number": "010-9897-1424",
+      "email": "cheoljun99@naver.com",
+      "birthday": "1999-07-13",
+      "adminkey": 1
     }
   ]
 }

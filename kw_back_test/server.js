@@ -311,7 +311,6 @@ server.post("/auth/modify", (req, res) => {
     birthday,
     new_password,
     new_tell_number,
-    new_email,
     new_birthday,
   } = req.body;
 
@@ -384,9 +383,6 @@ server.post("/auth/modify", (req, res) => {
     }
     if (new_email !== "") {
       data.users[find_user_index].email = new_email;
-    }
-    if (new_birthday !== "") {
-      data.users[find_user_index].birthday = new_birthday;
     }
 
     //add some data
