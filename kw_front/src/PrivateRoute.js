@@ -7,7 +7,7 @@ function PrivateRoute({ authenticated, component: Component }) {
   return authenticated ? (
     Component
   ) : (
-    <Navigate to="/" {...alert("접근할 수 없는 페이지입니다.")} />
+    <Navigate to="/" {...alert("정보 변경! 다시 로그인하십시오.")} />
   );
 }
 

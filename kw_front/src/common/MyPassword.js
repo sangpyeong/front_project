@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function MyPassword({ myUsername, setMyPassword, token }) {
+function MyPassword({ myUserID, setPasswordModal, token }) {
   const navigate = useNavigate();
   const [errorText, setErrorText] = useState("");
   const [inputPW, setInputPW] = useState("");
@@ -12,16 +12,16 @@ function MyPassword({ myUsername, setMyPassword, token }) {
 
   const test_login = () => {
     navigate("/profile");
-    setMyPassword(false);
+    setPasswordModal(false);
   };
   const login = () => {
     console.log("token", token);
-    console.log(myUsername, inputPW);
+    console.log(myUserID, inputPW);
     axios
       .post(
         "http://localhost:8000/auth/check",
         {
-          username: myUsername,
+          userID: myUserID,
           password: inputPW,
         },
         {
@@ -33,7 +33,7 @@ function MyPassword({ myUsername, setMyPassword, token }) {
       .then((res) => {
         console.log(res);
         navigate("/profile");
-        setMyPassword(false);
+        setPasswordModal(false);
       })
       .catch((err) => {
         console.log(err.response.data);

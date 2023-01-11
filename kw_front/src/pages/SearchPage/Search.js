@@ -28,7 +28,7 @@ function Search() {
         <input
           value="입력"
           type="submit"
-          className="p-2 text-cyan-300 border-2 border-cyan-300 rounded hover:text-white hover:bg-cyan-300"
+          className="p-2 text-cyan-300 border-2 border-cyan-300 rounded hover:text-white hover:bg-cyan-300 cursor-pointer"
         />
       </form>
     </div>

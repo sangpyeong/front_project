@@ -1,13 +1,14 @@
 import axios from "axios"; //통신
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import jwt_decode from "jwt-decode"; //보안
 import { NavLink, useNavigate } from "react-router-dom";
 
 function Login({
+  setTestMode,
   setToken,
   setModalContent,
   setAuth,
-  setMyUsername,
+  setMyUserID,
   setLogInModal,
 }) {
   const navigate = useNavigate();
@@ -22,10 +23,12 @@ function Login({
   };
 
   const test_login = () => {
+    setTestMode(true);
     setAuth(1);
     setLogInModal(false);
   };
   const admin_test_login = () => {
+    setTestMode(true);
     setAuth(2);
     setLogInModal(false);
   };
@@ -34,7 +37,7 @@ function Login({
       .post(
         "http://localhost:8000/auth/login",
         {
-          username: inputID,
+          userID: inputID,
           password: inputPW,
         },
         {
@@ -48,7 +51,7 @@ function Login({
         setToken(res.data.access_token);
         console.log(res);
         navigate("/search");
-        setMyUsername(inputID);
+        setMyUserID(inputID);
         if (jwt_decode(res.data.access_token).adminkey) {
           setAuth(2);
         } else {
@@ -61,34 +64,6 @@ function Login({
         console.log(err.response.data);
         setErrorText("아이디와 비밀번호를 확인하세요.");
       });
-
-    /************************************************
-      .then((res) => {
-        setToken(res.data.access_token);
-        axios
-          .post(
-            "http://localhost:8000/user/balance/makeAccount",
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          )
-          .then(console.log("makeAccount Success"))
-          .catch(console.log("makeAccount Fail"));
-        if (jwt_decode(res.data.access_token).admin) {
-          setAuth(2);
-        } else {
-          setAuth(1);
-        }
-        setLogInModal(false);
-      })
-      .catch((err) => {
-        console.log(err.response.data.detail);
-        setErrorText("아이디와 비밀번호를 확인하세요.");
-      });
-      ****************************************************/
   };
 
   return (

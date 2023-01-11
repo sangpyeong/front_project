@@ -5,7 +5,7 @@ function Navigation({
   auth,
   pageIndex,
   setPageIndex,
-  setMyPassword,
+  setPasswordModal,
 }) {
   return (
     <div>
@@ -55,7 +55,7 @@ function Navigation({
             </NavLink>
             <NavLink
               onClick={() => {
-                setMyPassword(true);
+                setPasswordModal(true);
               }}
               className="w-1/4 flex justify-center flex-col"
             >

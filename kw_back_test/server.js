@@ -28,32 +28,52 @@ function verifyToken(token) {
 }
 
 //로그인 함수에서 관리자 인증키를 변수에 인증키를 저장하기위한 함수
-function adminkeyinitinlogin({ username, password }) {
+function adminkeyinitinlogin({ userID, password }) {
   userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
   const finduser = userdb.users.find(
-    (user) => user.username === username && user.password === password
+    (user) => user.userID === userID && user.password === password
   );
   return finduser.adminkey;
 }
 
-function findhittingdata({ username }) {
+function findhittingdata({ userID }) {
   userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
-  const finduser = userdb.users.find((user) => user.username === username);
+  const finduser = userdb.users.find((user) => user.userID === userID);
   return finduser;
 }
 
-// Check if the user exists in database
-function isAuthenticatedforregister({ username }) {
+function findhittingdata_for_modify({
+  userID,
+  user_idnumber,
+  name,
+  tell_number,
+  email,
+  birthday,
+}) {
   userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
-  return userdb.users.findIndex((user) => user.username === username) !== -1;
+  const finduser = userdb.users.find(
+    (user) =>
+      user.userID === userID &&
+      user.user_idnumber === user_idnumber &&
+      user.name === name &&
+      user.tell_number === tell_number &&
+      user.email === email &&
+      user.birthday === birthday
+  );
+  return finduser;
+}
+// Check if the user exists in database
+function isAuthenticated_for_register_and_detail({ userID }) {
+  userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  return userdb.users.findIndex((user) => user.userID === userID) !== -1;
 }
 
 // Check if the user exists in database
-function isAuthenticatedforlogin({ username, password }) {
+function isAuthenticated_for_login_modify({ userID, password }) {
   userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
   return (
     userdb.users.findIndex(
-      (user) => user.username === username && user.password === password
+      (user) => user.userID === userID && user.password === password
     ) !== -1
   );
 }
@@ -63,7 +83,7 @@ server.post("/auth/register", (req, res) => {
   console.log("register endpoint called; request body:");
   console.log(req.body);
   var {
-    username,
+    userID,
     password,
     user_idnumber,
     name,
@@ -80,9 +100,9 @@ server.post("/auth/register", (req, res) => {
     adminkey = 0;
   }
 
-  if (isAuthenticatedforregister({ username }) === true) {
+  if (isAuthenticated_for_register_and_detail({ userID }) === true) {
     const status = 401;
-    const message = "username already exist";
+    const message = "userID already exist";
     res.status(status).json({ status, message });
     return;
   }
@@ -104,7 +124,7 @@ server.post("/auth/register", (req, res) => {
     //Add new user
     data.users.push({
       id: last_item_id + 1,
-      username: username,
+      userID: userID,
       password: password,
       user_idnumber: user_idnumber,
       name: name,
@@ -133,7 +153,7 @@ server.post("/auth/register", (req, res) => {
 
   // Create token for new user
   console.log(adminkey);
-  const access_token = createToken({ username, password, adminkey });
+  const access_token = createToken({ userID, password, adminkey });
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });
@@ -142,29 +162,30 @@ server.post("/auth/register", (req, res) => {
 server.post("/auth/login", (req, res) => {
   console.log("login endpoint called; request body:");
   console.log(req.body);
-  const { username, password } = req.body;
+  const { userID, password } = req.body;
 
-  if (isAuthenticatedforlogin({ username, password }) === false) {
+  if (isAuthenticated_for_login_modify({ userID, password }) === false) {
     const status = 401;
-    const message = "Incorrect username or password";
+    const message = "Incorrect userID or password";
     res.status(status).json({ status, message });
     return;
   }
-  const adminkey = adminkeyinitinlogin({ username, password });
+  const adminkey = adminkeyinitinlogin({ userID, password });
   console.log("adminkey", adminkey);
 
-  const access_token = createToken({ username, password, adminkey });
+  const access_token = createToken({ userID, password, adminkey });
   console.log("Access Token:" + access_token);
   res.status(200).json({ access_token });
 });
 
+//비밀번호 재확인
 server.post("/auth/check", (req, res) => {
   console.log("check endpoint called; request body:");
   console.log(req.body);
-  const { username, password } = req.body;
-  if (isAuthenticatedforlogin({ username, password }) === false) {
+  const { userID, password } = req.body;
+  if (isAuthenticated_for_login_modify({ userID, password }) === false) {
     const status = 401;
-    const message = "Incorrect username or password";
+    const message = "Incorrect userID or password";
     res.status(status).json({ status, message });
     return;
   }
@@ -198,13 +219,14 @@ server.post("/auth/check", (req, res) => {
   console.log("Bearer access_token:", req.headers.authorization);
 });
 
+// DB정보를 가지고오는 기능
 server.post("/auth/detail", (req, res) => {
   console.log("check endpoint called; request body:");
   console.log(req.body);
-  const { username } = req.body;
-  if (isAuthenticatedforregister({ username }) === false) {
+  const { userID } = req.body;
+  if (isAuthenticated_for_register_and_detail({ userID }) === false) {
     const status = 401;
-    const message = "No exist username";
+    const message = "No exist userID";
     res.status(status).json({ status, message });
     return;
   }
@@ -233,11 +255,140 @@ server.post("/auth/detail", (req, res) => {
     const message = "Error access_token is revoked";
     res.status(status).json({ status, message });
   }
-  const hittingdata = findhittingdata({ username });
+  const hittingdata = findhittingdata({ userID });
+
+  if (hittingdata === undefined) {
+    const status = 401;
+    const message = "No exist imformation in DB";
+    res.status(status).json({ status, message });
+    return;
+  }
+
   console.log(hittingdata);
   const message = req.headers.authorization;
   res.status(200).json(hittingdata);
   console.log("Bearer access_token:", req.headers.authorization);
+});
+
+// DB정보를 수정하는 기능
+server.post("/auth/modify", (req, res) => {
+  console.log("check endpoint called; request body:");
+  console.log(req.body);
+  const {
+    userID,
+    password,
+    user_idnumber,
+    name,
+    tell_number,
+    email,
+    birthday,
+    new_password,
+    new_tell_number,
+    new_email,
+    new_birthday,
+  } = req.body;
+
+  if (isAuthenticated_for_login_modify({ userID, password }) === false) {
+    const status = 401;
+    const message = "No exist userID";
+    res.status(status).json({ status, message });
+    return;
+  }
+
+  if (
+    req.headers.authorization === undefined ||
+    req.headers.authorization.split(" ")[0] !== "Bearer"
+  ) {
+    const status = 401;
+    const message = "Error in authorization format";
+    res.status(status).json({ status, message });
+    return;
+  }
+  try {
+    let verifyTokenResult;
+    verifyTokenResult = verifyToken(req.headers.authorization.split(" ")[1]);
+
+    if (verifyTokenResult instanceof Error) {
+      const status = 401;
+      const message = "Access token not provided";
+      res.status(status).json({ status, message });
+      return;
+    }
+  } catch (err) {
+    const status = 401;
+    const message = "Error access_token is revoked";
+    res.status(status).json({ status, message });
+  }
+  const hittingdata = findhittingdata_for_modify({
+    userID,
+    user_idnumber,
+    name,
+    tell_number,
+    email,
+    birthday,
+  });
+
+  if (hittingdata === undefined) {
+    const status = 401;
+    const message = "No exist imformation in DB";
+    res.status(status).json({ status, message });
+    return;
+  }
+  console.log("hittingdata:", hittingdata);
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  fs.readFile("./users.json", (err, data) => {
+    if (err) {
+      const status = 401;
+      const message = err;
+      res.status(status).json({ status, message });
+      return;
+    }
+
+    // Get current users data
+    var data = JSON.parse(data.toString());
+    const find_user_index = data.users.findIndex(
+      (data) => JSON.stringify(data) === JSON.stringify(hittingdata)
+    );
+    console.log("data.users[9]: ", data.users[9]);
+    console.log("hittingdata: ", hittingdata);
+    console.log("find_user_index: ", find_user_index);
+    console.log("data.users[find_user_index]: ", data.users[find_user_index]);
+
+    // 수정하고자 하는 유저 변경
+    if (new_password !== "") {
+      data.users[find_user_index].password = new_password;
+    }
+    if (new_tell_number !== "") {
+      data.users[find_user_index].tell_number = new_tell_number;
+    }
+    if (new_email !== "") {
+      data.users[find_user_index].email = new_email;
+    }
+    if (new_birthday !== "") {
+      data.users[find_user_index].birthday = new_birthday;
+    }
+    console.log("변경후: ", data.users[10]);
+
+    //add some data
+    var writeData = fs.writeFileSync(
+      "./users.json",
+      JSON.stringify(data),
+      (err, result) => {
+        // WRITE
+        if (err) {
+          const status = 401;
+          const message = err;
+          res.status(status).json({ status, message });
+          return;
+        }
+      }
+    );
+    userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8")); //동기화
+    console.log(userdb.users[10]);
+    res.status(200).json(userdb.users[10]);
+    console.log("Bearer access_token:", req.headers.authorization);
+  });
 });
 
 server.use(router);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-function Register({ setModalContent, setAuth, setLogInModal }) {
+function Register({ setModalContent }) {
   const [inputID, setInputID] = useState("");
   const [inputPW, setInputPW] = useState("");
   const [inputName, setInputName] = useState("");
@@ -42,7 +42,7 @@ function Register({ setModalContent, setAuth, setLogInModal }) {
       .post(
         "http://localhost:8000/auth/register", //DB 프로젝트에서 가져옴
         {
-          username: inputID,
+          userID: inputID,
           user_idnumber: inputIDNumber,
           password: inputPW,
           name: inputName,
