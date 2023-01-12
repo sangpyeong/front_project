@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import index from "./Upload.css";
-import AWS from "aws-sdk";
+import AWS from "aws-sdk"; // s3 파일업로드에 필요
 
 function Upload() {
-  const [fileList, setFileList] = useState([]);
-  const [dropClass, setDropClass] = useState("dropBox");
-  const [fileName, setFilename] = useState("이곳에 폴더를 드롭해주세요.");
-  const [showAlert, setShowAlert] = useState(0); // 0: 아직 업로드 안함, 1: 업로드 중, 2: 업로드 완료 진행해야함
-  let tmpFile = [];
-  let filePath = useRef([]);
+  const [fileList, setFileList] = useState([]); // 업로드 하는 파일을 의미
+  const [dropClass, setDropClass] = useState("dropBox"); // 드래그앤드랍 이벤트에 따라 css 바뀜
+  const [fileName, setFilename] = useState("이곳에 폴더를 드롭해주세요."); //드래그앤드랍 안에 텍스트
+  const [showAlert, setShowAlert] = useState(0); // 0: 아직 업로드 안함, 1: 업로드 중, 2: 업로드 완료
+  let tmpFile = []; //드래드앤드랍 할 때 FileEntry 임시 배열
+  let filePath = useRef([]); //파일경로 설정
 
+  //s3연결
   const ACCESS_KEY = "AKIAQRW62EWBLT7WM7I3";
   const SECRET_ACCESS_KEY = "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";
   const REGION = "ap-northeast-2";
@@ -24,7 +25,7 @@ function Upload() {
     params: { Bucket: S3_BUCKET },
     region: REGION,
   });
-
+  //드래그앤드랍 폴더 재귀함수로 탐색
   const traverseFileTree = (item, path) => {
     path = path || "";
     if (item.isFile) {
@@ -33,10 +34,10 @@ function Upload() {
         let FileObject;
         item.file(function (file) {
           filePath.current.push(item.fullPath);
-          console.log("filePath", filePath);
+
           FileObject = file;
           tmpFile = [...tmpFile, FileObject];
-          console.log("traver", tmpFile);
+
           setFileList((prev) => (prev = tmpFile));
         });
       }
@@ -50,7 +51,7 @@ function Upload() {
       });
     }
   };
-
+  // 폴더 선택
   const handleFileInput = (e) => {
     filePath.current = [];
     setShowAlert(0);
@@ -64,23 +65,24 @@ function Upload() {
     setFileList((prev) => (prev = result));
     setFilename(file[0].webkitRelativePath.split("/")[0]);
   };
-
+  //파일 리스트 보여줌
   const listItems = () => {
-    console.log("listItems_fileList", fileList);
+    const result = [];
     if (fileList.length > 10) {
-      return fileList.map((file) => <li>{file.name}</li>);
+      for (let i = 0; i < 10; i++) {
+        result.push(<li>{fileList[i].name}</li>);
+      }
+      result.push(<li>...</li>);
+      return result;
     } else {
       return fileList.map((file) => <li>{file.name}</li>);
     }
   };
-
+  //파일 업로드
   const uploadFile = (file, filePath) => {
-    console.log("file", file);
-    console.log("filePath", filePath);
-    console.log("filePath.current[0]", filePath.current[0]);
+    //if인 경우 폴더선택 else인 경우 드래그앤드랍
     if (filePath.current.length === 0) {
       for (let i = 0; i < file.length; i++) {
-        console.log("file[i]", file[i]);
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -101,7 +103,6 @@ function Upload() {
       }
     } else {
       for (let i = 0; i < file.length; i++) {
-        console.log("file[i]", file[i]);
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -123,8 +124,6 @@ function Upload() {
     }
   };
 
-  console.log("main_fileLsit", fileList);
-  console.log("main_tmpfile", tmpFile);
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="flex flex-col justify-center items-center w-full">
@@ -142,8 +141,6 @@ function Upload() {
                 traverseFileTree(item);
               }
             }
-
-            console.log("tmpfile", tmpFile);
 
             setFilename(e.dataTransfer.files[0].name);
             setDropClass("dropBox");
@@ -207,7 +204,6 @@ function Upload() {
           <button
             className="flex w-1/6 justify-center border border-slate-400 bg-slate-200 items-center h-full mt-3"
             onClick={() => {
-              console.log("filePath", filePath);
               uploadFile(fileList, filePath);
               filePath.current = [];
               setShowAlert(2);
