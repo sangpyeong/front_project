@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import MyPassword from "./MyPassword";
-import FindIDPassword from "./FindIDPassword";
+import FindPassword from "./FindPassword";
 
 function Modal({
   setTestMode,
@@ -13,11 +13,10 @@ function Modal({
   setLogInModal,
   passwordModal,
   setPasswordModal,
-  myUserID,
-  setMyUserID,
+  myEmployNumber,
+  setMyEmployNumber,
   setPageIndex,
 }) {
-  console.log("실행");
   const [modalContent, setModalContent] = useState(0);
   const ModalBG = useRef();
   return (
@@ -39,13 +38,13 @@ function Modal({
                 setToken={setToken}
                 setModalContent={setModalContent}
                 setAuth={setAuth}
-                setMyUserID={setMyUserID}
+                setMyEmployNumber={setMyEmployNumber}
                 setLogInModal={setLogInModal}
               />
             ) : modalContent === 1 ? (
               <Register setModalContent={setModalContent} />
             ) : (
-              <FindIDPassword setModalContent={setModalContent} />
+              <FindPassword setModalContent={setModalContent} />
             )}
           </div>
         </div>
@@ -63,7 +62,7 @@ function Modal({
         >
           <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
             <MyPassword
-              myUserID={myUserID}
+              myEmployNumber={myEmployNumber}
               setPasswordModal={setPasswordModal}
               token={token}
             />

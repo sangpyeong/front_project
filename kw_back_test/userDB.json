@@ -2,33 +2,20 @@
   "users": [
     {
       "id": 1,
-      "userID": "test",
+      "employNumber": "2018202065",
       "password": "1234",
-      "user_idnumber": "2018202065",
-      "name": "홍길동",
-      "tell_number": "010-8652-1545",
-      "email": "gildong@kw.ac.kr",
-      "birthday": "1999-07-07",
+      "username": "박철준",
+      "phoneNumber": "010-9897-1424",
+      "email": "cheoljun99@naver.com",
+      "birthday": "1999-07-13",
       "adminkey": 1
     },
     {
       "id": 2,
-      "userID": "test2",
+      "employNumber": "2018202066",
       "password": "1234",
-      "user_idnumber": "2018303065",
-      "name": "고길동",
-      "tell_number": "010-1234-1234",
-      "email": "go@kw.ac.kr",
-      "birthday": "1999-09-19",
-      "adminkey": 0
-    },
-    {
-      "id": 3,
-      "userID": "cheoljun99",
-      "password": "1234",
-      "user_idnumber": "2018202065",
-      "name": "박철준",
-      "tell_number": "010-9897-1424",
+      "username": "박철준",
+      "phoneNumber": "010-9897-1424",
       "email": "cheoljun99@naver.com",
       "birthday": "1999-07-13",
       "adminkey": 1

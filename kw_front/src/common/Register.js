@@ -2,36 +2,33 @@ import axios from "axios";
 import { useState } from "react";
 
 function Register({ setModalContent }) {
-  const [inputID, setInputID] = useState("");
-  const [inputPW, setInputPW] = useState("");
-  const [inputName, setInputName] = useState("");
-  const [inputIDNumber, setInputIDNumber] = useState("");
-  const [inputTellnumber, setInputTellnumber] = useState("");
+  const [inputEmployNumber, setInputEmployNumber] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [inputUserName, setInputUserName] = useState("");
+  const [inputPhoneNumber, setInputPhoneNumber] = useState("");
   const [inputEmail, setInputEmail] = useState("");
-  const [inputBD, setInputBD] = useState("");
+  const [inputBirthday, setInputBirthday] = useState("");
   const [inputAdminKey, setInputAdminKey] = useState("");
+
   const [errorText, setErrorText] = useState("");
 
-  const onChangeID = (e) => {
-    setInputID(e.target.value);
+  const onChangeEmployNumber = (e) => {
+    setInputEmployNumber(e.target.value);
   };
-  const onChangePW = (e) => {
-    setInputPW(e.target.value);
+  const onChangePassword = (e) => {
+    setInputPassword(e.target.value);
   };
-  const onChangeName = (e) => {
-    setInputName(e.target.value);
+  const onChangeUsername = (e) => {
+    setInputUserName(e.target.value);
   };
-  const onChangeIDNumber = (e) => {
-    setInputIDNumber(e.target.value);
-  };
-  const onChangeTellnumber = (e) => {
-    setInputTellnumber(e.target.value);
+  const onChangePhoneNumber = (e) => {
+    setInputPhoneNumber(e.target.value);
   };
   const onChangeEmail = (e) => {
     setInputEmail(e.target.value);
   };
-  const onChangeBD = (e) => {
-    setInputBD(e.target.value);
+  const onChangeBirthday = (e) => {
+    setInputBirthday(e.target.value);
   };
   const onChangeAdminKey = (e) => {
     setInputAdminKey(e.target.value);
@@ -42,13 +39,12 @@ function Register({ setModalContent }) {
       .post(
         "http://localhost:8000/auth/register", //DB 프로젝트에서 가져옴
         {
-          userID: inputID,
-          user_idnumber: inputIDNumber,
-          password: inputPW,
-          name: inputName,
-          tell_number: inputTellnumber,
+          employNumber: inputEmployNumber,
+          password: inputPassword,
+          username: inputUserName,
+          phoneNumber: inputPhoneNumber,
           email: inputEmail,
-          birthday: inputBD,
+          birthday: inputBirthday,
           adminkey: inputAdminKey,
         },
         {
@@ -64,7 +60,7 @@ function Register({ setModalContent }) {
         setModalContent(0);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
         setErrorText("회원가입 정보를 확인해주세요.");
       });
   };
@@ -77,18 +73,18 @@ function Register({ setModalContent }) {
       </div>
       <div class="flex flex-col">
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">ID</div>
+          <div class="w-1/4">사번</div>
           <input
-            onChange={onChangeID}
+            onChange={onChangeEmployNumber}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="text"
-            placeholder="아이디"
+            placeholder="사번"
           />
         </div>
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">비밀번호</div>
           <input
-            onChange={onChangePW}
+            onChange={onChangePassword}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="password"
             placeholder="비밀번호"
@@ -97,25 +93,16 @@ function Register({ setModalContent }) {
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">한글이름</div>
           <input
-            onChange={onChangeName}
+            onChange={onChangeUsername}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="text"
             placeholder="한글이름"
           />
         </div>
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">사번</div>
-          <input
-            onChange={onChangeIDNumber}
-            class=" w-3/4 border-solid border-[1px] border-black "
-            type="number"
-            placeholder="사번"
-          />
-        </div>
-        <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">휴대폰</div>
           <input
-            onChange={onChangeTellnumber}
+            onChange={onChangePhoneNumber}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="tel"
             placeholder="예)010-1234-5678"
@@ -128,14 +115,14 @@ function Register({ setModalContent }) {
             onChange={onChangeEmail}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="email"
-            placeholder="이메일"
+            placeholder="예)kwangwoon@kw.ac.kr"
             required
           />
         </div>
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">생년월일</div>
           <input
-            onChange={onChangeBD}
+            onChange={onChangeBirthday}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="date"
             placeholder="생년월일"

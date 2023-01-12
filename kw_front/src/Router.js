@@ -20,15 +20,11 @@ function Router() {
   const [logInModal, setLogInModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
 
-  const [myUserID, setMyUserID] = useState("");
-
-  const [myName, setMyName] = useState("");
-  const [myUser_idnumber, setMyUser_idnumber] = useState("");
-  const [mytell_number, setMytell_number] = useState("");
-  const [myemail, setMyemail] = useState("");
-  const [mybirthday, setMybirthday] = useState("");
-
-  console.log("실행");
+  const [myEmployNumber, setMyEmployNumber] = useState("");
+  const [myUserName, setMyUserName] = useState("");
+  const [myPhoneNumber, setMyPhoneNumber] = useState("");
+  const [myEmail, setMyEmail] = useState("");
+  const [myBirthday, setMyBirthday] = useState("");
 
   return (
     <div class="flex flex-col font-sans">
@@ -42,8 +38,8 @@ function Router() {
           setLogInModal={setLogInModal}
           passwordModal={passwordModal}
           setPasswordModal={setPasswordModal}
-          myUserID={myUserID}
-          setMyUserID={setMyUserID}
+          myEmployNumber={myEmployNumber}
+          setMyEmployNumber={setMyEmployNumber}
           setPageIndex={setPageIndex}
         />
         <div className="h-14 w-full fixed z-20">
@@ -100,17 +96,15 @@ function Router() {
                         setToken={setToken}
                         auth={auth}
                         setAuth={setAuth}
-                        myUserID={myUserID}
-                        myName={myName}
-                        myUser_idnumber={myUser_idnumber}
-                        mytell_number={mytell_number}
-                        myemail={myemail}
-                        mybirthday={mybirthday}
-                        setMyName={setMyName}
-                        setMyUser_idnumber={setMyUser_idnumber}
-                        setMytell_number={setMytell_number}
-                        setMyemail={setMyemail}
-                        setMybirthday={setMybirthday}
+                        myEmployNumber={myEmployNumber}
+                        myUserName={myUserName}
+                        myPhoneNumber={myPhoneNumber}
+                        myEmail={myEmail}
+                        myBirthday={myBirthday}
+                        setMyUserName={setMyUserName}
+                        setMyPhoneNumber={setMyPhoneNumber}
+                        setMyEmail={setMyEmail}
+                        setMyBirthday={setMyBirthday}
                       />
                     }
                   />

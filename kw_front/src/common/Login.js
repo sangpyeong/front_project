@@ -8,18 +8,19 @@ function Login({
   setToken,
   setModalContent,
   setAuth,
-  setMyUserID,
+  setMyEmployNumber,
   setLogInModal,
 }) {
   const navigate = useNavigate();
-  const [inputID, setInputID] = useState("");
-  const [inputPW, setInputPW] = useState("");
+  const [inputEmployNumber, setInputEmployNumber] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
   const [errorText, setErrorText] = useState("");
-  const onChangeID = (e) => {
-    setInputID(e.target.value);
+
+  const onChangeEmployNumber = (e) => {
+    setInputEmployNumber(e.target.value);
   };
-  const onChangePW = (e) => {
-    setInputPW(e.target.value);
+  const onChangePassword = (e) => {
+    setInputPassword(e.target.value);
   };
 
   const test_login = () => {
@@ -37,8 +38,8 @@ function Login({
       .post(
         "http://localhost:8000/auth/login",
         {
-          userID: inputID,
-          password: inputPW,
+          employNumber: inputEmployNumber,
+          password: inputPassword,
         },
         {
           headers: {
@@ -51,7 +52,7 @@ function Login({
         setToken(res.data.access_token);
         console.log(res);
         navigate("/search");
-        setMyUserID(inputID);
+        setMyEmployNumber(inputEmployNumber);
         if (jwt_decode(res.data.access_token).adminkey) {
           setAuth(2);
         } else {
@@ -61,7 +62,7 @@ function Login({
       })
 
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response);
         setErrorText("아이디와 비밀번호를 확인하세요.");
       });
   };
@@ -74,18 +75,18 @@ function Login({
       </div>
       <div class="flex flex-col">
         <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">ID</div>
+          <div class="w-1/4">사번</div>
           <input
-            onChange={onChangeID}
+            onChange={onChangeEmployNumber}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="text"
-            placeholder="아이디"
+            placeholder="사번"
           />
         </div>
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">비밀번호</div>
           <input
-            onChange={onChangePW}
+            onChange={onChangePassword}
             class=" w-3/4 border-solid border-[1px] border-black "
             type="password"
             placeholder="비밀번호"
@@ -106,7 +107,7 @@ function Login({
               setModalContent(2);
             }}
           >
-            아이디/비밀번호 찾기
+            비밀번호 찾기
           </div>
         </div>
       </div>
