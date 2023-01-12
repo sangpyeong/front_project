@@ -6,12 +6,12 @@ function Upload() {
   const [fileList, setFileList] = useState([]);
   const [dropClass, setDropClass] = useState("dropBox");
   const [fileName, setFilename] = useState("이곳에 폴더를 드롭해주세요.");
-  const [progress, setProgress] = useState(0);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(0); // 0: 아직 업로드 안함, 1: 업로드 중, 2: 업로드 완료 진행해야함
   let tmpFile = [];
-  const ACCESS_KEY = "AKIAQRW62EWBFZ6VWRID";
-  const SECRET_ACCESS_KEY = "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";
+  let filePath = useRef([]);
+
+  const ACCESS_KEY = "AKIAQRW62EWBLT7WM7I3";
+  const SECRET_ACCESS_KEY = "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";
   const REGION = "ap-northeast-2";
   const S3_BUCKET = "engineering-data-search-service";
 
@@ -32,9 +32,9 @@ function Upload() {
       if (item.name.split(".").pop() === "dwg") {
         let FileObject;
         item.file(function (file) {
+          filePath.current.push(item.fullPath);
+          console.log("filePath", filePath);
           FileObject = file;
-          // console.log(FileObject.webkitRelativePath);
-          // FileObject.webkitRelativePath = item.fullPath;
           tmpFile = [...tmpFile, FileObject];
           console.log("traver", tmpFile);
           setFileList((prev) => (prev = tmpFile));
@@ -52,6 +52,8 @@ function Upload() {
   };
 
   const handleFileInput = (e) => {
+    filePath.current = [];
+    setShowAlert(0);
     const file = e.target.files;
     let result = [];
     for (let i = 0; i < file.length; i++) {
@@ -72,10 +74,13 @@ function Upload() {
     }
   };
 
-  const uploadFile = (file) => {
-    console.log("file[0]", file[0]);
-    if (!file[0].fullPath) {
+  const uploadFile = (file, filePath) => {
+    console.log("file", file);
+    console.log("filePath", filePath);
+    console.log("filePath.current[0]", filePath.current[0]);
+    if (filePath.current.length === 0) {
       for (let i = 0; i < file.length; i++) {
+        console.log("file[i]", file[i]);
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -85,11 +90,9 @@ function Upload() {
         myBucket
           .putObject(params)
           .on("httpUploadProgress", (evt) => {
-            setProgress(Math.round((evt.loaded / evt.total) * 100));
-            setShowAlert(true);
+            setShowAlert(1);
             setTimeout(() => {
               setShowAlert(false);
-              setSelectedFile(null);
             }, 3000);
           })
           .send((err) => {
@@ -97,22 +100,20 @@ function Upload() {
           });
       }
     } else {
-      console.log("FileEntry.file()", file[0].file());
       for (let i = 0; i < file.length; i++) {
+        console.log("file[i]", file[i]);
         const params = {
           ACL: "public-read",
           Body: file[i],
           Bucket: S3_BUCKET,
-          Key: file[i].fullPath + file[i].name,
+          Key: filePath.current[i].substring(1) + file[i].name,
         };
         myBucket
           .putObject(params)
           .on("httpUploadProgress", (evt) => {
-            setProgress(Math.round((evt.loaded / evt.total) * 100));
-            setShowAlert(true);
+            setShowAlert(1);
             setTimeout(() => {
               setShowAlert(false);
-              setSelectedFile(null);
             }, 3000);
           })
           .send((err) => {
@@ -132,6 +133,8 @@ function Upload() {
           className={dropClass}
           onDrop={(e) => {
             e.preventDefault();
+            setShowAlert(0);
+            filePath.current = [];
             var items = e.dataTransfer.items;
             for (var i = 0; i < items.length; i++) {
               var item = items[i].webkitGetAsEntry();
@@ -163,6 +166,8 @@ function Upload() {
             onClick={() => {
               setFileList([]);
               setFilename("이곳에 폴더를 드롭해주세요.");
+              setShowAlert(0);
+              filePath.current = [];
             }}
           >
             {fileName !== "이곳에 폴더를 드롭해주세요." ? "x" : null}
@@ -185,20 +190,28 @@ function Upload() {
         </label>
 
         <div className="flex flex-row items-center justify-center w-full pb-3">
-          {showAlert ? (
+          {showAlert === 0 ? (
             <div color="primary" className="pt-3 pr-3">
-              업로드 진행률 : {progress}%
+              업로드하려면 버튼을 눌러주세요.
+            </div>
+          ) : showAlert === 1 ? (
+            <div color="primary" className="pt-3 pr-3">
+              업로드 중
             </div>
           ) : (
             <div color="primary" className="pt-3 pr-3">
-              업로드하려면 버튼을 눌러주세요.
+              업로드 완료
             </div>
           )}
 
           <button
-            type="submit"
             className="flex w-1/6 justify-center border border-slate-400 bg-slate-200 items-center h-full mt-3"
-            onClick={() => uploadFile(fileList)}
+            onClick={() => {
+              console.log("filePath", filePath);
+              uploadFile(fileList, filePath);
+              filePath.current = [];
+              setShowAlert(2);
+            }}
           >
             업로드
           </button>
