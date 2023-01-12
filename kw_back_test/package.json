@@ -1,10 +1,10 @@
 {
-  "name": "json-server-api",
+  "name": "simple-login-json-server-api",
   "version": "1.0.0",
-  "description": "Simple Fake API",
+  "description": "Simple Login API",
   "main": "main.js",
   "scripts": {
-    "start": "json-server --watch ./database.json",
+    "start": "json-server --watch ./userDB,json",
     "start-auth": "node server.js"
   },
   "author": "ME:)",

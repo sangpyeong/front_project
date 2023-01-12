@@ -1,23 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
 
-function Register({ setModalContent }) {
-  const [inputID, setInputID] = useState("");
-  const [inputPW, setInputPW] = useState("");
+function FindIDPassword({ setModalContent }) {
   const [inputName, setInputName] = useState("");
   const [inputIDNumber, setInputIDNumber] = useState("");
   const [inputTellnumber, setInputTellnumber] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputBD, setInputBD] = useState("");
-  const [inputAdminKey, setInputAdminKey] = useState("");
-  const [errorText, setErrorText] = useState("");
 
-  const onChangeID = (e) => {
-    setInputID(e.target.value);
-  };
-  const onChangePW = (e) => {
-    setInputPW(e.target.value);
-  };
+  const [errorText, setErrorText] = useState("");
+  const [successText1, setSuccessText1] = useState("");
+  const [successText2, setSuccessText2] = useState("");
+  const [foundID, setFoundID] = useState("");
+  const [foundPassword, setFoundPassword] = useState("");
+
   const onChangeName = (e) => {
     setInputName(e.target.value);
   };
@@ -33,23 +29,24 @@ function Register({ setModalContent }) {
   const onChangeBD = (e) => {
     setInputBD(e.target.value);
   };
-  const onChangeAdminKey = (e) => {
-    setInputAdminKey(e.target.value);
-  };
 
-  const regist = () => {
+  function alertFunc() {
+    setSuccessText1("");
+    setFoundID("");
+    setSuccessText2("");
+    setFoundPassword("");
+  }
+
+  const find = () => {
     axios
       .post(
-        "http://localhost:8000/auth/register", //DB 프로젝트에서 가져옴
+        "http://localhost:8000/auth/find", //DB 프로젝트에서 가져옴
         {
-          userID: inputID,
           user_idnumber: inputIDNumber,
-          password: inputPW,
           name: inputName,
           tell_number: inputTellnumber,
           email: inputEmail,
           birthday: inputBD,
-          adminkey: inputAdminKey,
         },
         {
           headers: {
@@ -60,12 +57,20 @@ function Register({ setModalContent }) {
       )
       .then((res) => {
         console.log(res);
-
-        setModalContent(0);
+        setErrorText("");
+        setSuccessText1("아이디 :");
+        setFoundID(res.data.userID);
+        setSuccessText2("비밀번호 :");
+        setFoundPassword(res.data.password);
+        setTimeout(alertFunc, 2000); //2초후에 실행
       })
       .catch((err) => {
         console.log(err);
-        setErrorText("회원가입 정보를 확인해주세요.");
+        setSuccessText1("");
+        setFoundID("");
+        setSuccessText2("");
+        setFoundPassword("");
+        setErrorText("사용자 정보를 확인해주세요.");
       });
   };
 
@@ -76,24 +81,6 @@ function Register({ setModalContent }) {
         <div></div>
       </div>
       <div class="flex flex-col">
-        <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">ID</div>
-          <input
-            onChange={onChangeID}
-            class=" w-3/4 border-solid border-[1px] border-black "
-            type="text"
-            placeholder="아이디"
-          />
-        </div>
-        <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">비밀번호</div>
-          <input
-            onChange={onChangePW}
-            class=" w-3/4 border-solid border-[1px] border-black "
-            type="password"
-            placeholder="비밀번호"
-          />
-        </div>
         <div class="flex justify-between mt-[20px]">
           <div class="w-1/4">한글이름</div>
           <input
@@ -141,27 +128,22 @@ function Register({ setModalContent }) {
             placeholder="생년월일"
           />
         </div>
-        <div class="flex justify-between mt-[20px]">
-          <div class="w-1/4">관리자권한</div>
-          <input
-            onChange={onChangeAdminKey}
-            class=" w-3/4 border-solid border-[1px] border-black "
-            type="number"
-            placeholder="관리자 권한을 원하시면 인증키를 입력하세요"
-          />
-        </div>
       </div>
       <div class="flex flex-col justify-center mt-[20px] mb-[40px]">
-        <div class=" text-red-600 text-center text-[15px] mb-[10px]">
+        <div class="  text-[#ff0000] font-bold text-center text-[15px] mb-[10px]">
           {errorText}
+          {successText1}&nbsp;
+          {foundID}&nbsp;
+          {successText2}&nbsp;
+          {foundPassword}
         </div>
         <div
           class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
-            regist();
+            find();
           }}
         >
-          REGISTER
+          FIND
         </div>
         <div
           class="w-full text-center text-black bg-white cursor-pointer border-solid border-[1px] border-black text-[15px] h-[30px] leading-[30px] mb-[10px]"
@@ -175,5 +157,4 @@ function Register({ setModalContent }) {
     </div>
   );
 }
-
-export default Register;
+export default FindIDPassword;

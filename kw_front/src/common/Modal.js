@@ -2,21 +2,22 @@ import { useRef, useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import MyPassword from "./MyPassword";
+import FindIDPassword from "./FindIDPassword";
 
 function Modal({
+  setTestMode,
   token,
   setToken,
-  auth,
   setAuth,
   logInModal,
   setLogInModal,
-  myPassword,
-  setMyPassword,
-  myUsername,
-  setMyUsername,
+  passwordModal,
+  setPasswordModal,
+  myUserID,
+  setMyUserID,
   setPageIndex,
 }) {
-  console.log(auth);
+  console.log("실행");
   const [modalContent, setModalContent] = useState(0);
   const ModalBG = useRef();
   return (
@@ -34,37 +35,36 @@ function Modal({
           <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
             {modalContent === 0 ? (
               <Login
+                setTestMode={setTestMode}
                 setToken={setToken}
                 setModalContent={setModalContent}
                 setAuth={setAuth}
-                setMyUsername={setMyUsername}
+                setMyUserID={setMyUserID}
                 setLogInModal={setLogInModal}
               />
+            ) : modalContent === 1 ? (
+              <Register setModalContent={setModalContent} />
             ) : (
-              <Register
-                setModalContent={setModalContent}
-                setAuth={setAuth}
-                setLogInModal={setLogInModal}
-              />
+              <FindIDPassword setModalContent={setModalContent} />
             )}
           </div>
         </div>
       ) : null}
-      {myPassword ? (
+      {passwordModal ? (
         <div
           class="background"
           ref={ModalBG}
           onClick={(e) => {
             if (ModalBG.current === e.target) {
-              setMyPassword(false);
+              setPasswordModal(false);
               setPageIndex(3);
             }
           }}
         >
           <div className="z-25 w-1/3 bg-white fixed left-1/3 top-1/4 p-2.5 text-lg ">
             <MyPassword
-              myUsername={myUsername}
-              setMyPassword={setMyPassword}
+              myUserID={myUserID}
+              setPasswordModal={setPasswordModal}
               token={token}
             />
           </div>
