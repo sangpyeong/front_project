@@ -118,13 +118,13 @@ server.post("/auth/register", (req, res) => {
   } = req.body;
 
   if (
+    //사용자가 정보를 누락해서 입력하였을 경우 (관리자 인증키의 경우 제외)
     employNumber === "" ||
     password === "" ||
     username === "" ||
     phoneNumber === "" ||
     email == "" ||
-    birthday === "" ||
-    adminkey === ""
+    birthday === ""
   ) {
     const status = 401;
     const message = "Incorrect data";
@@ -445,6 +445,20 @@ server.post("/auth/find", (req, res) => {
     email,
     birthday,
   });
+
+  if (
+    //사용자가 정보를 누락해서 입력하였을 경우 (관리자 인증키의 경우 제외)
+    employNumber === "" ||
+    username === "" ||
+    phoneNumber === "" ||
+    email == "" ||
+    birthday === ""
+  ) {
+    const status = 401;
+    const message = "Incorrect data";
+    res.status(status).json({ status, message });
+    return;
+  }
 
   if (hittingdata === undefined) {
     //매칭 실패시

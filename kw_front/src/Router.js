@@ -58,12 +58,40 @@ function Router() {
               <Route
                 exact
                 path="/"
-                element={<DefaultPage setLogInModal={setLogInModal} />}
+                element={
+                  <DefaultPage
+                    setLogInModal={setLogInModal}
+                    setAuth={setAuth}
+                    setMyBirthday={setMyBirthday}
+                    setMyEmail={setMyEmail}
+                    setMyEmployNumber={setMyEmployNumber}
+                    setMyPhoneNumber={setMyPhoneNumber}
+                    setMyUserName={setMyUserName}
+                    setPageIndex={setPageIndex}
+                    setPasswordModal={setPasswordModal}
+                    setTestMode={setTestMode}
+                    setToken={setToken}
+                  />
+                }
               />
               <Route
                 exact
                 path="/front_project"
-                element={<DefaultPage setLogInModal={setLogInModal} />}
+                element={
+                  <DefaultPage
+                    setLogInModal={setLogInModal}
+                    setAuth={setAuth}
+                    setMyBirthday={setMyBirthday}
+                    setMyEmail={setMyEmail}
+                    setMyEmployNumber={setMyEmployNumber}
+                    setMyPhoneNumber={setMyPhoneNumber}
+                    setMyUserName={setMyUserName}
+                    setPageIndex={setPageIndex}
+                    setPasswordModal={setPasswordModal}
+                    setTestMode={setTestMode}
+                    setToken={setToken}
+                  />
+                }
               />
               <Route
                 path="/upload"

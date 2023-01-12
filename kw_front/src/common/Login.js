@@ -26,11 +26,13 @@ function Login({
   const test_login = () => {
     setTestMode(true);
     setAuth(1);
+    setMyEmployNumber("테스트모드");
     setLogInModal(false);
   };
   const admin_test_login = () => {
     setTestMode(true);
     setAuth(2);
+    setMyEmployNumber("테스트모드");
     setLogInModal(false);
   };
   const login = () => {
