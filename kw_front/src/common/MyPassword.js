@@ -2,12 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function MyPassword({ myUserID, setPasswordModal, token }) {
+function MyPassword({ myEmployNumber, setPasswordModal, token }) {
   const navigate = useNavigate();
   const [errorText, setErrorText] = useState("");
-  const [inputPW, setInputPW] = useState("");
-  const onChangePW = (e) => {
-    setInputPW(e.target.value);
+  const [inputPassword, setInputPassword] = useState("");
+  const onChangePassword = (e) => {
+    setInputPassword(e.target.value);
   };
 
   const test_login = () => {
@@ -15,14 +15,12 @@ function MyPassword({ myUserID, setPasswordModal, token }) {
     setPasswordModal(false);
   };
   const login = () => {
-    console.log("token", token);
-    console.log(myUserID, inputPW);
     axios
       .post(
         "http://localhost:8000/auth/check",
         {
-          userID: myUserID,
-          password: inputPW,
+          employNumber: myEmployNumber,
+          password: inputPassword,
         },
         {
           headers: {
@@ -36,7 +34,7 @@ function MyPassword({ myUserID, setPasswordModal, token }) {
         setPasswordModal(false);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        console.log(err.response);
         setErrorText("비밀번호를 확인하세요.");
       });
   };
@@ -53,7 +51,7 @@ function MyPassword({ myUserID, setPasswordModal, token }) {
         type="password"
         className="flex border border-slate-300 h-[40px] pl-2 mb-3"
         placeholder="현재 비밀번호"
-        onChange={onChangePW}
+        onChange={onChangePassword}
       />
       <div class="flex flex-col justify-center ">
         <div class=" text-red-600 text-center text-[15px] ">{errorText}</div>

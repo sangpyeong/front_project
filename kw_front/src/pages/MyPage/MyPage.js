@@ -8,17 +8,15 @@ function MyPage({
   setToken,
   auth,
   setAuth,
-  myUserID,
-  myName,
-  myUser_idnumber,
-  mytell_number,
-  myemail,
-  mybirthday,
-  setMyName,
-  setMyUser_idnumber,
-  setMytell_number,
-  setMyemail,
-  setMybirthday,
+  myEmployNumber,
+  myUserName,
+  myPhoneNumber,
+  myEmail,
+  myBirthday,
+  setMyUserName,
+  setMyPhoneNumber,
+  setMyEmail,
+  setMyBirthday,
 }) {
   return (
     <div className="flex flex-col w-full">
@@ -43,17 +41,15 @@ function MyPage({
         setToken={setToken}
         auth={auth}
         setAuth={setAuth}
-        myUserID={myUserID}
-        myName={myName}
-        myUser_idnumber={myUser_idnumber}
-        mytell_number={mytell_number}
-        myemail={myemail}
-        mybirthday={mybirthday}
-        setMyName={setMyName}
-        setMyUser_idnumber={setMyUser_idnumber}
-        setMytell_number={setMytell_number}
-        setMyemail={setMyemail}
-        setMybirthday={setMybirthday}
+        myEmployNumber={myEmployNumber}
+        myUserName={myUserName}
+        myPhoneNumber={myPhoneNumber}
+        myEmail={myEmail}
+        myBirthday={myBirthday}
+        setMyUserName={setMyUserName}
+        setMyPhoneNumber={setMyPhoneNumber}
+        setMyEmail={setMyEmail}
+        setMyBirthday={setMyBirthday}
       />
     </div>
   );

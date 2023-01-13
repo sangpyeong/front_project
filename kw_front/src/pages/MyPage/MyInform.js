@@ -16,21 +16,19 @@ function MyInform({
   setToken,
   auth,
   setAuth,
-  myUserID,
-  myName,
-  myUser_idnumber,
-  mytell_number,
-  myemail,
-  mybirthday,
-  setMyName,
-  setMyUser_idnumber,
-  setMytell_number,
-  setMyemail,
-  setMybirthday,
+  myEmployNumber,
+  myUserName,
+  myPhoneNumber,
+  myEmail,
+  myBirthday,
+  setMyUserName,
+  setMyPhoneNumber,
+  setMyEmail,
+  setMyBirthday,
 }) {
   const [inputNewPassword_First, setInputNewPassword_First] = useState("");
   const [inputNewPassword_Second, setInputNewPassword_Second] = useState("");
-  const [inputNewTell_Number, setInputNewTell_Number] = useState("");
+  const [inputNewPhoneNumber, setInputNewPhoneNumber] = useState("");
   const [inputNewEmail, setInputNewEmail] = useState("");
   const [inputOldPassword, setInputOldPassword] = useState("");
 
@@ -42,8 +40,8 @@ function MyInform({
   const onChangeNewPassword_Second = (e) => {
     setInputNewPassword_Second(e.target.value);
   };
-  const onChangeNewTell_Number = (e) => {
-    setInputNewTell_Number(e.target.value);
+  const onChangeNewPhoneNumber = (e) => {
+    setInputNewPhoneNumber(e.target.value);
   };
   const onChangeNewEmail = (e) => {
     setInputNewEmail(e.target.value);
@@ -67,21 +65,15 @@ function MyInform({
         setTestMode,
         token,
         setToken,
-        auth,
         setAuth,
-        myUserID,
-        myName,
-        myUser_idnumber,
-        mytell_number,
-        myemail,
-        mybirthday,
-        setMyName,
-        setMyUser_idnumber,
-        setMytell_number,
-        setMyemail,
-        setMybirthday,
+        myEmployNumber,
+        myUserName,
+        myPhoneNumber,
+        myEmail,
+        myBirthday,
+        inputNewEmail,
         inputNewPassword_Second,
-        inputNewTell_Number,
+        inputNewPhoneNumber,
         inputOldPassword,
         setErrorText
       );
@@ -92,17 +84,16 @@ function MyInform({
 
   useEffect(() => {
     if (testMode === true) {
-      setMyName("테스트모드");
-      setMyUser_idnumber("테스트모드");
-      setMytell_number("테스트모드");
-      setMyemail("테스트모드");
-      setMybirthday("테스트모드");
+      setMyUserName("테스트모드");
+      setMyPhoneNumber("테스트모드");
+      setMyEmail("테스트모드");
+      setMyBirthday("테스트모드");
     } else {
       axios
         .post(
           "http://localhost:8000/auth/detail",
           {
-            userID: myUserID,
+            employNumber: myEmployNumber,
           },
           {
             headers: {
@@ -112,14 +103,13 @@ function MyInform({
         )
         .then((res) => {
           console.log(res);
-          setMyName(res.data.name);
-          setMyUser_idnumber(res.data.user_idnumber);
-          setMytell_number(res.data.tell_number);
-          setMyemail(res.data.email);
-          setMybirthday(res.data.birthday);
+          setMyUserName(res.data.userinform.username);
+          setMyPhoneNumber(res.data.userinform.phoneNumber);
+          setMyEmail(res.data.userinform.email);
+          setMyBirthday(res.data.userinform.birthday);
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
         });
     }
   });
@@ -135,13 +125,13 @@ function MyInform({
             이름
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            {myName}
+            {myUserName}
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
             사번
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
-            {myUser_idnumber}
+            {myEmployNumber}
           </div>
         </div>
 
@@ -150,7 +140,7 @@ function MyInform({
             생년월일
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 ">
-            {mybirthday}
+            {myBirthday}
           </div>
 
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
@@ -171,7 +161,7 @@ function MyInform({
               value={inputNewEmail}
               className="flex items-center border w-5/6 h-11/12 border-slate-300 justify-center placeholder:text-black"
               type="email"
-              placeholder={myemail}
+              placeholder={myEmail}
             />
           </div>
           <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
@@ -179,11 +169,11 @@ function MyInform({
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
             <input
-              onChange={onChangeNewTell_Number}
-              value={inputNewTell_Number}
+              onChange={onChangeNewPhoneNumber}
+              value={inputNewPhoneNumber}
               className="flex  items-center border w-5/6 h-11/12 border-slate-300 justify-center placeholder:text-black"
               type="tel"
-              placeholder={mytell_number}
+              placeholder={myPhoneNumber}
             />
           </div>
         </div>
