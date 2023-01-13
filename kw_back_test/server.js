@@ -1,14 +1,19 @@
 const fs = require("fs");
+
 const bodyParser = require("body-parser");
+
 const jsonServer = require("json-server");
+
 const jwt = require("jsonwebtoken");
 
 const server = jsonServer.create();
 const router = jsonServer.router("./userDB.json");
+
 var userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+
 server.use(jsonServer.defaults());
 
 const SECRET_KEY = "123456789";
@@ -131,6 +136,7 @@ server.post("/auth/register", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+
   if (adminkey === "9999") {
     //관리자권한 부여
     adminkey = 1;
@@ -139,6 +145,7 @@ server.post("/auth/register", (req, res) => {
   }
 
   if (isAuthenticated_for_register_and_detail({ employNumber }) === true) {
+    //DB에서 중복검사
     const status = 401;
     const message = "employNumber already exist";
     res.status(status).json({ status, message });
@@ -212,6 +219,7 @@ server.post("/auth/login", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+
   const adminkey = adminkeyinitinlogin({ employNumber, password }); //관리자키 확인
 
   // Create token for new user
@@ -244,6 +252,7 @@ server.post("/auth/check", (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+
   try {
     //토큰 유효성 검사
     let verifyTokenResult;
@@ -259,7 +268,9 @@ server.post("/auth/check", (req, res) => {
     const status = 401;
     const message = "Error access_token is revoked";
     res.status(status).json({ status, message });
+    return;
   }
+
   const message = "Success login";
   res.status(200).json({ message });
 });
@@ -269,6 +280,7 @@ server.post("/auth/detail", (req, res) => {
   console.log("check endpoint called; request body:");
   console.log(req.body);
   const { employNumber } = req.body;
+
   if (isAuthenticated_for_register_and_detail({ employNumber }) === false) {
     //사번을 DB와 매칭
     const status = 401;
@@ -302,6 +314,7 @@ server.post("/auth/detail", (req, res) => {
     const status = 401;
     const message = "Error access_token is revoked";
     res.status(status).json({ status, message });
+    return;
   }
 
   const hittingdata = findhittingdata({ employNumber }); //사번을 DB와 매칭시켜 데이터 가져오기
