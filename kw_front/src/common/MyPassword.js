@@ -10,11 +10,11 @@ function MyPassword({ myEmployNumber, setPasswordModal, token }) {
     setInputPassword(e.target.value);
   };
 
-  const test_login = () => {
+  const test_check = () => {
     navigate("/profile");
     setPasswordModal(false);
   };
-  const login = () => {
+  const check = () => {
     axios
       .post(
         "http://localhost:8000/auth/check",
@@ -58,7 +58,7 @@ function MyPassword({ myEmployNumber, setPasswordModal, token }) {
         <div
           className=" text-black bg-cyan-300 w-[100px] items-center flex justify-center cursor-pointer mb-[10px]"
           onClick={() => {
-            login();
+            check();
           }}
         >
           확인
@@ -66,7 +66,7 @@ function MyPassword({ myEmployNumber, setPasswordModal, token }) {
         <div
           className="border-slate-200 border w-[100px] items-center flex justify-center cursor-pointer mb-[10px]"
           onClick={() => {
-            test_login();
+            test_check();
           }}
         >
           test

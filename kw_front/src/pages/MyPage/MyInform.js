@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Mymodify from "./Mymodify";
+import { useNavigate } from "react-router-dom";
+
 function Authority({ auth }) {
   if (auth === 2) {
     return <div>관리자</div>;
@@ -33,6 +35,8 @@ function MyInform({
   const [inputOldPassword, setInputOldPassword] = useState("");
 
   const [errorText, setErrorText] = useState("");
+
+  const navigate = useNavigate();
 
   const onChangeNewPassword_First = (e) => {
     setInputNewPassword_First(e.target.value);
@@ -110,6 +114,7 @@ function MyInform({
         })
         .catch((err) => {
           console.log(err.response);
+          navigate("/"); // 토큰의 유효시간이 지나 유효하지 않거나 프론트에서 서버로 잘못된 토큰을 넘겨 주었을 시
         });
     }
   });
