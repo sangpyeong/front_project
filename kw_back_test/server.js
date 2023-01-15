@@ -1,24 +1,27 @@
-const fs = require("fs");
+const fs = require("fs"); //파일 입출력 처리를 위해
 
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); //클라이언트 POST request data의 body로부터 파라미터를 편리하게 추출합니다.
 
-const jsonServer = require("json-server");
+const jsonServer = require("json-server"); // json-server사용 해당 부분을 향후 express로 바꾸는 과정 학습 필요
 
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); // jwt 토큰을 사용하기 위해
 
-const server = jsonServer.create();
-const router = jsonServer.router("./userDB.json");
+const server = jsonServer.create(); //
+//const router = jsonServer.router("./userDB.json"); //get 요청을 위해
 
 var userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
 
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+//Express 4.16.0버전 부터 body-parser의 일부 기능이 익스프레스에 내장 body-parser 연결
+server.use(bodyParser.urlencoded({ extended: true })); //body를 활용하기 위해
+server.use(bodyParser.json()); //body를 활용하기 위해
 
-server.use(jsonServer.defaults());
+const middleware = jsonServer.defaults(); //미들웨어
 
-const SECRET_KEY = "123456789";
+server.use(middleware); //미들웨어 사용
 
-const expiresIn = "1h";
+const SECRET_KEY = "123456789"; //jwt의 시크릿키
+
+const expiresIn = "1h"; //jwt의 유효시간
 
 // Create a token from a payload
 function createToken(payload) {
@@ -485,7 +488,7 @@ server.post("/auth/find", (req, res) => {
   res.status(200).json({ message, userPassword });
 });
 
-server.use(router);
+//server.use(router);
 
 server.listen(8000, () => {
   console.log("Run Simple Login API Server");
