@@ -227,8 +227,8 @@ server.post("/auth/login", (req, res) => {
 
   // Create token for new user
   const access_token = createToken({ employNumber, password, adminkey }); //토큰 만들기
-
-  res.status(200).json({ access_token }); //토큰 전송
+  const message = "Success login";
+  res.status(200).json({ message, access_token }); //토큰 전송
 });
 
 //비밀번호 재확인 api MY페이지 접속을 위한 미들웨어
