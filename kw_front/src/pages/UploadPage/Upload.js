@@ -31,6 +31,7 @@ function Upload() {
     if (item.isFile) {
       // Get file
       if (item.name.split(".").pop() === "dwg") {
+        //File to FileEntry
         let FileObject;
         item.file(function (file) {
           filePath.current.push(item.fullPath);
