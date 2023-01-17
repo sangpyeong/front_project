@@ -12,7 +12,7 @@ function Search() {
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
     console.log("searchindex", searchindex);
     e.preventDefault();
-    // 입력란에 있던 글씨 지워주기
+
     axios
       .post(
         "http://로컬서버주소",
@@ -28,11 +28,11 @@ function Search() {
       )
       .then((res) => {
         console.log(res);
-        setSearchindex("");
+        setSearchindex(""); // 입력란에 있던 글씨 지워주기
       })
       .catch((err) => {
         console.log(err.response);
-        setSearchindex("");
+        setSearchindex(""); // 입력란에 있던 글씨 지워주기
       });
   };
   //console.log(value);
