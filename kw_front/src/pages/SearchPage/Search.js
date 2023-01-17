@@ -35,7 +35,6 @@ function Search() {
         setSearchindex(""); // 입력란에 있던 글씨 지워주기
       });
   };
-  //console.log(value);
   return (
     <div class="flex flex-row justify-center">
       <form onSubmit={handleSubmit} className="flex pt-2">
