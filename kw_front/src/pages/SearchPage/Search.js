@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function Search() {
   const [searchindex, setSearchindex] = useState("");
@@ -7,11 +8,32 @@ function Search() {
     setSearchindex(e.target.value);
   };
   const handleSubmit = (e) => {
+    //로컬서버에 검색 인덱스 전달하는 함수
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
     console.log("searchindex", searchindex);
     e.preventDefault();
     // 입력란에 있던 글씨 지워주기
-    setSearchindex("");
+    axios
+      .post(
+        "http://로컬서버주소",
+        {
+          searchindex: searchindex,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setSearchindex("");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setSearchindex("");
+      });
   };
   //console.log(value);
   return (
