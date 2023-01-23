@@ -172,7 +172,7 @@ function Upload() {
           </button>
         </div>
         <div className="felx w-[5%]"></div>
-        <div className="flex w-[30%] border">
+        <div className="flex w-[30%] border rounded-[6px]">
           <ul>{listItems()}</ul>
         </div>
       </div>
