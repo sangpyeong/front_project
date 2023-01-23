@@ -36,8 +36,11 @@ function Search() {
       });
   };
   return (
-    <div class="flex flex-row justify-center">
-      <form onSubmit={handleSubmit} className="flex pt-2">
+    <div className="flex flex-col justify-center items-center w-full h-[10%] pt-5">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-row justify-center w-[30%]"
+      >
         <input
           type="text"
           name="value"
@@ -49,7 +52,7 @@ function Search() {
         <input
           value="입력"
           type="submit"
-          className="p-2 text-cyan-300 border-2 border-cyan-300 rounded hover:text-white hover:bg-cyan-300 cursor-pointer"
+          className="p-2 text-[#6c59ce] border-2 border-[#6c59ce] rounded-[6px]"
         />
       </form>
     </div>

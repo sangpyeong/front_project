@@ -27,7 +27,7 @@ function Router() {
   const [myBirthday, setMyBirthday] = useState("");
 
   return (
-    <div class="flex flex-col font-sans">
+    <div class="flex flex-col font-[GmarketSansMedium]">
       <BrowserRouter>
         <Modal
           setTestMode={setTestMode}
@@ -53,7 +53,7 @@ function Router() {
           />
         </div>
         <div className="py-14 h-full w-full flex justify-center overflow-y-auto">
-          <div className="h-full w-[80%] bg-white padd px-3.5">
+          <div className="h-full w-full bg-white">
             <Routes>
               <Route
                 exact

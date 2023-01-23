@@ -1,8 +1,7 @@
 .dropBox {
-  width: 500px;
-  height: 150px;
+  width: 30%;
+  height: 100%;
 
-  margin: 0.6rem;
   overflow: auto;
 
   display: flex;
@@ -17,8 +16,8 @@
 
 /* 드롭 반응 */
 .dropBoxactive {
-  width: 500px;
-  height: 150px;
+  width: 30%;
+  height: 100%;
 
   margin: 0.6rem;
   overflow: auto;
