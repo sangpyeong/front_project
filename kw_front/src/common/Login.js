@@ -119,7 +119,7 @@ function Login({
         </div>
 
         <div
-          class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
+          class="w-full text-center text-white bg-violet-600 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
             login();
           }}
@@ -132,7 +132,7 @@ function Login({
             test_login();
           }}
         >
-          <div class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
+          <div class="w-full text-center text-white bg-violet-600 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
             TEST LOG IN (일반사원)
           </div>
         </NavLink>
@@ -142,7 +142,7 @@ function Login({
             admin_test_login();
           }}
         >
-          <div class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
+          <div class="w-full text-center text-white bg-violet-600 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
             TEST LOG IN (관리자)
           </div>
         </NavLink>

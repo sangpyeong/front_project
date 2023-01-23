@@ -53,10 +53,10 @@ function MyPassword({ myEmployNumber, setPasswordModal, token }) {
         placeholder="현재 비밀번호"
         onChange={onChangePassword}
       />
-      <div class="flex flex-col justify-center ">
+      <div class=" flex flex-col justify-center ">
         <div class=" text-red-600 text-center text-[15px] ">{errorText}</div>
         <div
-          className=" text-black bg-cyan-300 w-[100px] items-center flex justify-center cursor-pointer mb-[10px]"
+          className="border w-[100px] h-[40px]  text-[16px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg"
           onClick={() => {
             check();
           }}
@@ -64,7 +64,7 @@ function MyPassword({ myEmployNumber, setPasswordModal, token }) {
           확인
         </div>
         <div
-          className="border-slate-200 border w-[100px] items-center flex justify-center cursor-pointer mb-[10px]"
+          className="border w-[100px] h-[40px]  text-[16px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg"
           onClick={() => {
             test_check();
           }}

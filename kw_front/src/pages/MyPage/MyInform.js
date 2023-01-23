@@ -122,17 +122,17 @@ function MyInform({
   return (
     <div className="flex flex-col w-full border">
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-row w-full h-[80px] text-2xl ml-3 mt-3">
+        <div className="flex flex-row  h-[80px] text-2xl ml-3 mt-3">
           개인정보수정
         </div>
         <div className="flex flex-row justify-center h-[40px]">
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             이름
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
             {myUserName}
           </div>
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             사번
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
@@ -141,14 +141,14 @@ function MyInform({
         </div>
 
         <div className="flex flex-row justify-center h-[40px]">
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             생년월일
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2 ">
             {myBirthday}
           </div>
 
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             권한
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-start pl-2">
@@ -157,7 +157,7 @@ function MyInform({
         </div>
 
         <div className="flex flex-row justify-center h-[40px]">
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             e-mail
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
@@ -169,7 +169,7 @@ function MyInform({
               placeholder={myEmail}
             />
           </div>
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             휴대폰
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
@@ -190,7 +190,7 @@ function MyInform({
         </div>
 
         <div className="flex flex-row justify-center h-[40px]">
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             신규 비밀번호
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
@@ -202,7 +202,7 @@ function MyInform({
               placeholder="신규 비밀번호"
             />
           </div>
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             비밀번호 확인
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
@@ -222,7 +222,7 @@ function MyInform({
         </div>
 
         <div className="flex flex-row justify-center h-[40px]">
-          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-slate-200">
+          <div className="flex  items-center border w-1/5 h-full border-slate-300 justify-center bg-[#f1f6fe]">
             이전 비밀번호
           </div>
           <div className="flex  items-center border w-1/4 h-full border-slate-300 justify-center ">
@@ -243,7 +243,7 @@ function MyInform({
           <input
             value="제출"
             type="submit"
-            className="pr-2 border border-slate-300  bg-slate-400 items-center flex flex-row justify-center w-[100px] h-1/2 cursor-pointer"
+            className="border w-[100px] h-[50px]  text-[19px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg cursor-pointer"
           />
         </div>
       </form>
