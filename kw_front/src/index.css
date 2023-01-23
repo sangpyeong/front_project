@@ -35,3 +35,24 @@ input[type="date"]:focus::before,
 input[type="date"]:valid::before {
   display: none;
 }
+
+.depth-list__item.depthColor-01.current::before,
+.depth-list__item.depthColor-01.fixedCurrent::before {
+  background-color: rgb(124 58 237);
+}
+.depth-list__item.depthColor-02.current::before,
+.depth-list__item.depthColor-02.fixedCurrent::before {
+  background-color: rgb(29 78 216);
+}
+.depth-list__item.current::before,
+.depth-list__item.fixedCurrent::before {
+  content: "";
+  position: absolute;
+  left: 37%;
+  bottom: -20px;
+  transform: translate(-50%, 0);
+  width: calc(15% - 50px);
+  height: 5px;
+  padding: 0 4px;
+  border-radius: 3px 5px 0 0;
+}
