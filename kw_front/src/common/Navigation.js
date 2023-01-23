@@ -23,9 +23,9 @@ function Navigation({
               onClick={() => {
                 setPageIndex(1);
               }}
-              className="px-[100px] flex justify-center flex-col "
+              className=" mx-[100px] flex justify-center flex-col "
             >
-              <div className="h-3/4 w-full text-[20px] flex items-center font-bold hover:text-violet-600 duration-300 justify-center rounded-lg ">
+              <div className="hover:border-b-[3px] hover:border-violet-600 h-full w-full text-[20px] flex items-center font-bold hover:text-violet-600  justify-center  ">
                 파일 업로드
               </div>
             </NavLink>
@@ -35,9 +35,9 @@ function Navigation({
               onClick={() => {
                 setPageIndex(2);
               }}
-              className="px-[100px] flex justify-center flex-col "
+              className=" mx-[100px] flex justify-center flex-col "
             >
-              <div className="h-3/4 w-full text-[20px] flex items-center font-bold hover:text-blue-700 justify-center rounded-lg ">
+              <div className="hover:border-b-[3px] hover:border-blue-700 h-full w-full text-[20px] flex items-center font-bold hover:text-blue-700  justify-center ">
                 파일 검색
               </div>
             </NavLink>
