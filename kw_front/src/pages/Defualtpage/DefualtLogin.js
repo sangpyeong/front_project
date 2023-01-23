@@ -6,7 +6,7 @@ function DefulatLogin({ setLogInModal }) {
           onClick={() => {
             setLogInModal(true);
           }}
-          class="w-[200px] h-[100px]  bg-cyan-300 hover:bg-cyan-400 active:bg-cyan-500 focus:outline-none focus:ring focus:ring-cyan-200 cursor-pointer rounded shadow"
+          class="w-[200px] h-[100px] text-white bg-[#6c59ce] hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 rounded shadow"
         >
           <div class="text-center text-[40px] font-bold">로그인</div>
         </button>
