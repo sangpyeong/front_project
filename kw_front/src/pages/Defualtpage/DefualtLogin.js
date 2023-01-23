@@ -1,5 +1,3 @@
-import image from "./광운대로고.jpg";
-
 function DefulatLogin({ setLogInModal }) {
   return (
     <div>
