@@ -25,7 +25,7 @@ function Navigation({
               }}
               className="px-[100px] flex justify-center flex-col "
             >
-              <div className="h-3/4 w-full text-[20px] flex items-center font-bold hover:text-violet-600 justify-center rounded-lg ">
+              <div className="h-3/4 w-full text-[20px] flex items-center font-bold hover:text-violet-600 duration-300 justify-center rounded-lg ">
                 파일 업로드
               </div>
             </NavLink>

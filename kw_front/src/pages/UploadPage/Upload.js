@@ -126,8 +126,8 @@ function Upload() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-full">
-      <div className="flex flex-col justify-center items-center w-full">
+    <div className="flex flex-col justify-start w-full h-[70%] pt-5">
+      <div className="flex flex-row justify-center w-full h-full">
         <div
           draggable="ture"
           className={dropClass}
@@ -171,39 +171,43 @@ function Upload() {
             {fileName !== "이곳에 폴더를 드롭해주세요." ? "x" : null}
           </button>
         </div>
-        <input
-          type="file"
-          id="directory_upload"
-          className="flex w-1/4 h-full justify-center"
-          multiple
-          webkitdirectory="true"
-          onChange={handleFileInput}
-          class="hidden"
-        />
-        <label
-          for="directory_upload"
-          className="flex w-1/6 justify-center border border-slate-400 bg-slate-200 items-center h-full mt-3"
-        >
-          폴더 선택
-        </label>
+        <div className="felx w-[5%]"></div>
+        <div className="flex w-[30%] border">
+          <ul>{listItems()}</ul>
+        </div>
+      </div>
+      <div className="flex flex-row justify-center w-full  pt-3">
+        <div className="flex w-[30%] justify-center ">
+          <div className="pr-3">아니면 폴더를 선택해주세요.</div>
+          <input
+            type="file"
+            id="directory_upload"
+            className="flex w-1/4 h-full justify-center"
+            multiple
+            webkitdirectory="true"
+            onChange={handleFileInput}
+            class="hidden"
+          />
+          <label
+            for="directory_upload"
+            className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] hover:   "
+          >
+            폴더 선택
+          </label>
+        </div>
 
-        <div className="flex flex-row items-center justify-center w-full pb-3">
+        <div className="felx w-[5%]"></div>
+        <div className="flex flex-row items-center justify-center w-[30%] ">
           {showAlert === 0 ? (
-            <div color="primary" className="pt-3 pr-3">
-              업로드하려면 버튼을 눌러주세요.
-            </div>
+            <div>업로드하려면 버튼을 눌러주세요.</div>
           ) : showAlert === 1 ? (
-            <div color="primary" className="pt-3 pr-3">
-              업로드 중
-            </div>
+            <div>업로드 중</div>
           ) : (
-            <div color="primary" className="pt-3 pr-3">
-              업로드 완료
-            </div>
+            <div>업로드 완료</div>
           )}
 
           <button
-            className="flex w-1/6 justify-center border border-slate-400 bg-slate-200 items-center h-full mt-3"
+            className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] ml-3"
             onClick={() => {
               uploadFile(fileList, filePath);
               filePath.current = [];
@@ -212,9 +216,6 @@ function Upload() {
           >
             업로드
           </button>
-        </div>
-        <div id="list">
-          <ul>{listItems()}</ul>
         </div>
       </div>
     </div>
