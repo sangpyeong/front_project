@@ -118,23 +118,23 @@ function Login({
           {errorText}
         </div>
 
-        <div
-          class="w-full text-center text-white bg-violet-600 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
+        <button
+          class="border w-full text-center text-white bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 justify-center  cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
             login();
           }}
         >
           LOG IN
-        </div>
+        </button>
         <NavLink
           to="/search"
           onClick={() => {
             test_login();
           }}
         >
-          <div class="w-full text-center text-white bg-violet-600 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
+          <button class="border w-full text-center text-white bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 justify-center  cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
             TEST LOG IN (일반사원)
-          </div>
+          </button>
         </NavLink>
         <NavLink
           to="/search"
@@ -142,12 +142,13 @@ function Login({
             admin_test_login();
           }}
         >
-          <div class="w-full text-center text-white bg-violet-600 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
+          <button class="border w-full text-center text-white bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 justify-center  cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]">
             TEST LOG IN (관리자)
-          </div>
+          </button>
         </NavLink>
       </div>
     </div>
   );
+  //text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg cursor-pointer
 }
 export default Login;

@@ -55,22 +55,22 @@ function MyPassword({ myEmployNumber, setPasswordModal, token }) {
       />
       <div class=" flex flex-col justify-center ">
         <div class=" text-red-600 text-center text-[15px] ">{errorText}</div>
-        <div
-          className="border w-[100px] h-[40px]  text-[16px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg"
+        <button
+          className="border  w-[100px] h-[40px]  text-[16px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg"
           onClick={() => {
             check();
           }}
         >
           확인
-        </div>
-        <div
-          className="border w-[100px] h-[40px]  text-[16px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg"
+        </button>
+        <button
+          className="border mt-[10px] w-[100px] h-[40px]  text-[16px] text-center text-white flex items-center font-bold bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500  justify-center rounded-lg"
           onClick={() => {
             test_check();
           }}
         >
           test
-        </div>
+        </button>
       </div>
     </div>
   );

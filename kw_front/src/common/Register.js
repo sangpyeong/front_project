@@ -142,22 +142,22 @@ function Register({ setModalContent }) {
         <div class=" text-red-600 text-center text-[15px] mb-[10px]">
           {errorText}
         </div>
-        <div
-          class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
+        <button
+          class="border w-full text-center text-white bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 justify-center  cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
             regist();
           }}
         >
           REGISTER
-        </div>
-        <div
+        </button>
+        <button
           class="w-full text-center text-black bg-white cursor-pointer border-solid border-[1px] border-black text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
             setModalContent(0);
           }}
         >
           CANCEL
-        </div>
+        </button>
       </div>
     </div>
   );
