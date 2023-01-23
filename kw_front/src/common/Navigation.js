@@ -10,7 +10,7 @@ function Navigation({
   return (
     <div>
       {auth ? (
-        <div class="px-[60px] h-[80px] w-full flex justify-between bg-[#D9F3FF] border border-slate-300  shadow  ">
+        <div class="px-[60px] h-[80px] w-full flex justify-between bg-white border border-slate-300  shadow  ">
           <NavLink className=" flex justify-center flex-col ">
             <div className="h-3/4 w-full text-4xl text-violet-600 flex items-center font-bold justify-center rounded-lg ">
               산학회

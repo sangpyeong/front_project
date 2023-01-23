@@ -1,6 +1,6 @@
 function Description() {
   return (
-    <div class="flex h-[70px] w-full flex-col justify-center">
+    <div class="flex h-[70px] w-full flex-col justify-center pt-5">
       <div class="h-1/2 flex justify-center">
         <div class="flex items-center text-[22px]">
           데이터베이스 및 검색 서비스
