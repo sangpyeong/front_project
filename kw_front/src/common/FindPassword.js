@@ -127,22 +127,22 @@ function FindPassword({ setModalContent }) {
           {successText}&nbsp;
           {foundPassword}&nbsp;
         </div>
-        <div
-          class="w-full text-center text-black bg-cyan-300 cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
+        <button
+          class="border w-full text-center text-white bg-violet-600 hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 justify-center  cursor-pointer text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
             find();
           }}
         >
           FIND
-        </div>
-        <div
+        </button>
+        <button
           class="w-full text-center text-black bg-white cursor-pointer border-solid border-[1px] border-black text-[15px] h-[30px] leading-[30px] mb-[10px]"
           onClick={() => {
             setModalContent(0);
           }}
         >
           CANCEL
-        </div>
+        </button>
       </div>
     </div>
   );
