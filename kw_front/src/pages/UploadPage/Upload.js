@@ -100,25 +100,6 @@ function Upload() {
             if (err) {
               console.log(err);
               setShowAlert(3);
-            } else if (i === file.length) {
-              axios
-                .post(
-                  "http://로컬서버주소",
-                  { foldername: fileName },
-                  {
-                    headers: {
-                      "Content-type": "application/json",
-                      Accept: "application/json",
-                    },
-                  }
-                )
-                .then((res) => {
-                  console.log(res);
-                  setShowAlert(2);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
             }
           });
       }
@@ -139,29 +120,28 @@ function Upload() {
             if (err) {
               console.log(err);
               setShowAlert(3);
-            } else if (i === file.length) {
-              axios
-                .post(
-                  "http://로컬서버주소",
-                  { foldername: fileName },
-                  {
-                    headers: {
-                      "Content-type": "application/json",
-                      Accept: "application/json",
-                    },
-                  }
-                )
-                .then((res) => {
-                  console.log(res);
-                  setShowAlert(2);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
             }
           });
       }
     }
+    axios
+      .post(
+        "http://로컬서버주소",
+        { foldername: fileName },
+        {
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        setShowAlert(2);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
