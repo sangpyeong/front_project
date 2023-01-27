@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import index from "./Upload.css";
 import AWS from "aws-sdk"; // s3 파일업로드에 필요
+import axios from "axios";
 
 function Upload() {
   const [fileList, setFileList] = useState([]); // 업로드 하는 파일을 의미
   const [dropClass, setDropClass] = useState("dropBox"); // 드래그앤드랍 이벤트에 따라 css 바뀜
   const [fileName, setFilename] = useState("이곳에 폴더를 드롭해주세요."); //드래그앤드랍 안에 텍스트
-  const [showAlert, setShowAlert] = useState(0); // 0: 아직 업로드 안함, 1: 업로드 중, 2: 업로드 완료
+  const [showAlert, setShowAlert] = useState(0); // 0: 아직 업로드 안함, 1: 업로드 중, 2: 업로드 완료, 3: 업로드 실패
   let tmpFile = []; //드래드앤드랍 할 때 FileEntry 임시 배열
   let filePath = useRef([]); //파일경로 설정
 
@@ -83,7 +84,8 @@ function Upload() {
   const uploadFile = (file, filePath) => {
     //if인 경우 폴더선택 else인 경우 드래그앤드랍
     if (filePath.current.length === 0) {
-      for (let i = 0; i < file.length; i++) {
+      let i = 0;
+      for (; i < file.length; i++) {
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -94,12 +96,34 @@ function Upload() {
           .putObject(params)
           .on("httpUploadProgress", (evt) => {
             setShowAlert(1);
-            setTimeout(() => {
-              setShowAlert(false);
-            }, 3000);
           })
           .send((err) => {
-            if (err) console.log(err);
+            if (err) {
+              console.log(err);
+              setShowAlert(3);
+            }
+          });
+      }
+      console.log("show", showAlert);
+      if (i === file.length) {
+        console.log("if show", showAlert);
+        axios
+          .post(
+            "http://로컬서버주소",
+            { foldername: fileName },
+            {
+              headers: {
+                "Content-type": "application/json",
+                Accept: "application/json",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            setShowAlert(2);
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
     } else {
@@ -114,12 +138,34 @@ function Upload() {
           .putObject(params)
           .on("httpUploadProgress", (evt) => {
             setShowAlert(1);
-            setTimeout(() => {
-              setShowAlert(false);
-            }, 3000);
           })
           .send((err) => {
-            if (err) console.log(err);
+            if (err) {
+              console.log(err);
+              setShowAlert(3);
+            }
+          });
+      }
+      console.log("show", showAlert);
+      if (showAlert === 1) {
+        console.log("if show", showAlert);
+        axios
+          .post(
+            "http://로컬서버주소",
+            { foldername: fileName },
+            {
+              headers: {
+                "Content-type": "application/json",
+                Accept: "application/json",
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+            setShowAlert(2);
+          })
+          .catch((err) => {
+            console.log(err);
           });
       }
     }
@@ -202,8 +248,10 @@ function Upload() {
             <div>업로드하려면 버튼을 눌러주세요.</div>
           ) : showAlert === 1 ? (
             <div>업로드 중</div>
-          ) : (
+          ) : showAlert === 2 ? (
             <div>업로드 완료</div>
+          ) : (
+            <div>업로드 실패</div>
           )}
 
           <button
@@ -211,7 +259,6 @@ function Upload() {
             onClick={() => {
               uploadFile(fileList, filePath);
               filePath.current = [];
-              setShowAlert(2);
             }}
           >
             업로드
