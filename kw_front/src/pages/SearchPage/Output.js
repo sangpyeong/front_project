@@ -3,10 +3,17 @@ function Output({ output }) {
     const result = [];
     for (let i = 0; i < filelist.length; i++) {
       result.push(
-        <div className="flex flex-col border w-[22.5%] items-center h-1/2 ml-[2%] mt-[2%] rounded-[6px]">
-          <div className="h-[60%] w-full  border">{filelist[i].fileimg}</div>
-          <div className=" w-full  border">{filelist[i].filename}</div>
-          <div className=" w-full  border">{filelist[i].filepath}</div>
+        <div className="flex flex-col border w-[22.5%] h-1/2 ml-[2%] mt-[2%] rounded-[6px]">
+          <img className="h-[60%] w-full  border" src="이미지url" />
+          <div className="w-full h-[13.33%] border">{filelist[i].filename}</div>
+          <div className="w-full h-[13.33%] border">{filelist[i].filepath}</div>
+          {filelist[i].fileindex.length < 20 ? (
+            <div className="w-full h-[13.33%] border">
+              {filelist[i].fileindex}
+            </div>
+          ) : (
+            <div>{`${filelist[i].fileindex.slice(0, 15)}...`}</div>
+          )}
         </div>
       );
     }
