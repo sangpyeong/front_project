@@ -16,6 +16,8 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
     console.log("searchindex", searchIndex);
     e.preventDefault();
+    setOutput(testfilelist);
+    console.log("testfilelist: ", testfilelist);
 
     axios
       .post(
@@ -39,6 +41,8 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       })
       .catch((err) => {
         console.log(err.response);
+        setOutput(testfilelist);
+        console.log("testfilelist: ", testfilelist);
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       });
   };
