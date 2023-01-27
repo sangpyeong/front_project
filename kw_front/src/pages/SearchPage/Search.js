@@ -1,23 +1,27 @@
-import { useState } from "react";
 import axios from "axios";
 
-function Search() {
-  const [searchindex, setSearchindex] = useState("");
+function Search({ searchIndex, setSearchIndex, setOutput, output }) {
+  let testfilelist = [
+    { filename: "표지1", filepath: "a1/b/c", fileimg: "a1.jpg" },
+    { filename: "표지2", filepath: "a2/b/c", fileimg: "a2.jpg" },
+    { filename: "표지3", filepath: "a3/b/c", fileimg: "a3.jpg" },
+    { filename: "표지4", filepath: "a4/b/c", fileimg: "a4.jpg" },
+  ];
 
   const onchangesearchindex = (e) => {
-    setSearchindex(e.target.value);
+    setSearchIndex(e.target.value);
   };
   const handleSubmit = (e) => {
     //로컬서버에 검색 인덱스 전달하는 함수
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
-    console.log("searchindex", searchindex);
+    console.log("searchindex", searchIndex);
     e.preventDefault();
 
     axios
       .post(
-        "http://로컬서버주소",
+        "http://localhost:8000/index",
         {
-          searchindex: searchindex,
+          searchIndex: searchIndex,
         },
         {
           headers: {
@@ -28,11 +32,14 @@ function Search() {
       )
       .then((res) => {
         console.log(res);
-        setSearchindex(""); // 입력란에 있던 글씨 지워주기
+        //setOutput((prev)=>{prev = [...res.filelist]})
+        setOutput(testfilelist);
+        console.log("testfilelist: ", testfilelist);
+        setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       })
       .catch((err) => {
         console.log(err.response);
-        setSearchindex(""); // 입력란에 있던 글씨 지워주기
+        setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       });
   };
   return (
@@ -46,7 +53,7 @@ function Search() {
           name="value"
           className="w-full px-3 py-2 mr-4 text-gray-500 border rounded shadow"
           placeholder="검색어를 입력하세요."
-          value={searchindex}
+          value={searchIndex}
           onChange={onchangesearchindex}
         />
         <input
