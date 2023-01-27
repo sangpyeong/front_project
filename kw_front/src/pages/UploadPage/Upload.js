@@ -84,8 +84,7 @@ function Upload() {
   const uploadFile = (file, filePath) => {
     //if인 경우 폴더선택 else인 경우 드래그앤드랍
     if (filePath.current.length === 0) {
-      let i = 0;
-      for (; i < file.length; i++) {
+      for (let i = 0; i < file.length; i++) {
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -101,29 +100,26 @@ function Upload() {
             if (err) {
               console.log(err);
               setShowAlert(3);
+            } else if (i === file.length) {
+              axios
+                .post(
+                  "http://로컬서버주소",
+                  { foldername: fileName },
+                  {
+                    headers: {
+                      "Content-type": "application/json",
+                      Accept: "application/json",
+                    },
+                  }
+                )
+                .then((res) => {
+                  console.log(res);
+                  setShowAlert(2);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }
-          });
-      }
-      console.log("show", showAlert);
-      if (i === file.length) {
-        console.log("if show", showAlert);
-        axios
-          .post(
-            "http://로컬서버주소",
-            { foldername: fileName },
-            {
-              headers: {
-                "Content-type": "application/json",
-                Accept: "application/json",
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            setShowAlert(2);
-          })
-          .catch((err) => {
-            console.log(err);
           });
       }
     } else {
@@ -143,29 +139,26 @@ function Upload() {
             if (err) {
               console.log(err);
               setShowAlert(3);
+            } else if (i === file.length) {
+              axios
+                .post(
+                  "http://로컬서버주소",
+                  { foldername: fileName },
+                  {
+                    headers: {
+                      "Content-type": "application/json",
+                      Accept: "application/json",
+                    },
+                  }
+                )
+                .then((res) => {
+                  console.log(res);
+                  setShowAlert(2);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }
-          });
-      }
-      console.log("show", showAlert);
-      if (showAlert === 1) {
-        console.log("if show", showAlert);
-        axios
-          .post(
-            "http://로컬서버주소",
-            { foldername: fileName },
-            {
-              headers: {
-                "Content-type": "application/json",
-                Accept: "application/json",
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            setShowAlert(2);
-          })
-          .catch((err) => {
-            console.log(err);
           });
       }
     }
