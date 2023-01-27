@@ -126,7 +126,7 @@ function Upload() {
     }
     axios
       .post(
-        "http://로컬서버주소",
+        "http://localhost:8080/data",
         { foldername: fileName },
         {
           headers: {
