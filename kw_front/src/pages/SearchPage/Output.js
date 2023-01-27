@@ -3,9 +3,10 @@ function Output({ output }) {
     const result = [];
     for (let i = 0; i < filelist.length; i++) {
       result.push(
-        <div className="flex justify-start item-center w-1/4">
-          {filelist[i].filename} {filelist[i].filepath}
-          {filelist[i].fileimg}
+        <div className="flex flex-col border w-[22.5%] items-center h-1/2 ml-[2%] mt-[2%] rounded-[6px]">
+          <div className="h-[60%] w-full  border">{filelist[i].fileimg}</div>
+          <div className=" w-full  border">{filelist[i].filename}</div>
+          <div className=" w-full  border">{filelist[i].filepath}</div>
         </div>
       );
     }
@@ -22,7 +23,7 @@ function Output({ output }) {
           검색결과가 없습니다.
         </div>
       ) : (
-        <div className="flex flex-row justify-center items-center w-[60%] h-full border rounded-[6px]">
+        <div className="flex flex-row flex-wrap   items-center w-[60%] h-full border rounded-[6px] overflow-y-scroll">
           {listitem(output)}
         </div>
       )}

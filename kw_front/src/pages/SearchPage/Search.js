@@ -6,6 +6,12 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
     { filename: "표지2", filepath: "a2/b/c", fileimg: "a2.jpg" },
     { filename: "표지3", filepath: "a3/b/c", fileimg: "a3.jpg" },
     { filename: "표지4", filepath: "a4/b/c", fileimg: "a4.jpg" },
+    { filename: "표지5", filepath: "a5/b/c", fileimg: "a5.jpg" },
+    { filename: "표지6", filepath: "a6/b/c", fileimg: "a6.jpg" },
+    { filename: "표지7", filepath: "a7/b/c", fileimg: "a7.jpg" },
+    { filename: "표지8", filepath: "a8/b/c", fileimg: "a8.jpg" },
+    { filename: "표지9", filepath: "a9/b/c", fileimg: "a9.jpg" },
+    { filename: "표지10", filepath: "a10/b/c", fileimg: "a10.jpg" },
   ];
 
   const onchangesearchindex = (e) => {
