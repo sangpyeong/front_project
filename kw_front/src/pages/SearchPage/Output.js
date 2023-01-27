@@ -5,7 +5,13 @@ function Output({ output }) {
       result.push(
         <div className="flex flex-col border w-[22.5%] items-center h-1/2 ml-[2%] mt-[2%] rounded-[6px]">
           <div className="h-[60%] w-full  border">{filelist[i].fileimg}</div>
-          <div className=" w-full  border">{filelist[i].filename}</div>
+          <a
+            href="파일 경로/파일이름.확장자"
+            className=" w-full  border"
+            download
+          >
+            <button className=" w-full">{filelist[i].filename}</button>
+          </a>
           <div className=" w-full  border">{filelist[i].filepath}</div>
         </div>
       );
