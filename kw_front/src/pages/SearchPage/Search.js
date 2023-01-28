@@ -62,6 +62,30 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       fileimg: "a10.jpg",
       fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
     },
+    {
+      filename: "표지11",
+      filepath: "a11/b/c",
+      fileimg: "a11.jpg",
+      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
+    },
+    {
+      filename: "표지12",
+      filepath: "a12/b/c",
+      fileimg: "a12.jpg",
+      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
+    },
+    {
+      filename: "표지13",
+      filepath: "a13/b/c",
+      fileimg: "a13.jpg",
+      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
+    },
+    {
+      filename: "표지14",
+      filepath: "a14/b/c",
+      fileimg: "a14.jpg",
+      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
+    },
   ];
 
   const onchangesearchindex = (e) => {

@@ -1,4 +1,5 @@
 import AWS from "aws-sdk";
+import fileimg from "./예시이미지.jpg";
 function Output({ output }) {
   const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
   const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
@@ -7,7 +8,7 @@ function Output({ output }) {
   const http = "https://";
   const s3 = ".s3.";
   const amazonawscom = ".amazonaws.com/";
-  const test = "test테스트/T2002032-004.dwgT2002032-004.dwg";
+  const test = "test3/00_간지.dwg00_간지.dwg";
 
   AWS.config.update({
     accessKeyId: ACCESS_KEY,
@@ -23,25 +24,31 @@ function Output({ output }) {
     const result = [];
     for (let i = 0; i < filelist.length; i++) {
       result.push(
-        <div className="flex flex-col border w-[22.5%] items-center h-1/2 ml-[2%] mt-[2%] rounded-[6px]">
-          <img className="h-[100%] w-full  border" src={filelist[i].fileimg} />
-          <div className=" w-full border">{filelist[i].filename}</div>
-          <div className=" w-full  border">{filelist[i].filepath}</div>
-          {filelist[i].fileindex.length < 20 ? (
-            <div className="w-full h-[13.33%] border">
-              {filelist[i].fileindex}
-            </div>
-          ) : (
-            <div>{`${filelist[i].fileindex.slice(0, 15)}...`}</div>
-          )}
+        <div className="flex flex-col  w-[22.5%] items-center h-[300px] ml-[2%] mt-[2%] rounded-[6px] ">
           <a
             href={http + S3_BUCKET + s3 + REGION + amazonawscom + test}
-            className=" w-full   "
+            className=" w-full h-full  focus:outline-none focus:ring-8 focus:ring-[#f1f6fe]"
             download
           >
-            <button className=" w-full bg-blue-300 hover:bg-blue-700 hover:text-white active:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-700 border">
-              다운로드
-            </button>
+            <img
+              className="h-[60%] border"
+              src={fileimg /*filelist[i].fileimg*/}
+            />
+            <div className=" w-full  h-[10%] border  ">
+              {filelist[i].filename}
+            </div>
+            <div className=" w-full h-[10%] border ">
+              {filelist[i].filepath}
+            </div>
+            {filelist[i].fileindex.length < 20 ? (
+              <div className="w-full h-[20%] border ">
+                {filelist[i].fileindex}
+              </div>
+            ) : (
+              <div className="w-full h-[20%] border ">{`${filelist[
+                i
+              ].fileindex.slice(0, 15)}...`}</div>
+            )}
           </a>
         </div>
       );
