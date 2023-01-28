@@ -16,7 +16,7 @@ function SearchPage() {
         setOutput={setOutput}
         output={output}
       />
-      <Output output={output} />
+      <Output output={output} setOutput={setOutput} />
     </div>
   );
 }

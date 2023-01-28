@@ -56,12 +56,6 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       fileimg: "a9.jpg",
       fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
     },
-    {
-      filename: "표지10",
-      filepath: "a10/b/c",
-      fileimg: "a10.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
   ];
 
   const onchangesearchindex = (e) => {
