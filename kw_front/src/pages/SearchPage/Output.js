@@ -10,7 +10,7 @@ function Output({ output }) {
             className=" w-full  border"
             download
           >
-            <button className=" w-full">{filelist[i].filename}</button>
+            <button className=" w-full ">{filelist[i].filename}</button>
           </a>
           <div className=" w-full  border">{filelist[i].filepath}</div>
         </div>
