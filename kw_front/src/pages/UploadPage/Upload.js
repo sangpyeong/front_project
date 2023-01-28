@@ -209,7 +209,7 @@ function Upload() {
           />
           <label
             for="directory_upload"
-            className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] hover:   "
+            className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] cursor-pointer hover:bg-violet-700 active:bg-violet-800 "
           >
             폴더 선택
           </label>
@@ -228,7 +228,7 @@ function Upload() {
           )}
 
           <button
-            className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] ml-3"
+            className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] ml-3  hover:bg-violet-700 active:bg-violet-800  focus:outline-none focus:ring focus:ring-violet-500"
             onClick={() => {
               uploadFile(fileList, filePath);
               filePath.current = [];

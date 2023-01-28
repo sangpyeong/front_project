@@ -3,16 +3,16 @@ function Output({ output }) {
     const result = [];
     for (let i = 0; i < filelist.length; i++) {
       result.push(
-        <div className="flex flex-col border w-[22.5%] items-center h-1/2 ml-[2%] mt-[2%] rounded-[6px]">
+        <div className="flex flex-col border w-[22.5%] items-center h-1/2 ml-[2%] mt-[2%] rounded-lg">
           <div className="h-[60%] w-full  border">{filelist[i].fileimg}</div>
-          <a
-            href="파일 경로/파일이름.확장자"
-            className=" w-full  border"
-            download
-          >
-            <button className=" w-full ">{filelist[i].filename}</button>
-          </a>
+          <div className=" w-full border">{filelist[i].filename}</div>
           <div className=" w-full  border">{filelist[i].filepath}</div>
+          <div className=" w-full  border">인덱스</div>
+          <a href="파일 경로/파일이름.확장자" className=" w-full   " download>
+            <button className=" w-full hover:bg-blue-700 hover:text-white active:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-700 border">
+              다운로드
+            </button>
+          </a>
         </div>
       );
     }
