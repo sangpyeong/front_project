@@ -119,7 +119,7 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
         <input
           value="입력"
           type="submit"
-          className="p-2 text-[#6c59ce] border-2 border-[#6c59ce] rounded-[6px]"
+          className="p-2 text-[#6c59ce] border-2 border-[#6c59ce] hover:border-[#e4e1f1] rounded-[6px] hover:text-white cursor-pointer hover:bg-violet-700 active:bg-violet-800 focus:outline-none focus:ring focus:ring-violet-500 "
         />
       </form>
     </div>
