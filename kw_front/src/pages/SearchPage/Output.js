@@ -1,4 +1,24 @@
+import AWS from "aws-sdk";
 function Output({ output }) {
+  const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+  const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
+  const REGION = "ap-northeast-2";
+  const S3_BUCKET = "dwg-upload";
+  const http = "https://";
+  const s3 = ".s3.";
+  const amazonawscom = ".amazonaws.com/";
+  const test = "test테스트/T2002032-004.dwgT2002032-004.dwg";
+
+  AWS.config.update({
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+  });
+
+  const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET },
+    region: REGION,
+  });
+
   const listitem = (filelist) => {
     const result = [];
     for (let i = 0; i < filelist.length; i++) {
@@ -14,8 +34,12 @@ function Output({ output }) {
           ) : (
             <div>{`${filelist[i].fileindex.slice(0, 15)}...`}</div>
           )}
-          <a href="파일 경로/파일이름.확장자" className=" w-full   " download>
-            <button className=" w-full hover:bg-blue-700 hover:text-white active:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-700 border">
+          <a
+            href={http + S3_BUCKET + s3 + REGION + amazonawscom + test}
+            className=" w-full   "
+            download
+          >
+            <button className=" w-full bg-blue-300 hover:bg-blue-700 hover:text-white active:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-700 border">
               다운로드
             </button>
           </a>
