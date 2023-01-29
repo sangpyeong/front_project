@@ -42,13 +42,13 @@ function Output({ output, setOutput }) {
               {filelist[i].filepath}
             </div>
             {filelist[i].fileindex.length < 20 ? (
-              <div className="w-full h-[20%] border ">
+              <div className="w-full h-[20%] border rounded-b-[6px] whitespace-normal break-normal">
                 {filelist[i].fileindex}
               </div>
             ) : (
-              <div className="w-full h-[20%] border rounded-b-[6px]">{`${filelist[
-                i
-              ].fileindex.slice(0, 15)}...`}</div>
+              <div className="w-full h-[20%] border rounded-b-[6px] break-normal break-words whitespace-pre-wrap">
+                {`${filelist[i].fileindex.slice(0, 40)}...`}
+              </div>
             )}
           </a>
         </div>
