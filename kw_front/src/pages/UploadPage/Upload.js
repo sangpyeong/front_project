@@ -87,6 +87,7 @@ function Upload() {
     if (filePath.current.length === 0) {
       for (; i < file.length; i++) {
         console.log(i);
+        setShowAlert(1);
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -97,9 +98,7 @@ function Upload() {
           console.log("if");
           myBucket
             .putObject(params)
-            .on("httpUploadProgress", (evt) => {
-              setShowAlert(1);
-            })
+
             .send((err) => {
               if (err) {
                 console.log(err);
@@ -107,7 +106,7 @@ function Upload() {
               } else {
                 axios
                   .post(
-                    "http://localhost:8080/data",
+                    "http://localhost:8000/data",
                     { foldername: fileName },
                     {
                       headers: {
@@ -129,9 +128,7 @@ function Upload() {
         } else {
           myBucket
             .putObject(params)
-            .on("httpUploadProgress", (evt) => {
-              setShowAlert(1);
-            })
+
             .send((err) => {
               if (err) {
                 console.log(err);
@@ -143,6 +140,7 @@ function Upload() {
     } else {
       for (; i < file.length; i++) {
         console.log(i);
+        setShowAlert(1);
         const params = {
           ACL: "public-read",
           Body: file[i],
@@ -151,49 +149,39 @@ function Upload() {
         };
         if (i === file.length - 1) {
           console.log("if");
-          myBucket
-            .putObject(params)
-            .on("httpUploadProgress", (evt) => {
-              setShowAlert(1);
-            })
-            .send((err) => {
-              if (err) {
-                console.log(err);
-                setShowAlert(3);
-              } else {
-                axios
-                  .post(
-                    "http://localhost:8080/data",
-                    { foldername: fileName },
-                    {
-                      headers: {
-                        "Content-type": "application/json",
-                        Accept: "application/json",
-                      },
-                    }
-                  )
-                  .then((res) => {
-                    console.log(res);
-                    setShowAlert(2);
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    setShowAlert(3);
-                  });
-              }
-            });
+          myBucket.putObject(params).send((err) => {
+            if (err) {
+              console.log(err);
+              setShowAlert(3);
+            } else {
+              axios
+                .post(
+                  "http://localhost:8000/data",
+                  { foldername: fileName },
+                  {
+                    headers: {
+                      "Content-type": "application/json",
+                      Accept: "application/json",
+                    },
+                  }
+                )
+                .then((res) => {
+                  console.log(res);
+                  setShowAlert(2);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  setShowAlert(3);
+                });
+            }
+          });
         } else {
-          myBucket
-            .putObject(params)
-            .on("httpUploadProgress", (evt) => {
-              setShowAlert(1);
-            })
-            .send((err) => {
-              if (err) {
-                console.log(err);
-                setShowAlert(3);
-              }
-            });
+          myBucket.putObject(params).send((err) => {
+            if (err) {
+              console.log(err);
+              setShowAlert(3);
+            }
+          });
         }
       }
     }

@@ -31,19 +31,21 @@ function Output({ output, setOutput }) {
           download
         >
           <img
-            className="h-[60%] border rounded-t-[6px]"
+            className="h-[60%] border-b rounded-t-[6px]"
             src={fileimg /*filelist[i].fileimg*/}
           />
-          <div className=" w-full  h-[10%] border  ">
+          <div className=" w-full  h-[10%] border-b ">
             {filelist[i].filename}
           </div>
-          <div className=" w-full h-[10%] border ">{filelist[i].filepath}</div>
+          <div className=" w-full h-[10%] border-b ">
+            {filelist[i].filepath}
+          </div>
           {filelist[i].fileindex.length < 70 ? (
-            <div className=" w-full h-[20%] border rounded-b-[6px] text-[10px] break-all overflow-hidden">
+            <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden">
               {filelist[i].fileindex}
             </div>
           ) : (
-            <div className=" w-full h-[20%] border rounded-b-[6px] text-[10px] break-all overflow-hidden">
+            <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden">
               {`${filelist[i].fileindex.slice(0, 70)}...`}
             </div>
           )}
