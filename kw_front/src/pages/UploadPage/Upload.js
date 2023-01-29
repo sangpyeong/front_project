@@ -82,48 +82,61 @@ function Upload() {
   };
   //파일 업로드
   const uploadFile = (file, filePath) => {
-    //if인 경우 폴더선택 else인 경우 드래그앤드랍
-    if (filePath.current.length === 0) {
-      for (let i = 0; i < file.length; i++) {
-        const params = {
-          ACL: "public-read",
-          Body: file[i],
-          Bucket: S3_BUCKET,
-          Key: file[i].webkitRelativePath + file[i].name,
-        };
-        myBucket
-          .putObject(params)
-          .on("httpUploadProgress", (evt) => {
-            setShowAlert(1);
-          })
-          .send((err) => {
-            if (err) {
-              console.log(err);
-              setShowAlert(3);
-            }
-          });
+    return new Promise((resolve, reject) => {
+      //if인 경우 폴더선택 else인 경우 드래그앤드랍
+      let i = 0;
+      if (filePath.current.length === 0) {
+        for (; i < file.length; i++) {
+          console.log(i);
+          const params = {
+            ACL: "public-read",
+            Body: file[i],
+            Bucket: S3_BUCKET,
+            Key: file[i].webkitRelativePath + file[i].name,
+          };
+          myBucket
+            .putObject(params)
+            .on("httpUploadProgress", (evt) => {
+              setShowAlert(1);
+            })
+            .send((err) => {
+              if (err) {
+                console.log(err);
+                reject(err);
+                setShowAlert(3);
+              }
+            });
+          resolve(1);
+        }
+      } else {
+        for (; i < file.length; i++) {
+          console.log(i);
+          const params = {
+            ACL: "public-read",
+            Body: file[i],
+            Bucket: S3_BUCKET,
+            Key: filePath.current[i].substring(1) + file[i].name,
+          };
+          myBucket
+            .putObject(params)
+            .on("httpUploadProgress", (evt) => {
+              setShowAlert(1);
+            })
+            .send((err) => {
+              if (err) {
+                console.log(err);
+                setShowAlert(3);
+                reject(err);
+              }
+            });
+          resolve(1);
+        }
       }
-    } else {
-      for (let i = 0; i < file.length; i++) {
-        const params = {
-          ACL: "public-read",
-          Body: file[i],
-          Bucket: S3_BUCKET,
-          Key: filePath.current[i].substring(1) + file[i].name,
-        };
-        myBucket
-          .putObject(params)
-          .on("httpUploadProgress", (evt) => {
-            setShowAlert(1);
-          })
-          .send((err) => {
-            if (err) {
-              console.log(err);
-              setShowAlert(3);
-            }
-          });
-      }
-    }
+    });
+  };
+
+  const filepost = () => {
+    console.log("filepost");
     axios
       .post(
         "http://localhost:8080/data",
@@ -141,6 +154,7 @@ function Upload() {
       })
       .catch((err) => {
         console.log(err);
+        setShowAlert(3);
       });
   };
 
@@ -230,7 +244,9 @@ function Upload() {
           <button
             className="flex w-[20%] justify-center border border-[#e0e0e0] bg-[#6c59ce] text-[#fff] items-center h-full rounded-[6px] ml-3  hover:bg-violet-700 active:bg-violet-800  focus:outline-none focus:ring focus:ring-violet-500"
             onClick={() => {
-              uploadFile(fileList, filePath);
+              uploadFile(fileList, filePath)
+                .then(filepost())
+                .catch(console.log("error"));
               filePath.current = [];
             }}
           >

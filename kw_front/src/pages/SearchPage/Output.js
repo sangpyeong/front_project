@@ -59,7 +59,7 @@ function Output({ output, setOutput }) {
         <div className="flex flex-row  ">
           <div className="">제목</div>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-4 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
@@ -72,7 +72,7 @@ function Output({ output, setOutput }) {
             <AiOutlineArrowUp />
           </button>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-4 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
@@ -88,7 +88,7 @@ function Output({ output, setOutput }) {
         <div className="flex flex-row ">
           <div className="">경로</div>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-4 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
@@ -101,7 +101,7 @@ function Output({ output, setOutput }) {
             <AiOutlineArrowUp className="" />
           </button>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-4 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
