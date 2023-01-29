@@ -12,13 +12,15 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       filename: "표지2",
       filepath: "a2/b/c",
       fileimg: "a2.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
+      fileindex:
+        "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcvasdaweqesdascxzcxcasdqewasdzxczcsdqdqweadscxzcsddwde",
     },
     {
       filename: "표지3",
       filepath: "a3/b/c",
       fileimg: "a3.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
+      fileindex:
+        "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가능능능능능능능능능능능능능능능능능능능능능능능능능가가가가능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능가가가가능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능",
     },
     {
       filename: "표지4",
