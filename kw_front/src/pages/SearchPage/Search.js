@@ -6,7 +6,7 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       filename: "표지1",
       filepath: "a1/b/c",
       fileimg: "a1.jpg",
-      fileindex: "qwerasdfzx",
+      fileindex: "qwerasdfzxcvqwerasd",
     },
     {
       filename: "표지2",
@@ -115,14 +115,14 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       .then((res) => {
         console.log(res);
         //setOutput((prev)=>{prev = [...res.filelist]})
-        setOutput(testfilelist);
-        console.log("testfilelist: ", testfilelist);
+        //setOutput(testfilelist);
+        //console.log("testfilelist: ", testfilelist);
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       })
       .catch((err) => {
         console.log(err.response);
-        setOutput(testfilelist);
-        console.log("testfilelist: ", testfilelist);
+        //setOutput(testfilelist);
+        //console.log("testfilelist: ", testfilelist);
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       });
   };

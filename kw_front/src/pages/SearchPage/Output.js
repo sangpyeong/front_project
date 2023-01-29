@@ -25,33 +25,29 @@ function Output({ output, setOutput }) {
     const result = [];
     for (let i = 0; i < output.length; i++) {
       result.push(
-        <div className="flex flex-col  w-[22.5%] items-center h-[300px] ml-[2%] mt-[2%] ">
-          <a
-            href={http + S3_BUCKET + s3 + REGION + amazonawscom + test}
-            className=" w-full h-full  focus:outline-none focus:ring-8 focus:ring-[#f1f6fe] rounded-[6px] border"
-            download
-          >
-            <img
-              className="h-[60%] border rounded-t-[6px]"
-              src={fileimg /*filelist[i].fileimg*/}
-            />
-            <div className=" w-full  h-[10%] border  ">
-              {filelist[i].filename}
+        <a
+          href={http + S3_BUCKET + s3 + REGION + amazonawscom + test}
+          className=" flex flex-col  w-[22.5%] items-center h-[300px] ml-[2%] mt-[2%]   focus:outline-none focus:ring-8 focus:ring-[#f1f6fe] rounded-[6px] border"
+          download
+        >
+          <img
+            className="h-[60%] border rounded-t-[6px]"
+            src={fileimg /*filelist[i].fileimg*/}
+          />
+          <div className=" w-full  h-[10%] border  ">
+            {filelist[i].filename}
+          </div>
+          <div className=" w-full h-[10%] border ">{filelist[i].filepath}</div>
+          {filelist[i].fileindex.length < 20 ? (
+            <div className=" w-full h-[20%] border rounded-b-[6px] break-all">
+              {filelist[i].fileindex}
             </div>
-            <div className=" w-full h-[10%] border ">
-              {filelist[i].filepath}
+          ) : (
+            <div className=" w-full h-[20%] border rounded-b-[6px] break-all">
+              {`${filelist[i].fileindex.slice(0, 15)}...`}
             </div>
-            {filelist[i].fileindex.length < 20 ? (
-              <div className="w-full h-[20%] border ">
-                {filelist[i].fileindex}
-              </div>
-            ) : (
-              <div className="w-full h-[20%] border rounded-b-[6px]">{`${filelist[
-                i
-              ].fileindex.slice(0, 15)}...`}</div>
-            )}
-          </a>
-        </div>
+          )}
+        </a>
       );
     }
     return result;
@@ -63,7 +59,7 @@ function Output({ output, setOutput }) {
         <div className="flex flex-row  ">
           <div className="">제목</div>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
@@ -76,7 +72,7 @@ function Output({ output, setOutput }) {
             <AiOutlineArrowUp />
           </button>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
@@ -92,7 +88,7 @@ function Output({ output, setOutput }) {
         <div className="flex flex-row ">
           <div className="">경로</div>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
@@ -105,7 +101,7 @@ function Output({ output, setOutput }) {
             <AiOutlineArrowUp className="" />
           </button>
           <button
-            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px]"
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-2 focus:ring-[#f1f6fe]"
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
