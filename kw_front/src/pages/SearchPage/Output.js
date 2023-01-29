@@ -38,13 +38,13 @@ function Output({ output, setOutput }) {
             {filelist[i].filename}
           </div>
           <div className=" w-full h-[10%] border ">{filelist[i].filepath}</div>
-          {filelist[i].fileindex.length < 20 ? (
-            <div className=" w-full h-[20%] border rounded-b-[6px] break-all">
+          {filelist[i].fileindex.length < 70 ? (
+            <div className=" w-full h-[20%] border rounded-b-[6px] text-[10px] break-all overflow-hidden">
               {filelist[i].fileindex}
             </div>
           ) : (
-            <div className=" w-full h-[20%] border rounded-b-[6px] break-all">
-              {`${filelist[i].fileindex.slice(0, 15)}...`}
+            <div className=" w-full h-[20%] border rounded-b-[6px] text-[10px] break-all overflow-hidden">
+              {`${filelist[i].fileindex.slice(0, 70)}...`}
             </div>
           )}
         </a>
