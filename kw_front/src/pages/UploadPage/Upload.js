@@ -92,7 +92,7 @@ function Upload() {
           ACL: "public-read",
           Body: file[i],
           Bucket: S3_BUCKET,
-          Key: file[i].webkitRelativePath + file[i].name,
+          Key: file[i].webkitRelativePath,
         };
         if (i === file.length - 1) {
           console.log("if");
@@ -145,7 +145,7 @@ function Upload() {
           ACL: "public-read",
           Body: file[i],
           Bucket: S3_BUCKET,
-          Key: filePath.current[i].substring(1) + file[i].name,
+          Key: filePath.current[i].substring(1),
         };
         if (i === file.length - 1) {
           console.log("if");
