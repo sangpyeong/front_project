@@ -28,7 +28,7 @@ function Output({ output, setOutput }) {
             {filelist[i].title}
           </div>
           <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            {`${filelist[i].mainCategory}/${filelist[i].subCategory}/${filelist[i].title}`}
+            {`${filelist[i].mainCategory}${filelist[i].subCategory}/${filelist[i].title}`}
           </div>
 
           <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
@@ -50,8 +50,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() <
-                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}${a.subCategory}/${a.title}`.toLowerCase() <
+                `${b.mainCategory}${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
@@ -66,8 +66,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() >
-                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}${a.subCategory}/${a.title}`.toLowerCase() >
+                `${b.mainCategory}${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
@@ -85,8 +85,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() <
-                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}${a.subCategory}/${a.title}`.toLowerCase() <
+                `${b.mainCategory}${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
@@ -101,8 +101,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() >
-                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}${a.subCategory}/${a.title}`.toLowerCase() >
+                `${b.mainCategory}${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
