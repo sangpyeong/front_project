@@ -1,45 +1,39 @@
-import AWS from "aws-sdk";
-import fileimg from "./예시이미지.jpg";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 
 function Output({ output, setOutput }) {
   const REGION = "ap-northeast-2";
   const S3_BUCKET = "dwg-upload";
-  const http = "https://";
-  const s3 = ".s3.";
-  const amazonawscom = ".amazonaws.com/";
-  const dwgtest = "test3/00_간지.dwg00_간지.dwg";
-  const imgtest = "image/009_행선안내시스템 구성도.jpeg";
 
   const listitem = (filelist) => {
     const result = [];
+
     for (let i = 0; i < output.length; i++) {
+      const fileURL = `https://${S3_BUCKET}.s3${REGION}.amazonaws.com/${filelist[i].mainCategory}/${filelist[i].subcategory}/${filelist[i].title}`;
+      const imgURL = `https://${S3_BUCKET}.s3${REGION}.amazonaws.com/${filelist[i].s3Url}`;
       result.push(
         <a
-          href={http + S3_BUCKET + s3 + REGION + amazonawscom + dwgtest}
+          href={fileURL}
           className=" flex flex-col  w-[22.5%] items-center h-[300px] ml-[2%] mt-[2%]   focus:outline-none focus:ring-8 focus:ring-[#f1f6fe] rounded-[6px] border"
           download
         >
           <img
             className="h-[60%] border-b rounded-t-[6px]"
             src={
-              http + S3_BUCKET + s3 + REGION + amazonawscom + imgtest
+              imgURL
               /*filelist[i].fileimg*/
             }
           />
-          <div className=" w-full  h-[10%] border-b ">
-            {filelist[i].filename}
-          </div>
+          <div className=" w-full  h-[10%] border-b ">{filelist[i].title}</div>
           <div className=" w-full h-[10%] border-b ">
-            {filelist[i].filepath}
+            {`${filelist[i].mainCategory}/${filelist[i].subcategory}/${filelist[i].title}`}
           </div>
           {filelist[i].fileindex.length < 70 ? (
             <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden">
-              {filelist[i].fileindex}
+              {filelist[i].index}
             </div>
           ) : (
             <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden">
-              {`${filelist[i].fileindex.slice(0, 70)}...`}
+              {`${filelist[i].index.slice(0, 70)}...`}
             </div>
           )}
         </a>
@@ -58,7 +52,10 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                a.filename.toLowerCase() < b.filename.toLowerCase() ? -1 : 1
+                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() <
+                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                  ? -1
+                  : 1
               );
               console.log(TmpOutput);
               setOutput(TmpOutput);
@@ -71,7 +68,10 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                a.filename.toLowerCase() > b.filename.toLowerCase() ? -1 : 1
+                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() >
+                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                  ? -1
+                  : 1
               );
               console.log(TmpOutput);
               setOutput(TmpOutput);
@@ -87,7 +87,10 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                a.filepath.toLowerCase() < b.filepath.toLowerCase() ? -1 : 1
+                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() <
+                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                  ? -1
+                  : 1
               );
               console.log(TmpOutput);
               setOutput(TmpOutput);
@@ -100,7 +103,10 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                a.filepath.toLowerCase() > b.filepath.toLowerCase() ? -1 : 1
+                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() >
+                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                  ? -1
+                  : 1
               );
               console.log(TmpOutput);
               setOutput(TmpOutput);

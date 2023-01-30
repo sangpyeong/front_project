@@ -1,95 +1,6 @@
 import axios from "axios";
 
 function Search({ searchIndex, setSearchIndex, setOutput, output }) {
-  let testfilelist = [
-    {
-      filename: "표지1",
-      filepath: "a1/b/c",
-      fileimg: "a1.jpg",
-      fileindex: "qwerasdfzxcvqwerasd",
-    },
-    {
-      filename: "표지2",
-      filepath: "a2/b/c",
-      fileimg: "a2.jpg",
-      fileindex:
-        "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcvasdaweqesdascxzcxcasdqewasdzxczcsdqdqweadscxzcsddwde",
-    },
-    {
-      filename: "표지3",
-      filepath: "a3/b/c",
-      fileimg: "a3.jpg",
-      fileindex:
-        "가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가능능능능능능능능능능능능능능능능능능능능능능능능능가가가가능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능가가가가능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능능",
-    },
-    {
-      filename: "표지4",
-      filepath: "a4/b/c",
-      fileimg: "a4.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지5",
-      filepath: "a5/b/c",
-      fileimg: "a5.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지6",
-      filepath: "a6/b/c",
-      fileimg: "a6.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지7",
-      filepath: "a7/b/c",
-      fileimg: "a7.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지8",
-      filepath: "a8/b/c",
-      fileimg: "a8.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지9",
-      filepath: "a9/b/c",
-      fileimg: "a9.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지10",
-      filepath: "a10/b/c",
-      fileimg: "a10.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지11",
-      filepath: "a11/b/c",
-      fileimg: "a11.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지12",
-      filepath: "a12/b/c",
-      fileimg: "a12.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지13",
-      filepath: "a13/b/c",
-      fileimg: "a13.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-    {
-      filename: "표지14",
-      filepath: "a14/b/c",
-      fileimg: "a14.jpg",
-      fileindex: "qwerasdfzxcvqwerasdfzxcvqewrasxcvqwerasdfzxcvwqerasdfzxcv",
-    },
-  ];
-
   const onchangesearchindex = (e) => {
     setSearchIndex(e.target.value);
   };
@@ -116,15 +27,13 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       )
       .then((res) => {
         console.log(res);
-        //setOutput((prev)=>{prev = [...res.filelist]})
-        //setOutput(testfilelist);
-        //console.log("testfilelist: ", testfilelist);
+        setOutput((prev) => {
+          prev = [...res.filelist];
+        });
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       })
       .catch((err) => {
         console.log(err.response);
-        //setOutput(testfilelist);
-        //console.log("testfilelist: ", testfilelist);
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       });
   };
