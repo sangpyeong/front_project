@@ -17,9 +17,7 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
       .then((res) => {
         console.log(res);
 
-        setOutput((prev) => {
-          prev = [...res.data];
-        });
+        setOutput(res.data);
 
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       })

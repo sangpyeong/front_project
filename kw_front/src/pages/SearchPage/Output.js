@@ -5,37 +5,43 @@ function Output({ output, setOutput }) {
   const S3_BUCKET = "dwg-upload";
 
   const listitem = (filelist) => {
+    console.log("filelist", filelist);
+
     const result = [];
 
-    for (let i = 0; i < output.length; i++) {
-      const fileURL = `https://${S3_BUCKET}.s3${REGION}.amazonaws.com/${filelist[i].mainCategory}/${filelist[i].subcategory}/${filelist[i].title}`;
-      const imgURL = `https://${S3_BUCKET}.s3${REGION}.amazonaws.com/${filelist[i].s3Url}`;
+    for (let i = 0; i < filelist.length; i++) {
+      console.log("filelist[i].mainCategory", filelist[i].mainCategory);
+      console.log("filelist[i].subCategory", filelist[i].subCategory);
+      console.log("filelist[i].title", filelist[i].title);
+      const fileURL = `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${filelist[i].mainCategory}${filelist[i].subCategory}/${filelist[i].title}`;
+      const imgURL = filelist[i].s3Url;
+
+      console.log("fileURL", fileURL);
+      console.log("imgURL", imgURL);
+
       result.push(
         <a
           href={fileURL}
-          className=" flex flex-col  w-[22.5%] items-center h-[300px] ml-[2%] mt-[2%]   focus:outline-none focus:ring-8 focus:ring-[#f1f6fe] rounded-[6px] border"
+          className=" flex flex-col  w-[22.5%] items-center h-[300px] ml-[2%] mt-[2%]  flex-nowrap  focus:outline-none focus:ring-8 focus:ring-[#f1f6fe] rounded-[6px] border "
           download
         >
           <img
-            className="h-[60%] border-b rounded-t-[6px]"
+            className="h-[60%] border-b rounded-t-[6px] hover:w-[100%] hover:h-[100%]"
             src={
               imgURL
               /*filelist[i].fileimg*/
             }
           />
-          <div className=" w-full  h-[10%] border-b ">{filelist[i].title}</div>
-          <div className=" w-full h-[10%] border-b ">
-            {`${filelist[i].mainCategory}/${filelist[i].subcategory}/${filelist[i].title}`}
+          <div className=" w-full  h-[10%] border-b text-[15px]  truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+            {filelist[i].title}
           </div>
-          {filelist[i].fileindex.length < 70 ? (
-            <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden">
-              {filelist[i].index}
-            </div>
-          ) : (
-            <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden">
-              {`${filelist[i].index.slice(0, 70)}...`}
-            </div>
-          )}
+          <div className=" w-full h-[10%] border-b text-[15px] truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+            {`${filelist[i].mainCategory}/${filelist[i].subCategory}/${filelist[i].title}`}
+          </div>
+
+          <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+            {filelist[i].index}
+          </div>
         </a>
       );
     }
@@ -52,8 +58,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() <
-                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() <
+                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
@@ -68,8 +74,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() >
-                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() >
+                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
@@ -87,8 +93,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() <
-                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() <
+                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );
@@ -103,8 +109,8 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}/${a.subcategory}/${a.title}`.toLowerCase() >
-                `${b.mainCategory}/${b.subcategory}/${b.title}`.toLowerCase()
+                `${a.mainCategory}/${a.subCategory}/${a.title}`.toLowerCase() >
+                `${b.mainCategory}/${b.subCategory}/${b.title}`.toLowerCase()
                   ? -1
                   : 1
               );

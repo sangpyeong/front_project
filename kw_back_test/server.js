@@ -488,25 +488,6 @@ server.post("/auth/find", (req, res) => {
   res.status(200).json({ message, userPassword });
 });
 
-server.post("/index", (req, res) => {
-  console.log("check endpoint called; request body:");
-  console.log(req.body);
-  const { searchIndex } = req.body;
-
-  const message = "Success Sending index";
-  res.status(200).json({ message, searchIndex });
-  //res.sendFile(process.cwd() + "/file/000.표지.dwg");
-});
-
-server.post("/data", (req, res) => {
-  console.log("check endpoint called; request body:");
-  console.log(req.body);
-  const { filename } = req.body;
-
-  const message = "Success Sending index";
-  res.status(200).json({ message, filename });
-  //res.sendFile(process.cwd() + "/file/000.표지.dwg");
-});
 //server.use(router);
 
 server.listen(8000, () => {
