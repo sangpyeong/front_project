@@ -106,7 +106,7 @@ function Upload() {
               } else {
                 axios
                   .post(
-                    "http://localhost:8000/data",
+                    "http://localhost:8080/cad/data",
                     { foldername: fileName },
                     {
                       headers: {
