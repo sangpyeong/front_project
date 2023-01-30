@@ -5,19 +5,11 @@ function Output({ output, setOutput }) {
   const S3_BUCKET = "dwg-upload";
 
   const listitem = (filelist) => {
-    console.log("filelist", filelist);
-
     const result = [];
 
     for (let i = 0; i < filelist.length; i++) {
-      console.log("filelist[i].mainCategory", filelist[i].mainCategory);
-      console.log("filelist[i].subCategory", filelist[i].subCategory);
-      console.log("filelist[i].title", filelist[i].title);
       const fileURL = `https://${S3_BUCKET}.s3.${REGION}.amazonaws.com/${filelist[i].mainCategory}${filelist[i].subCategory}/${filelist[i].title}`;
       const imgURL = filelist[i].s3Url;
-
-      console.log("fileURL", fileURL);
-      console.log("imgURL", imgURL);
 
       result.push(
         <a
@@ -26,16 +18,16 @@ function Output({ output, setOutput }) {
           download
         >
           <img
-            className="h-[60%] border-b rounded-t-[6px] hover:w-[100%] hover:h-[100%]"
+            className="h-[60%] border-b rounded-t-[6px]"
             src={
               imgURL
               /*filelist[i].fileimg*/
             }
           />
-          <div className=" w-full  h-[10%] border-b text-[15px]  truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+          <div className=" w-full  h-[10%] border-b text-[14px] break-all truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
             {filelist[i].title}
           </div>
-          <div className=" w-full h-[10%] border-b text-[15px] truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+          <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
             {`${filelist[i].mainCategory}/${filelist[i].subCategory}/${filelist[i].title}`}
           </div>
 
