@@ -9,7 +9,6 @@ function DefaultPage({
   setMyEmail,
   setMyEmployNumber,
   setMyPhoneNumber,
-  setMyUserName,
   setPageIndex,
   setPasswordModal,
   setTestMode,
@@ -20,7 +19,6 @@ function DefaultPage({
   setAuth(0);
   setToken("");
   setMyEmployNumber("");
-  setMyUserName("");
   setMyPhoneNumber("");
   setPasswordModal(false);
   setMyEmail("");

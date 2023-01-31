@@ -13,7 +13,6 @@ function MyPage({
   myPhoneNumber,
   myEmail,
   myBirthday,
-  setMyUserName,
   setMyPhoneNumber,
   setMyEmail,
   setMyBirthday,
@@ -46,7 +45,6 @@ function MyPage({
         myPhoneNumber={myPhoneNumber}
         myEmail={myEmail}
         myBirthday={myBirthday}
-        setMyUserName={setMyUserName}
         setMyPhoneNumber={setMyPhoneNumber}
         setMyEmail={setMyEmail}
         setMyBirthday={setMyBirthday}

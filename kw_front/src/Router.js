@@ -41,6 +41,7 @@ function Router() {
           myEmployNumber={myEmployNumber}
           setMyEmployNumber={setMyEmployNumber}
           setPageIndex={setPageIndex}
+          setMyUserName={setMyUserName}
         />
         <div className="h-14 w-full fixed z-20">
           <Navigation
@@ -66,7 +67,6 @@ function Router() {
                     setMyEmail={setMyEmail}
                     setMyEmployNumber={setMyEmployNumber}
                     setMyPhoneNumber={setMyPhoneNumber}
-                    setMyUserName={setMyUserName}
                     setPageIndex={setPageIndex}
                     setPasswordModal={setPasswordModal}
                     setTestMode={setTestMode}
@@ -85,7 +85,6 @@ function Router() {
                     setMyEmail={setMyEmail}
                     setMyEmployNumber={setMyEmployNumber}
                     setMyPhoneNumber={setMyPhoneNumber}
-                    setMyUserName={setMyUserName}
                     setPageIndex={setPageIndex}
                     setPasswordModal={setPasswordModal}
                     setTestMode={setTestMode}
@@ -129,7 +128,6 @@ function Router() {
                         myPhoneNumber={myPhoneNumber}
                         myEmail={myEmail}
                         myBirthday={myBirthday}
-                        setMyUserName={setMyUserName}
                         setMyPhoneNumber={setMyPhoneNumber}
                         setMyEmail={setMyEmail}
                         setMyBirthday={setMyBirthday}

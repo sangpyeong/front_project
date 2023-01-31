@@ -10,6 +10,7 @@ function Login({
   setAuth,
   setMyEmployNumber,
   setLogInModal,
+  setMyUserName,
 }) {
   const navigate = useNavigate();
   const [inputEmployNumber, setInputEmployNumber] = useState("");
@@ -26,13 +27,15 @@ function Login({
   const test_login = () => {
     setTestMode(true);
     setAuth(1);
-    setMyEmployNumber("테스트모드");
+    setMyEmployNumber("1234567890");
+    setMyUserName("테스트");
     setLogInModal(false);
   };
   const admin_test_login = () => {
     setTestMode(true);
     setAuth(2);
-    setMyEmployNumber("테스트모드");
+    setMyEmployNumber("1234567890");
+    setMyUserName("테스트");
     setLogInModal(false);
   };
   const login = () => {
@@ -55,6 +58,7 @@ function Login({
         console.log(res);
         navigate("/search");
         setMyEmployNumber(inputEmployNumber);
+        setMyUserName(res.data.username);
         if (jwt_decode(res.data.access_token).adminkey) {
           setAuth(2);
         } else {
