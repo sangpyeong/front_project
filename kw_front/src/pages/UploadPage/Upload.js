@@ -10,7 +10,6 @@ function Upload({ myUserName }) {
   const [showAlert, setShowAlert] = useState(0); // 0: 아직 업로드 안함, 1: 업로드 중, 2: 업로드 완료, 3: 업로드 실패
   let tmpFile = []; //드래드앤드랍 할 때 FileEntry 임시 배열
   let filePath = useRef([]); //파일경로 설정
-
   //s3연결
   const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
   const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
