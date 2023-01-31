@@ -16,6 +16,7 @@ function Modal({
   myEmployNumber,
   setMyEmployNumber,
   setPageIndex,
+  setMyUserName,
 }) {
   const [modalContent, setModalContent] = useState(0);
   const ModalBG = useRef();
@@ -40,6 +41,7 @@ function Modal({
                 setAuth={setAuth}
                 setMyEmployNumber={setMyEmployNumber}
                 setLogInModal={setLogInModal}
+                setMyUserName={setMyUserName}
               />
             ) : modalContent === 1 ? (
               <Register setModalContent={setModalContent} />

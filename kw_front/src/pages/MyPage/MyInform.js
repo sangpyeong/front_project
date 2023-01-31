@@ -23,7 +23,6 @@ function MyInform({
   myPhoneNumber,
   myEmail,
   myBirthday,
-  setMyUserName,
   setMyPhoneNumber,
   setMyEmail,
   setMyBirthday,
@@ -88,7 +87,6 @@ function MyInform({
 
   useEffect(() => {
     if (testMode === true) {
-      setMyUserName("테스트모드");
       setMyPhoneNumber("테스트모드");
       setMyEmail("테스트모드");
       setMyBirthday("테스트모드");
@@ -107,7 +105,6 @@ function MyInform({
         )
         .then((res) => {
           console.log(res);
-          setMyUserName(res.data.userinform.username);
           setMyPhoneNumber(res.data.userinform.phoneNumber);
           setMyEmail(res.data.userinform.email);
           setMyBirthday(res.data.userinform.birthday);

@@ -93,6 +93,14 @@ function findhittingdata_for_find({
   return finduser;
 }
 
+function findhittingdata_login({ employNumber, password }) {
+  userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
+  const finduser = userdb.users.find(
+    (user) => user.employNumber === employNumber && user.password === password
+  );
+  return finduser.username;
+}
+
 // Check if the user exists in database
 function isAuthenticated_for_register_and_detail({ employNumber }) {
   userdb = JSON.parse(fs.readFileSync("./userDB.json", "UTF-8"));
@@ -224,11 +232,11 @@ server.post("/auth/login", (req, res) => {
   }
 
   const adminkey = adminkeyinitinlogin({ employNumber, password }); //관리자키 확인
-
+  const username = findhittingdata_login({ employNumber, password });
   // Create token for new user
   const access_token = createToken({ employNumber, password, adminkey }); //토큰 만들기
   const message = "Success login";
-  res.status(200).json({ message, access_token }); //토큰 전송
+  res.status(200).json({ message, access_token, username }); //토큰 전송
 });
 
 //비밀번호 재확인 api MY페이지 접속을 위한 미들웨어

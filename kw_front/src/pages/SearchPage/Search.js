@@ -18,12 +18,9 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
         console.log(res);
 
         setOutput(res.data);
-
-        setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       })
       .catch((err) => {
         console.log(err.response);
-        setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       });
   };
   return (

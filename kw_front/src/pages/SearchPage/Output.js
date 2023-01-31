@@ -25,18 +25,18 @@ function Output({ output, setOutput }) {
             }
           />
           <div className=" w-full  h-[10%] border-b text-[14px] break-all truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            제목:{filelist[i].title}
+            제목: {filelist[i].title}
           </div>
           <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            경로:
+            경로:{" "}
             {`${filelist[i].mainCategory}${filelist[i].subCategory}/${filelist[i].title}`}
           </div>
 
           <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            작성자:{filelist[i].author}
+            작성자: {filelist[i].author}
           </div>
           <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            수정날짜:{filelist[i].createdAt}
+            수정날짜: {filelist[i].createdAt}
           </div>
         </a>
       );
@@ -54,10 +54,7 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}${a.subCategory}/${a.title}`.toLowerCase() <
-                `${b.mainCategory}${b.subCategory}/${b.title}`.toLowerCase()
-                  ? -1
-                  : 1
+                a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1
               );
               console.log(TmpOutput);
               setOutput(TmpOutput);
@@ -70,10 +67,36 @@ function Output({ output, setOutput }) {
             onClick={() => {
               let TmpOutput = [...output];
               TmpOutput.sort((a, b) =>
-                `${a.mainCategory}${a.subCategory}/${a.title}`.toLowerCase() >
-                `${b.mainCategory}${b.subCategory}/${b.title}`.toLowerCase()
-                  ? -1
-                  : 1
+                a.title.toLowerCase() > b.title.toLowerCase() ? -1 : 1
+              );
+              console.log(TmpOutput);
+              setOutput(TmpOutput);
+            }}
+          >
+            <AiOutlineArrowDown />
+          </button>
+        </div>
+        <div className="flex flex-row  ">
+          <div className="">작성날짜</div>
+          <button
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-4 focus:ring-[#f1f6fe]"
+            onClick={() => {
+              let TmpOutput = [...output];
+              TmpOutput.sort((a, b) =>
+                a.createdAt.toLowerCase() < b.createdAt.toLowerCase() ? -1 : 1
+              );
+              console.log(TmpOutput);
+              setOutput(TmpOutput);
+            }}
+          >
+            <AiOutlineArrowUp />
+          </button>
+          <button
+            className="ml-3 hover:border-[#e4e1f1] hover:border rounded-[6px] focus:outline-none focus:ring-4 focus:ring-[#f1f6fe]"
+            onClick={() => {
+              let TmpOutput = [...output];
+              TmpOutput.sort((a, b) =>
+                a.createdAt.toLowerCase() > b.createdAt.toLowerCase() ? -1 : 1
               );
               console.log(TmpOutput);
               setOutput(TmpOutput);
