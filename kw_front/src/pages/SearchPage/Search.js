@@ -9,27 +9,18 @@ function Search({ searchIndex, setSearchIndex, setOutput, output }) {
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
     console.log("searchindex", searchIndex);
     e.preventDefault();
-    setOutput(testfilelist);
-    console.log("testfilelist: ", testfilelist);
 
     axios
-      .post(
-        "http://localhost:8000/index",
-        {
-          searchIndex: searchIndex,
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      )
+      .get("http://localhost:8080/cad/data", {
+        params: { searchText: searchIndex },
+      })
       .then((res) => {
         console.log(res);
+
         setOutput((prev) => {
-          prev = [...res.filelist];
+          prev = [...res.data];
         });
+
         setSearchIndex(""); // 입력란에 있던 글씨 지워주기
       })
       .catch((err) => {
