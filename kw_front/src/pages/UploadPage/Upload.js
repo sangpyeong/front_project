@@ -107,7 +107,7 @@ function Upload({ myUserName }) {
                 axios
                   .post(
                     "http://localhost:8080/cad/data",
-                    { foldername: fileName },
+                    { foldername: fileName, author: myUserName },
                     {
                       headers: {
                         "Content-type": "application/json",

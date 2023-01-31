@@ -25,14 +25,18 @@ function Output({ output, setOutput }) {
             }
           />
           <div className=" w-full  h-[10%] border-b text-[14px] break-all truncate hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            {filelist[i].title}
+            제목:{filelist[i].title}
           </div>
           <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+            경로:
             {`${filelist[i].mainCategory}${filelist[i].subCategory}/${filelist[i].title}`}
           </div>
 
-          <div className=" w-full h-[20%]   text-[10px] break-all overflow-hidden hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
-            {filelist[i].index}
+          <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+            작성자:{filelist[i].author}
+          </div>
+          <div className=" w-full h-[10%] border-b text-[14px] break-all truncate  hover:z-10 hover:overflow-y-auto hover:whitespace-normal hover:h-[40%] hover:border hover:border-black">
+            수정날짜:{filelist[i].createdAt}
           </div>
         </a>
       );
