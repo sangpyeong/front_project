@@ -98,7 +98,7 @@ function Router() {
                 element={
                   <AdminPrivateRoute
                     authenticated={auth}
-                    component={<UploadPage />}
+                    component={<UploadPage myUserName={myUserName} />}
                   />
                 }
               />

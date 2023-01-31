@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import index from "./Upload.css";
 import AWS from "aws-sdk"; // s3 파일업로드에 필요
 import axios from "axios";
 
-function Upload() {
+function Upload({ myUserName }) {
   const [fileList, setFileList] = useState([]); // 업로드 하는 파일을 의미
   const [dropClass, setDropClass] = useState("dropBox"); // 드래그앤드랍 이벤트에 따라 css 바뀜
   const [fileName, setFilename] = useState("이곳에 폴더를 드롭해주세요."); //드래그앤드랍 안에 텍스트
@@ -157,7 +157,7 @@ function Upload() {
               axios
                 .post(
                   "http://localhost:8000/data",
-                  { foldername: fileName },
+                  { foldername: fileName, author: myUserName },
                   {
                     headers: {
                       "Content-type": "application/json",
