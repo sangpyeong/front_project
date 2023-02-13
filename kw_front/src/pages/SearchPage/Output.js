@@ -5,29 +5,6 @@ function Output({ output, setOutput, highlightIndex }) {
   const REGION = "ap-northeast-2";
   const S3_BUCKET = "dwg-upload";
 
-  //////////////////////////////////////////////////////////
-
-  const highlightedText = (text, query) => {
-    if (query !== "" && text.includes(query)) {
-      const parts = text.split(new RegExp(`(${query})`, "gi"));
-
-      return (
-        <>
-          {parts.map((part, index) =>
-            part.toLowerCase() === query.toLowerCase() ? (
-              <mark key={index}>{part}</mark>
-            ) : (
-              part
-            )
-          )}
-        </>
-      );
-    }
-
-    return text;
-  };
-  //////////////////////////////////////////////////////////
-
   const listitem = (filelist) => {
     const result = [];
 
