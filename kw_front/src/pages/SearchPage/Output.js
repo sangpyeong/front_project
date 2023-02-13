@@ -6,6 +6,7 @@ function Output({ output, setOutput, highlightIndex }) {
   const S3_BUCKET = "dwg-upload";
 
   //////////////////////////////////////////////////////////
+
   const highlightedText = (text, query) => {
     if (query !== "" && text.includes(query)) {
       const parts = text.split(new RegExp(`(${query})`, "gi"));
